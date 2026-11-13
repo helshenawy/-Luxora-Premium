@@ -1,0 +1,13 @@
+<section class="section-cta" {% if section.settings.image %}style="background-image:url('{{ section.settings.image }}')"{% endif %}>
+  <div class="section-cta__overlay" style="opacity:{{ (section.settings.overlay_opacity | default(50)) / 100 }}" aria-hidden="true"></div>
+  <div class="container section-cta__content">
+    {% set heading = section.settings.heading_ar if session.lang == 'ar' else section.settings.heading_en %}
+    {% set subtext = section.settings.subtext_ar if session.lang == 'ar' else section.settings.subtext_en %}
+    {% set cta_text = section.settings.cta_text_ar if session.lang == 'ar' else section.settings.cta_text_en %}
+    {% if heading | default('') %}<h2 class="section-cta__heading">{{ heading }}</h2>{% endif %}
+    {% if subtext | default('') %}<p class="section-cta__sub">{{ subtext }}</p>{% endif %}
+    {% if section.settings.cta_url | default('') %}
+      <a href="{{ section.settings.cta_url }}" class="btn btn--outline-light">{{ cta_text | default('Shop Now') }}</a>
+    {% endif %}
+  </div>
+</section>

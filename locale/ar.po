@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "add_to_cart"
+msgstr "أضيفي للسلة"
+
+msgid "out_of_stock"
+msgstr "نفذ المخزون"
+
+msgid "quick_view"
+msgstr "نظرة سريعة"
+
+msgid "shop_now"
+msgstr "تسوقي الآن"
+
+msgid "new_arrivals"
+msgstr "الوصول الجديد"
+
+msgid "best_sellers"
+msgstr "الأكثر مبيعاً"
+
+msgid "featured_categories"
+msgstr "التصنيفات المميزة"
+
+msgid "search_placeholder"
+msgstr "ابحثي عن منتج..."
+
+msgid "cart_empty"
+msgstr "سلتك فارغة"
+
+msgid "checkout"
+msgstr "إتمام الشراء"
+
+msgid "view_cart"
+msgstr "عرض السلة"
+
+msgid "total"
+msgstr "الإجمالي"
+
+msgid "subtotal"
+msgstr "المجموع الفرعي"
+
+msgid "free_shipping"
+msgstr "شحن مجاني"
+
+msgid "size_guide"
+msgstr "دليل المقاسات"
+
+msgid "product_description"
+msgstr "وصف المنتج"
+
+msgid "related_products"
+msgstr "منتجات مشابهة"
+
+msgid "home"
+msgstr "الرئيسية"
+
+msgid "wishlist"
+msgstr "المفضلة"
+
+msgid "my_account"
+msgstr "حسابي"
+
+msgid "continue_shopping"
+msgstr "متابعة التسوق"
+
+msgid "all_categories"
+msgstr "جميع التصنيفات"
+
+msgid "all_products"
+msgstr "جميع المنتجات"

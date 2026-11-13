@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-espresso: #1C1008;
+  --color-ivory: #FAF7F2;
+  --color-gold: #C9A96E;
+  --color-gold-light: #E8D5A3;
+  --color-cream: #F2EDE4;
+  --color-cream-dark: #E8DFD0;
+  --font-family-sans: 'Cairo', 'Noto Naskh Arabic', sans-serif;
+  --font-family-serif: 'Cormorant Garamond', Georgia, serif;
+}
+
+@import "./css/luxora.css";

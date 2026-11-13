@@ -1,0 +1,10 @@
+<div
+  class="products-grid products-grid--{{ columns | default(settings.product_card_columns_desktop | default('4')) }}"
+  data-mobile-cols="{{ settings.product_card_columns_mobile | default('2') }}"
+>
+  {% for product in products %}
+    {% include "components/products/card.jinja" %}
+  {% else %}
+    {% include "components/shared/empty-state.jinja" %}
+  {% endfor %}
+</div>

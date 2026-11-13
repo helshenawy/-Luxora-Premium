@@ -1,0 +1,16 @@
+<section class="section section-gallery section-y">
+  <div class="container">
+    {% set title = section.settings.title_ar if session.lang == 'ar' else section.settings.title_en %}
+    {% include "components/shared/section-header.jinja" with { "title": title } only %}
+    <div class="gallery-grid" id="luxora-gallery">
+      {% for i in [1,2,3,4,5,6] %}
+        {% set img = section.settings['image_' ~ i] | default('') %}
+        {% if img %}
+          <a href="{{ img }}" class="gallery-grid__item" data-pswp-width="1200" data-pswp-height="1600">
+            <img src="{{ img }}" alt="{{ title | default('Gallery') }} {{ i }}" loading="lazy" class="gallery-grid__img" />
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

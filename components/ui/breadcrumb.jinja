@@ -1,0 +1,19 @@
+{% if breadcrumbs | default([]) %}
+<nav class="breadcrumb" aria-label="{% if session.lang == 'ar' %}مسار التنقل{% else %}Breadcrumb{% endif %}">
+  <ol class="breadcrumb__list">
+    <li class="breadcrumb__item">
+      <a href="/" class="breadcrumb__link">{% if session.lang == 'ar' %}الرئيسية{% else %}Home{% endif %}</a>
+    </li>
+    {% for crumb in breadcrumbs %}
+      <li class="breadcrumb__item">
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        {% if loop.last %}
+          <span class="breadcrumb__current" aria-current="page">{{ crumb.name }}</span>
+        {% else %}
+          <a href="{{ crumb.url }}" class="breadcrumb__link">{{ crumb.name }}</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+</nav>
+{% endif %}

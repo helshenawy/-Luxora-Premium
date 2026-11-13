@@ -1,0 +1,81 @@
+{
+  "icon": "fa fa-window-maximize",
+  "name": { "ar": "أسفل الصفحة", "en": "Footer" },
+  "groups": [
+    {
+      "id": "brand",
+      "icon": "fa fa-info-circle",
+      "name": { "ar": "معلومات المتجر", "en": "Store Info" },
+      "settings": [
+        {
+          "id": "footer_about_ar",
+          "type": "textarea",
+          "label": { "ar": "نبذة عن المتجر (عربي)", "en": "About (Arabic)" },
+          "default": "وجهتك الأولى للأزياء الراقية والعباءات الفاخرة."
+        },
+        {
+          "id": "footer_about_en",
+          "type": "textarea",
+          "label": { "ar": "نبذة عن المتجر (إنجليزي)", "en": "About (English)" },
+          "default": "Your premier destination for luxury fashion and abayas."
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "icon": "fa fa-share-alt",
+      "name": { "ar": "روابط التواصل الاجتماعي", "en": "Social Media" },
+      "settings": [
+        { "id": "social_instagram", "type": "text", "label": { "ar": "انستغرام", "en": "Instagram" }, "default": "" },
+        { "id": "social_tiktok", "type": "text", "label": { "ar": "تيك توك", "en": "TikTok" }, "default": "" },
+        { "id": "social_snapchat", "type": "text", "label": { "ar": "سناب شات", "en": "Snapchat" }, "default": "" },
+        { "id": "social_twitter", "type": "text", "label": { "ar": "تويتر / X", "en": "Twitter / X" }, "default": "" },
+        { "id": "social_whatsapp", "type": "text", "label": { "ar": "واتساب", "en": "WhatsApp" }, "default": "" }
+      ]
+    },
+    {
+      "id": "newsletter",
+      "icon": "fa fa-envelope",
+      "name": { "ar": "النشرة البريدية", "en": "Newsletter" },
+      "settings": [
+        {
+          "id": "newsletter_display",
+          "type": "checkbox",
+          "label": { "ar": "إظهار النشرة البريدية", "en": "Show Newsletter" },
+          "default": true
+        },
+        {
+          "id": "newsletter_heading_ar",
+          "type": "text",
+          "label": { "ar": "عنوان النشرة (عربي)", "en": "Newsletter Heading (Arabic)" },
+          "default": "انضمي إلى عالمنا"
+        },
+        {
+          "id": "newsletter_heading_en",
+          "type": "text",
+          "label": { "ar": "عنوان النشرة (إنجليزي)", "en": "Newsletter Heading (English)" },
+          "default": "Join Our World"
+        }
+      ]
+    },
+    {
+      "id": "copyright",
+      "icon": "fa fa-copyright",
+      "name": { "ar": "حقوق النشر", "en": "Copyright" },
+      "settings": [
+        {
+          "id": "copyright_text_ar",
+          "type": "text",
+          "label": { "ar": "نص حقوق النشر (عربي)", "en": "Copyright Text (Arabic)" },
+          "default": "جميع الحقوق محفوظة"
+        },
+        {
+          "id": "copyright_text_en",
+          "type": "text",
+          "label": { "ar": "نص حقوق النشر (إنجليزي)", "en": "Copyright Text (English)" },
+          "default": "All rights reserved"
+        }
+      ]
+    }
+  ]
+}

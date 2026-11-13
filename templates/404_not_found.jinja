@@ -1,0 +1,21 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="error-page container section-y">
+  <div class="error-page__inner">
+    <span class="error-page__code">404</span>
+    <h1 class="error-page__title">{% if session.lang == 'ar' %}الصفحة غير موجودة{% else %}Page Not Found{% endif %}</h1>
+    <p class="error-page__message">
+      {% if session.lang == 'ar' %}
+        عذراً، الصفحة التي تبحثين عنها غير موجودة أو تم نقلها.
+      {% else %}
+        Sorry, the page you're looking for doesn't exist or has been moved.
+      {% endif %}
+    </p>
+    <div class="error-page__actions">
+      <a href="/" class="btn btn--primary">{% if session.lang == 'ar' %}العودة للرئيسية{% else %}Back to Home{% endif %}</a>
+      <a href="/products" class="btn btn--outline">{% if session.lang == 'ar' %}تسوقي{% else %}Shop Now{% endif %}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{
+  "name": { "ar": "آراء العملاء", "en": "Testimonials" },
+  "settings": [
+    { "id": "title_ar", "type": "text", "label": { "ar": "العنوان (عربي)", "en": "Title (Arabic)" }, "default": "ماذا يقول عملاؤنا" },
+    { "id": "title_en", "type": "text", "label": { "ar": "العنوان (إنجليزي)", "en": "Title (English)" }, "default": "What Our Customers Say" },
+    { "id": "testimonial_1_text_ar", "type": "textarea", "label": { "ar": "رأي 1 (عربي)", "en": "Review 1 (Arabic)" }, "default": "جودة رائعة وخدمة ممتازة. سعيدة جداً بتجربتي!" },
+    { "id": "testimonial_1_text_en", "type": "textarea", "label": { "ar": "رأي 1 (إنجليزي)", "en": "Review 1 (English)" }, "default": "Amazing quality and excellent service. Very happy with my experience!" },
+    { "id": "testimonial_1_name", "type": "text", "label": { "ar": "الاسم 1", "en": "Name 1" }, "default": "سارة م." },
+    { "id": "testimonial_2_text_ar", "type": "textarea", "label": { "ar": "رأي 2 (عربي)", "en": "Review 2 (Arabic)" }, "default": "العباءة وصلت بحالة ممتازة والخامة فاخرة جداً" },
+    { "id": "testimonial_2_text_en", "type": "textarea", "label": { "ar": "رأي 2 (إنجليزي)", "en": "Review 2 (English)" }, "default": "The abaya arrived in perfect condition and the fabric is very luxurious." },
+    { "id": "testimonial_2_name", "type": "text", "label": { "ar": "الاسم 2", "en": "Name 2" }, "default": "نورة ع." },
+    { "id": "testimonial_3_text_ar", "type": "textarea", "label": { "ar": "رأي 3 (عربي)", "en": "Review 3 (Arabic)" }, "default": "أفضل متجر للأزياء الراقية، تجربة تسوق لا تُنسى." },
+    { "id": "testimonial_3_text_en", "type": "textarea", "label": { "ar": "رأي 3 (إنجليزي)", "en": "Review 3 (English)" }, "default": "Best luxury fashion store, an unforgettable shopping experience." },
+    { "id": "testimonial_3_name", "type": "text", "label": { "ar": "الاسم 3", "en": "Name 3" }, "default": "ريم ك." }
+  ]
+}

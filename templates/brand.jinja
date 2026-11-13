@@ -1,0 +1,21 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="container brand-page section-y">
+  {% include "components/ui/breadcrumb.jinja" %}
+  <div class="brand-header">
+    {% if brand.image | default('') %}
+      <img src="{{ brand.image }}" alt="{{ brand.name }}" loading="eager" class="brand-header__logo" />
+    {% endif %}
+    <h1 class="brand-header__name">{{ brand.name }}</h1>
+    {% if brand.description | default('') %}<p class="brand-header__desc">{{ brand.description }}</p>{% endif %}
+  </div>
+  <div class="products-grid products-grid--4">
+    {% for product in products | default([]) %}
+      {% include "components/products/card.jinja" %}
+    {% else %}
+      {% include "components/shared/empty-state.jinja" %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

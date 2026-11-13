@@ -1,0 +1,33 @@
+<section class="section-carousel">
+  <div
+    class="embla"
+    id="luxora-carousel"
+    data-autoplay="{{ section.settings.autoplay | default(true) | lower }}"
+    data-delay="{{ (section.settings.autoplay_delay | default(5)) * 1000 }}"
+  >
+    <div class="embla__container">
+      {% for i in [1,2,3] %}
+        {% set img = section.settings['slide_' ~ i ~ '_image'] | default('') %}
+        {% if img %}
+          {% set heading = section.settings['slide_' ~ i ~ '_heading_ar'] if session.lang == 'ar' else section.settings['slide_' ~ i ~ '_heading_en'] %}
+          {% set url = section.settings['slide_' ~ i ~ '_url'] | default('') %}
+          <div class="embla__slide">
+            {% if url %}<a href="{{ url }}">{% endif %}
+            <img src="{{ img }}" alt="{{ heading | default('') }}" loading="{% if i == 1 %}eager{% else %}lazy{% endif %}" class="embla__slide-img" />
+            {% if heading | default('') %}
+              <div class="embla__slide-caption"><h3>{{ heading }}</h3></div>
+            {% endif %}
+            {% if url %}</a>{% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <button class="embla__prev" aria-label="{% if session.lang == 'ar' %}السابق{% else %}Previous{% endif %}">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="{% if session.locale.language.direction == 'rtl' %}9,18 15,12 9,6{% else %}15,18 9,12 15,6{% endif %}"/></svg>
+    </button>
+    <button class="embla__next" aria-label="{% if session.lang == 'ar' %}التالي{% else %}Next{% endif %}">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="{% if session.locale.language.direction == 'rtl' %}15,18 9,12 15,6{% else %}9,18 15,12 9,6{% endif %}"/></svg>
+    </button>
+    <div class="embla__dots" aria-hidden="true"></div>
+  </div>
+</section>

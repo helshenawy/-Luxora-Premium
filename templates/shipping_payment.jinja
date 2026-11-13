@@ -1,0 +1,39 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="container page-content section-y">
+  {% include "components/ui/breadcrumb.jinja" %}
+  <h1 class="page-title">{% if session.lang == 'ar' %}الشحن والدفع{% else %}Shipping & Payment{% endif %}</h1>
+  <div class="shipping-payment-grid">
+    <div class="info-card">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect x="9" y="11" width="14" height="10" rx="1"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>
+      <h2>{% if session.lang == 'ar' %}الشحن{% else %}Shipping{% endif %}</h2>
+      <ul>
+        <li>{% if session.lang == 'ar' %}شحن مجاني للطلبات فوق 299 ريال{% else %}Free shipping on orders over SAR 299{% endif %}</li>
+        <li>{% if session.lang == 'ar' %}2–5 أيام عمل داخل المملكة{% else %}2–5 business days within KSA{% endif %}</li>
+        <li>{% if session.lang == 'ar' %}7–14 يوم للشحن الدولي{% else %}7–14 days for international shipping{% endif %}</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <h2>{% if session.lang == 'ar' %}وسائل الدفع{% else %}Payment Methods{% endif %}</h2>
+      <ul>
+        <li>Visa / Mastercard</li>
+        <li>Apple Pay</li>
+        <li>STC Pay</li>
+        <li>Tamara / Tabby</li>
+        <li>{% if session.lang == 'ar' %}تحويل بنكي{% else %}Bank Transfer{% endif %}</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      <h2>{% if session.lang == 'ar' %}الإرجاع{% else %}Returns{% endif %}</h2>
+      <ul>
+        <li>{% if session.lang == 'ar' %}إرجاع مجاني خلال 30 يومًا{% else %}Free returns within 30 days{% endif %}</li>
+        <li>{% if session.lang == 'ar' %}المنتج يجب أن يكون بحالة أصلية{% else %}Items must be in original condition{% endif %}</li>
+        <li>{% if session.lang == 'ar' %}استرداد كامل أو استبدال{% else %}Full refund or exchange{% endif %}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

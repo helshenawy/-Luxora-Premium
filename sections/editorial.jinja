@@ -1,0 +1,31 @@
+<section class="section section-editorial section-y">
+  <div class="container">
+    <div class="editorial-block editorial-block--img-{{ section.settings.image_position | default('start') }}">
+      <div class="editorial-block__media">
+        {% if section.settings.image %}
+          <img
+            src="{{ section.settings.image }}"
+            alt="{% if session.lang == 'ar' %}{{ section.settings.heading_ar | default('') }}{% else %}{{ section.settings.heading_en | default('') }}{% endif %}"
+            loading="lazy"
+            class="editorial-block__img"
+          />
+        {% else %}
+          <div class="editorial-block__img-placeholder"></div>
+        {% endif %}
+      </div>
+      <div class="editorial-block__content">
+        {% set eyebrow = section.settings.eyebrow_ar if session.lang == 'ar' else section.settings.eyebrow_en %}
+        {% set heading = section.settings.heading_ar if session.lang == 'ar' else section.settings.heading_en %}
+        {% set body = section.settings.body_ar if session.lang == 'ar' else section.settings.body_en %}
+        {% set cta_text = section.settings.cta_text_ar if session.lang == 'ar' else section.settings.cta_text_en %}
+
+        {% if eyebrow | default('') %}<span class="editorial-block__eyebrow">{{ eyebrow }}</span>{% endif %}
+        {% if heading | default('') %}<h2 class="editorial-block__heading">{{ heading }}</h2>{% endif %}
+        {% if body | default('') %}<p class="editorial-block__body">{{ body }}</p>{% endif %}
+        {% if section.settings.cta_url | default('') and cta_text | default('') %}
+          <a href="{{ section.settings.cta_url }}" class="btn btn--primary">{{ cta_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

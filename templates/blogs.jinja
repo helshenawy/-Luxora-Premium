@@ -1,0 +1,24 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="container blogs-page section-y">
+  <h1 class="page-title">{% if session.lang == 'ar' %}المدونة{% else %}Blog{% endif %}</h1>
+  <div class="blogs-grid">
+    {% for post in posts | default([]) %}
+      <a href="{{ post.url }}" class="blog-card">
+        {% if post.image | default('') %}
+          <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy" class="blog-card__img" />
+        {% endif %}
+        <div class="blog-card__body">
+          <span class="blog-card__date">{{ post.date | default('') }}</span>
+          <h2 class="blog-card__title">{{ post.title }}</h2>
+          <p class="blog-card__excerpt">{{ post.excerpt | default('') }}</p>
+          <span class="blog-card__read-more">{% if session.lang == 'ar' %}اقرأ المزيد{% else %}Read More{% endif %} →</span>
+        </div>
+      </a>
+    {% else %}
+      {% include "components/shared/empty-state.jinja" %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

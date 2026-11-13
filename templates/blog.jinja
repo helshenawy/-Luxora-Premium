@@ -1,0 +1,17 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="container blog-post section-y">
+  {% include "components/ui/breadcrumb.jinja" %}
+  {% if post.image | default('') %}
+    <img src="{{ post.image }}" alt="{{ post.title }}" loading="eager" class="blog-post__hero" />
+  {% endif %}
+  <div class="blog-post__meta">
+    <span class="blog-post__date">{{ post.date | default('') }}</span>
+    {% if post.author | default('') %}<span class="blog-post__author">{{ post.author }}</span>{% endif %}
+  </div>
+  <h1 class="blog-post__title">{{ post.title }}</h1>
+  <div class="blog-post__body rich-text">{{ post.content | default('') }}</div>
+  <a href="/blog" class="btn btn--outline">{% if session.lang == 'ar' %}جميع المقالات{% else %}All Articles{% endif %}</a>
+</div>
+{% endblock %}

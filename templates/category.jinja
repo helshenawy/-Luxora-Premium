@@ -1,0 +1,47 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="category-page">
+  {% if category.image | default('') %}
+    <div class="category-banner">
+      <img src="{{ category.image }}" alt="{{ category.name }}" loading="eager" class="category-banner__img" />
+      <div class="category-banner__overlay" aria-hidden="true"></div>
+      <div class="category-banner__content container">
+        <h1 class="category-banner__title">{{ category.name }}</h1>
+        {% if category.description | default('') %}
+          <p class="category-banner__desc">{{ category.description }}</p>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <div class="container">
+      <h1 class="page-title">{{ category.name }}</h1>
+      {% include "components/ui/breadcrumb.jinja" %}
+    </div>
+  {% endif %}
+
+  <div class="container category-page__body">
+    <div class="products-page__toolbar">
+      <span class="products-page__count">
+        {% if session.lang == 'ar' %}{{ products | length }} منتج{% else %}{{ products | length }} products{% endif %}
+      </span>
+      <select class="products-sort__select" onchange="window.location.href=this.value">
+        <option value="?sort=newest">{% if session.lang == 'ar' %}الأحدث{% else %}Newest{% endif %}</option>
+        <option value="?sort=price_asc">{% if session.lang == 'ar' %}السعر: الأقل{% else %}Price: Low to High{% endif %}</option>
+        <option value="?sort=price_desc">{% if session.lang == 'ar' %}السعر: الأعلى{% else %}Price: High to Low{% endif %}</option>
+      </select>
+    </div>
+
+    {% if products | default([]) %}
+      <div class="products-grid products-grid--{{ settings.product_card_columns_desktop | default('4') }}">
+        {% for product in products %}
+          {% include "components/products/card.jinja" %}
+        {% endfor %}
+      </div>
+      {% include "components/ui/pagination.jinja" %}
+    {% else %}
+      {% include "components/shared/empty-state.jinja" %}
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

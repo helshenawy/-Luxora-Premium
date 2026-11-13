@@ -1,0 +1,114 @@
+{
+  "name": {
+    "ar": "إعدادات التخطيط",
+    "en": "Layout Settings"
+  },
+  "groups": [
+    {
+      "id": "colors",
+      "icon": "fa fa-palette",
+      "name": {
+        "ar": "الألوان",
+        "en": "Colors"
+      },
+      "settings": [
+        {
+          "id": "theme_background",
+          "type": "color",
+          "label": { "ar": "لون الخلفية", "en": "Background Color" },
+          "default": "#FAF7F2"
+        },
+        {
+          "id": "theme_foreground",
+          "type": "color",
+          "label": { "ar": "لون النص", "en": "Text Color" },
+          "default": "#1C1008"
+        },
+        {
+          "id": "theme_primary",
+          "type": "color",
+          "label": { "ar": "اللون الأساسي", "en": "Primary Color" },
+          "default": "#1C1008"
+        },
+        {
+          "id": "theme_accent",
+          "type": "color",
+          "label": { "ar": "لون التمييز (ذهبي)", "en": "Accent Color (Gold)" },
+          "default": "#C9A96E"
+        },
+        {
+          "id": "theme_border",
+          "type": "color",
+          "label": { "ar": "لون الحدود", "en": "Border Color" },
+          "default": "#E0D8CC"
+        }
+      ]
+    },
+    {
+      "id": "typography",
+      "icon": "fa fa-font",
+      "name": {
+        "ar": "الخطوط",
+        "en": "Typography"
+      },
+      "settings": [
+        {
+          "id": "font_family",
+          "type": "select",
+          "label": { "ar": "نوع الخط", "en": "Font Family" },
+          "options": [
+            { "value": "Cairo", "label": { "ar": "Cairo", "en": "Cairo" } },
+            { "value": "Tajawal", "label": { "ar": "Tajawal", "en": "Tajawal" } },
+            { "value": "Almarai", "label": { "ar": "Almarai", "en": "Almarai" } },
+            { "value": "Cormorant+Garamond", "label": { "ar": "Cormorant Garamond", "en": "Cormorant Garamond" } }
+          ],
+          "default": "Cairo"
+        }
+      ]
+    },
+    {
+      "id": "product_card",
+      "icon": "fa fa-th-large",
+      "name": {
+        "ar": "بطاقة المنتج",
+        "en": "Product Card"
+      },
+      "settings": [
+        {
+          "id": "product_card_columns_desktop",
+          "type": "select",
+          "label": { "ar": "عدد الأعمدة (سطح المكتب)", "en": "Columns (Desktop)" },
+          "options": [
+            { "value": "2", "label": { "ar": "2 أعمدة", "en": "2 Columns" } },
+            { "value": "3", "label": { "ar": "3 أعمدة", "en": "3 Columns" } },
+            { "value": "4", "label": { "ar": "4 أعمدة", "en": "4 Columns" } },
+            { "value": "5", "label": { "ar": "5 أعمدة", "en": "5 Columns" } }
+          ],
+          "default": "4"
+        },
+        {
+          "id": "product_card_columns_mobile",
+          "type": "select",
+          "label": { "ar": "عدد الأعمدة (موبايل)", "en": "Columns (Mobile)" },
+          "options": [
+            { "value": "1", "label": { "ar": "1 عمود", "en": "1 Column" } },
+            { "value": "2", "label": { "ar": "2 أعمدة", "en": "2 Columns" } }
+          ],
+          "default": "2"
+        },
+        {
+          "id": "product_card_image_aspect_ratio",
+          "type": "select",
+          "label": { "ar": "نسبة أبعاد الصورة", "en": "Image Aspect Ratio" },
+          "options": [
+            { "value": "adapt", "label": { "ar": "تكيّف مع الصورة", "en": "Adapt to image" } },
+            { "value": "1/1", "label": { "ar": "مربع 1:1", "en": "Square 1:1" } },
+            { "value": "3/4", "label": { "ar": "عمودي 3:4", "en": "Portrait 3:4" } },
+            { "value": "4/3", "label": { "ar": "أفقي 4:3", "en": "Landscape 4:3" } }
+          ],
+          "default": "3/4"
+        }
+      ]
+    }
+  ]
+}

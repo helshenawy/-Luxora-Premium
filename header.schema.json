@@ -1,0 +1,87 @@
+{
+  "icon": "fa fa-bars",
+  "name": { "ar": "أعلى الصفحة", "en": "Header" },
+  "groups": [
+    {
+      "id": "header",
+      "icon": "fa fa-cog",
+      "name": { "ar": "إعدادات الرأس", "en": "Header Settings" },
+      "settings": [
+        {
+          "id": "sticky",
+          "type": "checkbox",
+          "label": { "ar": "رأس ثابت عند التمرير", "en": "Sticky Header" },
+          "default": true
+        },
+        {
+          "id": "hide_language",
+          "type": "checkbox",
+          "label": { "ar": "إخفاء اللغة", "en": "Hide Language Switcher" },
+          "default": false
+        },
+        {
+          "id": "hide_country",
+          "type": "checkbox",
+          "label": { "ar": "إخفاء الدولة", "en": "Hide Country" },
+          "default": false
+        }
+      ]
+    },
+    {
+      "id": "logo",
+      "icon": "fa fa-image",
+      "name": { "ar": "الشعار", "en": "Logo" },
+      "settings": [
+        {
+          "id": "logo_desktop",
+          "type": "image",
+          "label": { "ar": "شعار سطح المكتب", "en": "Desktop Logo" },
+          "info": { "ar": "200 × 80 بكسل (اختياري)", "en": "200 × 80 px (optional)" }
+        },
+        {
+          "id": "logo_mobile",
+          "type": "image",
+          "label": { "ar": "شعار الجوال", "en": "Mobile Logo" },
+          "info": { "ar": "150 × 60 بكسل (اختياري)", "en": "150 × 60 px (optional)" }
+        },
+        {
+          "id": "logo_width",
+          "type": "range",
+          "label": { "ar": "عرض الشعار (px)", "en": "Logo Width (px)" },
+          "min": 60, "max": 240, "step": 4, "default": 120
+        }
+      ]
+    },
+    {
+      "id": "announcement_bar",
+      "icon": "fa fa-bullhorn",
+      "name": { "ar": "شريط الإعلانات", "en": "Announcement Bar" },
+      "settings": [
+        {
+          "id": "announcement_display",
+          "type": "checkbox",
+          "label": { "ar": "إظهار شريط الإعلانات", "en": "Show Announcement Bar" },
+          "default": true
+        },
+        {
+          "id": "announcement_text_ar",
+          "type": "text",
+          "label": { "ar": "نص الإعلان (عربي)", "en": "Announcement Text (Arabic)" },
+          "default": "شحن مجاني للطلبات فوق 299 ريال • إرجاع مجاني خلال 30 يومًا"
+        },
+        {
+          "id": "announcement_text_en",
+          "type": "text",
+          "label": { "ar": "نص الإعلان (إنجليزي)", "en": "Announcement Text (English)" },
+          "default": "Free shipping on orders over SAR 299 • Free returns within 30 days"
+        },
+        {
+          "id": "announcement_url",
+          "type": "text",
+          "label": { "ar": "رابط الإعلان", "en": "Announcement Link" },
+          "default": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": { "ar": "التصنيفات", "en": "Categories" },
+  "settings": [
+    { "id": "title_ar", "type": "text", "label": { "ar": "العنوان (عربي)", "en": "Title (Arabic)" }, "default": "تسوقي حسب التصنيف" },
+    { "id": "title_en", "type": "text", "label": { "ar": "العنوان (إنجليزي)", "en": "Title (English)" }, "default": "Shop by Category" },
+    { "id": "limit", "type": "range", "label": { "ar": "عدد التصنيفات", "en": "Categories Count" }, "min": 3, "max": 8, "step": 1, "default": 4 },
+    { "id": "show_all_link", "type": "checkbox", "label": { "ar": "رابط عرض الكل", "en": "Show All Link" }, "default": true }
+  ]
+}

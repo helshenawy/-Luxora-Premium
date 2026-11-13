@@ -1,0 +1,22 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="container questions-page section-y">
+  <h1 class="page-title">{% if session.lang == 'ar' %}الأسئلة والأجوبة{% else %}Questions & Answers{% endif %}</h1>
+  {% if questions | default([]) %}
+    <div class="faqs-list">
+      {% for q in questions %}
+        <details class="faq-item">
+          <summary class="faq-item__question">
+            {{ q.question }}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="faq-item__icon" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+          </summary>
+          <div class="faq-item__answer">{{ q.answer | default('') }}</div>
+        </details>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% include "components/shared/empty-state.jinja" %}
+  {% endif %}
+</div>
+{% endblock %}

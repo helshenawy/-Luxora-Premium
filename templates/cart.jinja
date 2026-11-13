@@ -1,0 +1,67 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="container cart-page section-y">
+  <h1 class="page-title">{% if session.lang == 'ar' %}سلة التسوق{% else %}Shopping Cart{% endif %}</h1>
+
+  {% if cart.items | default([]) %}
+    <div class="cart-layout">
+      <div class="cart-items">
+        {% for item in cart.items %}
+          <div class="cart-item" data-item-id="{{ item.id }}">
+            <a href="{{ item.url | default('#') }}" class="cart-item__img-link">
+              <img src="{{ item.image | default('') }}" alt="{{ item.name }}" loading="lazy" class="cart-item__img" />
+            </a>
+            <div class="cart-item__info">
+              <a href="{{ item.url | default('#') }}" class="cart-item__name">{{ item.name }}</a>
+              {% if item.variant | default('') %}
+                <span class="cart-item__variant">{{ item.variant }}</span>
+              {% endif %}
+              <span class="cart-item__price">{{ item.price }}</span>
+            </div>
+            <div class="cart-item__actions">
+              <div class="quantity-control quantity-control--sm">
+                <button class="quantity-control__btn" data-action="decrease" data-item="{{ item.id }}" aria-label="decrease">−</button>
+                <input type="number" class="quantity-control__input" value="{{ item.quantity }}" min="1" data-item="{{ item.id }}" />
+                <button class="quantity-control__btn" data-action="increase" data-item="{{ item.id }}" aria-label="increase">+</button>
+              </div>
+              <button class="cart-item__remove" data-item="{{ item.id }}" aria-label="{% if session.lang == 'ar' %}حذف{% else %}Remove{% endif %}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6m3,0V4a1,1,0,0,1,1-1h4a1,1,0,0,1,1,1v2"/></svg>
+              </button>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="cart-summary">
+        <h2 class="cart-summary__title">{% if session.lang == 'ar' %}ملخص الطلب{% else %}Order Summary{% endif %}</h2>
+        <div class="cart-summary__row">
+          <span>{% if session.lang == 'ar' %}المجموع الفرعي{% else %}Subtotal{% endif %}</span>
+          <span>{{ cart.total }}</span>
+        </div>
+        <div class="cart-summary__row cart-summary__row--shipping">
+          <span>{% if session.lang == 'ar' %}الشحن{% else %}Shipping{% endif %}</span>
+          <span>{% if session.lang == 'ar' %}يُحتسب عند الدفع{% else %}Calculated at checkout{% endif %}</span>
+        </div>
+        <div class="cart-summary__row cart-summary__row--total">
+          <span>{% if session.lang == 'ar' %}الإجمالي{% else %}Total{% endif %}</span>
+          <span>{{ cart.total }}</span>
+        </div>
+        <a href="/checkout" class="btn btn--primary btn--full cart-summary__checkout">
+          {% if session.lang == 'ar' %}إتمام الشراء{% else %}Proceed to Checkout{% endif %}
+        </a>
+        <a href="/products" class="btn btn--outline btn--full cart-summary__continue">
+          {% if session.lang == 'ar' %}متابعة التسوق{% else %}Continue Shopping{% endif %}
+        </a>
+      </div>
+    </div>
+  {% else %}
+    <div class="cart-empty">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <h2>{% if session.lang == 'ar' %}سلتك فارغة{% else %}Your Cart is Empty{% endif %}</h2>
+      <p>{% if session.lang == 'ar' %}ابدأي تسوقك الآن واملأي سلتك بأجمل القطع{% else %}Start shopping now and fill your cart with beautiful pieces{% endif %}</p>
+      <a href="/products" class="btn btn--primary">{% if session.lang == 'ar' %}تسوقي الآن{% else %}Shop Now{% endif %}</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="container reviews-page section-y">
+  <h1 class="page-title">{% if session.lang == 'ar' %}التقييمات{% else %}Reviews{% endif %}</h1>
+  <div class="reviews-list">
+    {% for review in reviews | default([]) %}
+      <div class="review-item">
+        <div class="review-item__header">
+          <span class="review-item__author">{{ review.author | default('') }}</span>
+          <div class="review-item__stars" aria-label="{{ review.rating | default(5) }} stars">
+            {% for s in range(review.rating | default(5)) %}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--gold)" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            {% endfor %}
+          </div>
+          <span class="review-item__date">{{ review.date | default('') }}</span>
+        </div>
+        <p class="review-item__text">{{ review.text | default('') }}</p>
+      </div>
+    {% else %}
+      <p>{% if session.lang == 'ar' %}لا توجد تقييمات حتى الآن{% else %}No reviews yet{% endif %}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

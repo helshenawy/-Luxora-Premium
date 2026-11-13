@@ -1,0 +1,23 @@
+{% if pagination | default('') and pagination.total_pages | default(1) > 1 %}
+<nav class="pagination" aria-label="{% if session.lang == 'ar' %}الصفحات{% else %}Pagination{% endif %}">
+  {% if pagination.prev_url | default('') %}
+    <a href="{{ pagination.prev_url }}" class="pagination__btn pagination__btn--prev" aria-label="{% if session.lang == 'ar' %}السابق{% else %}Previous{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="{% if session.locale.language.direction == 'rtl' %}9,18 15,12 9,6{% else %}15,18 9,12 15,6{% endif %}"/></svg>
+    </a>
+  {% endif %}
+  <div class="pagination__pages">
+    {% for page_num in range(1, pagination.total_pages + 1) %}
+      {% if page_num == pagination.current_page %}
+        <span class="pagination__page pagination__page--active" aria-current="page">{{ page_num }}</span>
+      {% else %}
+        <a href="?page={{ page_num }}" class="pagination__page">{{ page_num }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% if pagination.next_url | default('') %}
+    <a href="{{ pagination.next_url }}" class="pagination__btn pagination__btn--next" aria-label="{% if session.lang == 'ar' %}التالي{% else %}Next{% endif %}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="{% if session.locale.language.direction == 'rtl' %}15,18 9,12 15,6{% else %}9,18 15,12 9,6{% endif %}"/></svg>
+    </a>
+  {% endif %}
+</nav>
+{% endif %}

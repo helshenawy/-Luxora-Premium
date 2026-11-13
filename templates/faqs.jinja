@@ -1,0 +1,21 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="container faqs-page section-y">
+  {% include "components/ui/breadcrumb.jinja" %}
+  <h1 class="page-title">{% if session.lang == 'ar' %}الأسئلة الشائعة{% else %}Frequently Asked Questions{% endif %}</h1>
+  <div class="faqs-list">
+    {% for faq in faqs | default([]) %}
+      <details class="faq-item">
+        <summary class="faq-item__question">
+          {{ faq.question }}
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="faq-item__icon" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </summary>
+        <div class="faq-item__answer">{{ faq.answer }}</div>
+      </details>
+    {% else %}
+      <p class="faqs-empty">{% if session.lang == 'ar' %}لا توجد أسئلة حالياً{% else %}No questions available{% endif %}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{
+  "name": { "ar": "منتجات", "en": "Products" },
+  "settings": [
+    { "id": "title_ar", "type": "text", "label": { "ar": "العنوان (عربي)", "en": "Title (Arabic)" }, "default": "الوصول الجديد" },
+    { "id": "title_en", "type": "text", "label": { "ar": "العنوان (إنجليزي)", "en": "Title (English)" }, "default": "New Arrivals" },
+    { "id": "subtitle_ar", "type": "text", "label": { "ar": "النص الفرعي (عربي)", "en": "Subtitle (Arabic)" }, "default": "" },
+    { "id": "subtitle_en", "type": "text", "label": { "ar": "النص الفرعي (إنجليزي)", "en": "Subtitle (English)" }, "default": "" },
+    { "id": "category_id", "type": "text", "label": { "ar": "معرّف التصنيف (فارغ = الكل)", "en": "Category ID (empty = all)" }, "default": "" },
+    { "id": "limit", "type": "range", "label": { "ar": "عدد المنتجات", "en": "Products Count" }, "min": 4, "max": 20, "step": 4, "default": 8 },
+    {
+      "id": "columns_desktop",
+      "type": "select",
+      "label": { "ar": "أعمدة سطح المكتب", "en": "Desktop Columns" },
+      "options": [
+        { "value": "2", "label": { "ar": "2", "en": "2" } },
+        { "value": "3", "label": { "ar": "3", "en": "3" } },
+        { "value": "4", "label": { "ar": "4", "en": "4" } }
+      ],
+      "default": "4"
+    },
+    { "id": "show_view_all", "type": "checkbox", "label": { "ar": "إظهار زر عرض الكل", "en": "Show View All Button" }, "default": true },
+    { "id": "view_all_url", "type": "text", "label": { "ar": "رابط عرض الكل", "en": "View All URL" }, "default": "/products" }
+  ]
+}

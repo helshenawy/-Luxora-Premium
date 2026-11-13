@@ -1,0 +1,16 @@
+{
+  "name": { "ar": "محتوى تحريري", "en": "Editorial Block" },
+  "settings": [
+    { "id": "image", "type": "image", "label": { "ar": "الصورة", "en": "Image" } },
+    { "id": "image_position", "type": "select", "label": { "ar": "موضع الصورة", "en": "Image Position" }, "options": [{"value":"start","label":{"ar":"يمين","en":"Start"}},{"value":"end","label":{"ar":"يسار","en":"End"}}], "default": "start" },
+    { "id": "eyebrow_ar", "type": "text", "label": { "ar": "النص العلوي (عربي)", "en": "Eyebrow (Arabic)" }, "default": "قصتنا" },
+    { "id": "eyebrow_en", "type": "text", "label": { "ar": "النص العلوي (إنجليزي)", "en": "Eyebrow (English)" }, "default": "Our Story" },
+    { "id": "heading_ar", "type": "text", "label": { "ar": "العنوان (عربي)", "en": "Heading (Arabic)" }, "default": "صنع بشغف" },
+    { "id": "heading_en", "type": "text", "label": { "ar": "العنوان (إنجليزي)", "en": "Heading (English)" }, "default": "Crafted With Passion" },
+    { "id": "body_ar", "type": "textarea", "label": { "ar": "النص (عربي)", "en": "Body (Arabic)" }, "default": "نحن نؤمن بأن الأزياء الراقية يجب أن تكون في متناول الجميع." },
+    { "id": "body_en", "type": "textarea", "label": { "ar": "النص (إنجليزي)", "en": "Body (English)" }, "default": "We believe that luxury fashion should be within everyone's reach." },
+    { "id": "cta_text_ar", "type": "text", "label": { "ar": "نص الزر (عربي)", "en": "CTA Text (Arabic)" }, "default": "اعرفي أكثر" },
+    { "id": "cta_text_en", "type": "text", "label": { "ar": "نص الزر (إنجليزي)", "en": "CTA Text (English)" }, "default": "Learn More" },
+    { "id": "cta_url", "type": "text", "label": { "ar": "رابط الزر", "en": "CTA URL" }, "default": "/about" }
+  ]
+}

@@ -1,0 +1,80 @@
+{% set card_columns_desktop = settings.product_card_columns_desktop | default('4') %}
+{% set card_columns_mobile = settings.product_card_columns_mobile | default('2') %}
+{% set card_image_aspect_ratio = settings.product_card_image_aspect_ratio | default('3/4') %}
+{% set font_family = settings.font_family | default('Cairo') %}
+
+<!DOCTYPE html>
+<html
+  class="no-js"
+  lang="{{ session.lang }}"
+  dir="{{ session.locale.language.direction }}"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% vitrin_head %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.onload=null;this.media='all'"
+      href="https://fonts.googleapis.com/css2?family={{ font_family }}:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cairo:wght@300;400;500;600;700&display=swap"
+    />
+    <!-- prettier-ignore-start -->
+    <style>
+      :root {
+        --font-family: {{ (font_family | default('Cairo')).replace('+', ' ') }}, 'Noto Naskh Arabic', sans-serif;
+        --font-serif: 'Cormorant Garamond', Georgia, serif;
+
+        --espresso:        {{ settings.theme_primary | default('#1C1008') }};
+        --ivory:           {{ settings.theme_background | default('#FAF7F2') }};
+        --gold:            {{ settings.theme_accent | default('#C9A96E') }};
+        --gold-light:      #E8D5A3;
+        --cream:           {{ settings.theme_secondary | default('#F2EDE4') }};
+        --cream-dark:      #E8DFD0;
+
+        --text-primary:    {{ settings.theme_foreground | default('#1C1008') }};
+        --text-secondary:  #5A4A38;
+        --text-muted:      {{ settings.theme_muted | default('#8A7868') }};
+        --text-inverse:    #FAF7F2;
+        --border:          {{ settings.theme_border | default('#E0D8CC') }};
+        --surface:         #FFFFFF;
+
+        --shadow-card:     0 4px 24px rgba(28,16,8,.07);
+        --shadow-hover:    0 16px 48px rgba(28,16,8,.14);
+        --shadow-header:   0 2px 20px rgba(28,16,8,.08);
+
+        --ease-out:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+        --t-fast:          0.2s var(--ease-out);
+        --t-base:          0.35s var(--ease-out);
+        --t-slow:          0.6s var(--ease-out);
+
+        --container-max:   1440px;
+        --container-pad:   clamp(1.5rem, 5vw, 5rem);
+        --section-y:       clamp(4rem, 8vw, 8rem);
+
+        --radius-sm:       2px;
+        --radius-md:       {{ settings.theme_radius | default(2) }}px;
+
+        --card-columns-desktop: {{ card_columns_desktop }};
+        --card-columns-mobile:  {{ card_columns_mobile }};
+      }
+    </style>
+    <!-- prettier-ignore-end -->
+    <link rel="stylesheet" href="{{ 'assets/styles.css' | asset_url }}" />
+  </head>
+  <body>
+    {% vitrin_body %}
+    {% include "header.jinja" %}
+    <main id="main-content">
+      {% block content %}{% endblock %}
+    </main>
+    {% include "footer.jinja" %}
+    {% include "components/cart/mini-cart.jinja" %}
+    <script src="{{ 'assets/dist/theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'assets/dist/cart-controller.js' | asset_url }}" defer></script>
+  </body>
+</html>

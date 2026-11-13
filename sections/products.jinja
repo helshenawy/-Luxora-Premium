@@ -1,0 +1,27 @@
+<section class="section section-products section-y">
+  <div class="container">
+    {% set title = section.settings.title_ar if session.lang == 'ar' else section.settings.title_en %}
+    {% set subtitle = section.settings.subtitle_ar if session.lang == 'ar' else section.settings.subtitle_en %}
+
+    {% include "components/shared/section-header.jinja" with { "title": title, "subtitle": subtitle } only %}
+
+    <div
+      class="products-grid products-grid--{{ section.settings.columns_desktop | default('4') }}"
+      data-columns="{{ section.settings.columns_desktop | default('4') }}"
+    >
+      {% for product in products | slice(section.settings.limit | default(8)) %}
+        {% include "components/products/card.jinja" %}
+      {% else %}
+        {% include "components/shared/empty-state.jinja" %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_view_all | default(true) and section.settings.view_all_url | default('') %}
+      <div class="section-products__footer">
+        <a href="{{ section.settings.view_all_url }}" class="btn btn--outline">
+          {% if session.lang == 'ar' %}عرض جميع المنتجات{% else %}View All Products{% endif %}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>

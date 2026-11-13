@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "add_to_cart"
+msgstr "Add to Cart"
+
+msgid "out_of_stock"
+msgstr "Out of Stock"
+
+msgid "quick_view"
+msgstr "Quick View"
+
+msgid "shop_now"
+msgstr "Shop Now"
+
+msgid "new_arrivals"
+msgstr "New Arrivals"
+
+msgid "best_sellers"
+msgstr "Best Sellers"
+
+msgid "featured_categories"
+msgstr "Featured Categories"
+
+msgid "search_placeholder"
+msgstr "Search for a product..."
+
+msgid "cart_empty"
+msgstr "Your Cart is Empty"
+
+msgid "checkout"
+msgstr "Checkout"
+
+msgid "view_cart"
+msgstr "View Cart"
+
+msgid "total"
+msgstr "Total"
+
+msgid "subtotal"
+msgstr "Subtotal"
+
+msgid "free_shipping"
+msgstr "Free Shipping"
+
+msgid "size_guide"
+msgstr "Size Guide"
+
+msgid "product_description"
+msgstr "Product Description"
+
+msgid "related_products"
+msgstr "You May Also Like"
+
+msgid "home"
+msgstr "Home"
+
+msgid "wishlist"
+msgstr "Wishlist"
+
+msgid "my_account"
+msgstr "My Account"
+
+msgid "continue_shopping"
+msgstr "Continue Shopping"
+
+msgid "all_categories"
+msgstr "All Categories"
+
+msgid "all_products"
+msgstr "All Products"

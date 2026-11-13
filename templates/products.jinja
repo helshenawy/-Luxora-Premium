@@ -1,0 +1,78 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="products-page">
+  <div class="container">
+    {% include "components/ui/breadcrumb.jinja" %}
+
+    <div class="products-page__header">
+      <h1 class="products-page__title">
+        {% if session.lang == 'ar' %}جميع المنتجات{% else %}All Products{% endif %}
+      </h1>
+      <div class="products-page__toolbar">
+        <span class="products-page__count">
+          {% if session.lang == 'ar' %}{{ products | length }} منتج{% else %}{{ products | length }} products{% endif %}
+        </span>
+        <div class="products-sort">
+          <label for="sort-select" class="visually-hidden">{% if session.lang == 'ar' %}ترتيب{% else %}Sort{% endif %}</label>
+          <select id="sort-select" class="products-sort__select" onchange="window.location.href=this.value">
+            <option value="?sort=newest">{% if session.lang == 'ar' %}الأحدث{% else %}Newest{% endif %}</option>
+            <option value="?sort=price_asc">{% if session.lang == 'ar' %}السعر: الأقل{% else %}Price: Low to High{% endif %}</option>
+            <option value="?sort=price_desc">{% if session.lang == 'ar' %}السعر: الأعلى{% else %}Price: High to Low{% endif %}</option>
+            <option value="?sort=popular">{% if session.lang == 'ar' %}الأكثر شعبية{% else %}Most Popular{% endif %}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-page__layout">
+      <!-- Filters Sidebar -->
+      <aside class="products-filters" id="products-filters">
+        <div class="products-filters__header">
+          <h2 class="products-filters__title">{% if session.lang == 'ar' %}تصفية{% else %}Filters{% endif %}</h2>
+          <button class="products-filters__clear" id="clear-filters">{% if session.lang == 'ar' %}مسح الكل{% else %}Clear All{% endif %}</button>
+        </div>
+
+        <!-- Categories Filter -->
+        {% if categories | default([]) %}
+          <div class="filter-group">
+            <h3 class="filter-group__label">{% if session.lang == 'ar' %}التصنيف{% else %}Category{% endif %}</h3>
+            <ul class="filter-group__options">
+              {% for category in categories %}
+                <li>
+                  <a href="{{ category.url }}" class="filter-group__option">{{ category.name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <!-- Price Filter -->
+        <div class="filter-group">
+          <h3 class="filter-group__label">{% if session.lang == 'ar' %}نطاق السعر{% else %}Price Range{% endif %}</h3>
+          <div class="price-range" id="price-range" data-min="0" data-max="2000"></div>
+          <div class="price-range__labels">
+            <span id="price-min">0</span>
+            <span> — </span>
+            <span id="price-max">2000</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Products Grid -->
+      <div class="products-page__grid-wrap">
+        {% if products | default([]) %}
+          <div class="products-grid products-grid--{{ settings.product_card_columns_desktop | default('4') }}" id="products-grid">
+            {% for product in products %}
+              {% include "components/products/card.jinja" %}
+            {% endfor %}
+          </div>
+          {% include "components/ui/pagination.jinja" %}
+        {% else %}
+          {% include "components/shared/empty-state.jinja" %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

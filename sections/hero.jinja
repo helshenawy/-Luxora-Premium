@@ -1,0 +1,48 @@
+<section
+  class="section-hero"
+  style="min-height: {{ section.settings.min_height | default(85) }}vh;"
+  aria-label="{% if session.lang == 'ar' %}البانر الرئيسي{% else %}Hero Banner{% endif %}"
+>
+  {% if section.settings.image %}
+    <picture class="section-hero__bg">
+      {% if section.settings.image_mobile %}
+        <source media="(max-width: 767px)" srcset="{{ section.settings.image_mobile }}" />
+      {% endif %}
+      <img
+        src="{{ section.settings.image }}"
+        alt="{% if session.lang == 'ar' %}{{ section.settings.heading_ar | default('') }}{% else %}{{ section.settings.heading_en | default('') }}{% endif %}"
+        loading="eager"
+        fetchpriority="high"
+        class="section-hero__bg-img"
+      />
+    </picture>
+  {% else %}
+    <div class="section-hero__bg section-hero__bg--placeholder"></div>
+  {% endif %}
+
+  <div
+    class="section-hero__overlay"
+    style="opacity: {{ (section.settings.overlay_opacity | default(40)) / 100 }};"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container section-hero__content section-hero__content--{{ section.settings.layout | default('center') }}">
+    {% set subheading = section.settings.subheading_ar if session.lang == 'ar' else section.settings.subheading_en %}
+    {% set heading = section.settings.heading_ar if session.lang == 'ar' else section.settings.heading_en %}
+    {% set cta_text = section.settings.cta_text_ar if session.lang == 'ar' else section.settings.cta_text_en %}
+
+    {% if subheading | default('') %}
+      <span class="section-hero__eyebrow">{{ subheading }}</span>
+    {% endif %}
+
+    {% if heading | default('') %}
+      <h1 class="section-hero__heading">{{ heading }}</h1>
+    {% endif %}
+
+    {% if section.settings.cta_url | default('') %}
+      <a href="{{ section.settings.cta_url }}" class="btn btn--outline-light section-hero__cta">
+        {{ cta_text | default('Shop Now') }}
+      </a>
+    {% endif %}
+  </div>
+</section>

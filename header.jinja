@@ -1,0 +1,123 @@
+{% if settings.announcement_display | default(true) %}
+<div class="announcement-bar" id="announcement-bar">
+  <div class="announcement-bar__inner">
+    {% if settings.announcement_url | default('') %}
+      <a href="{{ settings.announcement_url }}" class="announcement-bar__text">
+    {% else %}
+      <span class="announcement-bar__text">
+    {% endif %}
+      <span class="announcement-bar__dot"></span>
+      {% if session.lang == 'ar' %}
+        {{ settings.announcement_text_ar | default('شحن مجاني للطلبات فوق 299 ريال') }}
+      {% else %}
+        {{ settings.announcement_text_en | default('Free shipping on orders over SAR 299') }}
+      {% endif %}
+      <span class="announcement-bar__dot"></span>
+    {% if settings.announcement_url | default('') %}
+      </a>
+    {% else %}
+      </span>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+<header class="site-header {% if settings.sticky | default(true) %}is-sticky{% endif %}" id="site-header">
+  <div class="header-inner">
+    <!-- Logo -->
+    <a href="/" class="header-logo" aria-label="{{ store.name }}">
+      {% if settings.logo_desktop %}
+        <img
+          src="{{ settings.logo_desktop }}"
+          alt="{{ store.name }}"
+          width="{{ settings.logo_width | default(120) }}"
+          class="header-logo__img header-logo__img--desktop"
+          loading="eager"
+        />
+        {% if settings.logo_mobile %}
+          <img
+            src="{{ settings.logo_mobile }}"
+            alt="{{ store.name }}"
+            width="{{ (settings.logo_width | default(120) * 0.75) | int }}"
+            class="header-logo__img header-logo__img--mobile"
+            loading="eager"
+          />
+        {% endif %}
+      {% else %}
+        <span class="header-logo__text">{{ store.name }}</span>
+      {% endif %}
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="header-nav" aria-label="{% if session.lang == 'ar' %}القائمة الرئيسية{% else %}Main Navigation{% endif %}">
+      {% for category in categories | slice(6) %}
+        <a href="{{ category.url }}" class="header-nav__link">{{ category.name }}</a>
+      {% endfor %}
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      {% if not settings.hide_language | default(false) %}
+        <div class="header-lang-switcher">
+          {% if session.lang == 'ar' %}
+            <a href="?lang=en" class="header-action-btn" aria-label="English">EN</a>
+          {% else %}
+            <a href="?lang=ar" class="header-action-btn" aria-label="العربية">ع</a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <button class="header-action-btn" id="search-toggle" aria-label="{% if session.lang == 'ar' %}بحث{% else %}Search{% endif %}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+
+      <a href="/wishlist" class="header-action-btn" aria-label="{% if session.lang == 'ar' %}المفضلة{% else %}Wishlist{% endif %}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </a>
+
+      <button class="header-action-btn cart-trigger" id="cart-trigger" aria-label="{% if session.lang == 'ar' %}السلة{% else %}Cart{% endif %}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span class="cart-count" id="cart-count" {% if cart.count == 0 %}style="display:none"{% endif %}>{{ cart.count }}</span>
+      </button>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="{% if session.lang == 'ar' %}القائمة{% else %}Menu{% endif %}" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="header-search" id="header-search" hidden>
+    <div class="header-search__inner">
+      <form action="/search" method="get" role="search">
+        <input
+          type="search"
+          name="q"
+          class="header-search__input"
+          placeholder="{% if session.lang == 'ar' %}ابحث عن منتج...{% else %}Search for a product...{% endif %}"
+          autocomplete="off"
+          autofocus
+        />
+        <button type="submit" class="header-search__submit">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+      </form>
+      <button class="header-search__close" id="search-close" aria-label="{% if session.lang == 'ar' %}إغلاق{% else %}Close{% endif %}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% include "components/header/mobile-nav.jinja" %}

@@ -1,0 +1,9 @@
+<div class="section-header">
+  {% if title | default('') %}
+    <h2 class="section-header__title">{{ title }}</h2>
+  {% endif %}
+  {% if subtitle | default('') %}
+    <p class="section-header__subtitle">{{ subtitle }}</p>
+  {% endif %}
+  <div class="section-header__divider" aria-hidden="true"></div>
+</div>

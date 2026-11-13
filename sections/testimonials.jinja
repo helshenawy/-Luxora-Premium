@@ -1,0 +1,22 @@
+<section class="section section-testimonials section-y">
+  <div class="container">
+    {% set title = section.settings.title_ar if session.lang == 'ar' else section.settings.title_en %}
+    {% include "components/shared/section-header.jinja" with { "title": title } only %}
+
+    <div class="testimonials-grid">
+      {% for i in [1, 2, 3] %}
+        {% set text = section.settings['testimonial_' ~ i ~ '_text_ar'] if session.lang == 'ar' else section.settings['testimonial_' ~ i ~ '_text_en'] %}
+        {% set name = section.settings['testimonial_' ~ i ~ '_name'] | default('') %}
+        {% if text | default('') %}
+          <div class="testimonial-card">
+            <div class="testimonial-card__stars" aria-label="5 stars">
+              {% for s in [1,2,3,4,5] %}<svg width="14" height="14" viewBox="0 0 24 24" fill="var(--gold)" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>{% endfor %}
+            </div>
+            <p class="testimonial-card__text">"{{ text }}"</p>
+            {% if name %}<span class="testimonial-card__name">— {{ name }}</span>{% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

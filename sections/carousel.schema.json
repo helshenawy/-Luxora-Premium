@@ -1,0 +1,19 @@
+{
+  "name": { "ar": "شرائح صور", "en": "Image Carousel" },
+  "settings": [
+    { "id": "autoplay", "type": "checkbox", "label": { "ar": "تشغيل تلقائي", "en": "Autoplay" }, "default": true },
+    { "id": "autoplay_delay", "type": "range", "label": { "ar": "تأخير (ثانية)", "en": "Delay (seconds)" }, "min": 2, "max": 10, "step": 1, "default": 5 },
+    { "id": "slide_1_image", "type": "image", "label": { "ar": "صورة الشريحة 1", "en": "Slide 1 Image" } },
+    { "id": "slide_1_heading_ar", "type": "text", "label": { "ar": "عنوان 1 (عربي)", "en": "Heading 1 (Arabic)" }, "default": "" },
+    { "id": "slide_1_heading_en", "type": "text", "label": { "ar": "عنوان 1 (إنجليزي)", "en": "Heading 1 (English)" }, "default": "" },
+    { "id": "slide_1_url", "type": "text", "label": { "ar": "رابط 1", "en": "URL 1" }, "default": "" },
+    { "id": "slide_2_image", "type": "image", "label": { "ar": "صورة الشريحة 2", "en": "Slide 2 Image" } },
+    { "id": "slide_2_heading_ar", "type": "text", "label": { "ar": "عنوان 2 (عربي)", "en": "Heading 2 (Arabic)" }, "default": "" },
+    { "id": "slide_2_heading_en", "type": "text", "label": { "ar": "عنوان 2 (إنجليزي)", "en": "Heading 2 (English)" }, "default": "" },
+    { "id": "slide_2_url", "type": "text", "label": { "ar": "رابط 2", "en": "URL 2" }, "default": "" },
+    { "id": "slide_3_image", "type": "image", "label": { "ar": "صورة الشريحة 3", "en": "Slide 3 Image" } },
+    { "id": "slide_3_heading_ar", "type": "text", "label": { "ar": "عنوان 3 (عربي)", "en": "Heading 3 (Arabic)" }, "default": "" },
+    { "id": "slide_3_heading_en", "type": "text", "label": { "ar": "عنوان 3 (إنجليزي)", "en": "Heading 3 (English)" }, "default": "" },
+    { "id": "slide_3_url", "type": "text", "label": { "ar": "رابط 3", "en": "URL 3" }, "default": "" }
+  ]
+}

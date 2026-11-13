@@ -1,0 +1,3 @@
+<span class="product-badge {% if product.label == 'new' or product.label == 'جديد' %}product-badge--new{% elif product.label == 'sale' or product.label == 'تخفيض' %}product-badge--sale{% else %}product-badge--default{% endif %}">
+  {{ product.label }}
+</span>

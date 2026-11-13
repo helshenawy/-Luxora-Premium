@@ -1,0 +1,9 @@
+{
+  "name": { "ar": "فيديو", "en": "Video" },
+  "settings": [
+    { "id": "youtube_id", "type": "text", "label": { "ar": "معرّف يوتيوب", "en": "YouTube Video ID" }, "default": "" },
+    { "id": "thumbnail", "type": "image", "label": { "ar": "صورة مصغرة", "en": "Thumbnail Image" } },
+    { "id": "heading_ar", "type": "text", "label": { "ar": "العنوان (عربي)", "en": "Heading (Arabic)" }, "default": "شاهدي المجموعة" },
+    { "id": "heading_en", "type": "text", "label": { "ar": "العنوان (إنجليزي)", "en": "Heading (English)" }, "default": "Watch the Collection" }
+  ]
+}

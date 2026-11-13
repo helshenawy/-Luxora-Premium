@@ -1,0 +1,130 @@
+{
+  "ar": {
+    "sections": [
+      {
+        "type": "hero",
+        "settings": {
+          "heading_ar": "أناقة بلا حدود",
+          "subheading_ar": "مجموعة جديدة",
+          "cta_text_ar": "تسوقي الآن",
+          "cta_url": "/products",
+          "layout": "center",
+          "overlay_opacity": 40,
+          "min_height": 85
+        }
+      },
+      {
+        "type": "benefits",
+        "settings": {
+          "benefit_1_icon": "shipping",
+          "benefit_1_text_ar": "شحن مجاني فوق 299 ريال",
+          "benefit_2_icon": "return",
+          "benefit_2_text_ar": "إرجاع مجاني خلال 30 يومًا",
+          "benefit_3_icon": "secure",
+          "benefit_3_text_ar": "دفع آمن ومشفر",
+          "benefit_4_icon": "support",
+          "benefit_4_text_ar": "دعم عملاء على مدار الساعة"
+        }
+      },
+      {
+        "type": "categories",
+        "settings": {
+          "title_ar": "تسوقي حسب التصنيف",
+          "limit": 4,
+          "show_all_link": true
+        }
+      },
+      {
+        "type": "products",
+        "settings": {
+          "title_ar": "الوصول الجديد",
+          "limit": 8,
+          "columns_desktop": "4",
+          "show_view_all": true,
+          "view_all_url": "/products"
+        }
+      },
+      {
+        "type": "editorial",
+        "settings": {
+          "eyebrow_ar": "قصتنا",
+          "heading_ar": "صنع بشغف",
+          "body_ar": "نحن نؤمن بأن الأزياء الراقية يجب أن تكون في متناول الجميع.",
+          "cta_text_ar": "اعرفي أكثر",
+          "cta_url": "/about",
+          "image_position": "start"
+        }
+      },
+      {
+        "type": "testimonials",
+        "settings": {
+          "title_ar": "ماذا يقول عملاؤنا"
+        }
+      }
+    ]
+  },
+  "en": {
+    "sections": [
+      {
+        "type": "hero",
+        "settings": {
+          "heading_en": "Elegance Without Limits",
+          "subheading_en": "New Collection",
+          "cta_text_en": "Shop Now",
+          "cta_url": "/products",
+          "layout": "center",
+          "overlay_opacity": 40,
+          "min_height": 85
+        }
+      },
+      {
+        "type": "benefits",
+        "settings": {
+          "benefit_1_icon": "shipping",
+          "benefit_1_text_en": "Free shipping over SAR 299",
+          "benefit_2_icon": "return",
+          "benefit_2_text_en": "Free returns within 30 days",
+          "benefit_3_icon": "secure",
+          "benefit_3_text_en": "Secure & encrypted payment",
+          "benefit_4_icon": "support",
+          "benefit_4_text_en": "24/7 customer support"
+        }
+      },
+      {
+        "type": "categories",
+        "settings": {
+          "title_en": "Shop by Category",
+          "limit": 4,
+          "show_all_link": true
+        }
+      },
+      {
+        "type": "products",
+        "settings": {
+          "title_en": "New Arrivals",
+          "limit": 8,
+          "columns_desktop": "4",
+          "show_view_all": true,
+          "view_all_url": "/products"
+        }
+      },
+      {
+        "type": "editorial",
+        "settings": {
+          "eyebrow_en": "Our Story",
+          "heading_en": "Crafted With Passion",
+          "body_en": "We believe that luxury fashion should be within everyone's reach.",
+          "cta_text_en": "Learn More",
+          "cta_url": "/about",
+          "image_position": "start"
+        }
+      },
+      {
+        "type": "testimonials",
+        "settings": {
+          "title_en": "What Our Customers Say"
+        }
+      }
+    ]
+  }
+}

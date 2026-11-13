@@ -1,0 +1,11 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="container page-content section-y">
+  {% include "components/ui/breadcrumb.jinja" %}
+  <h1 class="page-title">{{ page.title | default('') }}</h1>
+  <div class="page-body rich-text">
+    {{ page.content | default('') }}
+  </div>
+</div>
+{% endblock %}

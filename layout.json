@@ -1,0 +1,32 @@
+{
+  "ar": {
+    "font_family": "Cairo",
+    "theme_primary": "#1C1008",
+    "theme_primary_foreground": "#FAF7F2",
+    "theme_secondary": "#F2EDE4",
+    "theme_accent": "#C9A96E",
+    "theme_background": "#FAF7F2",
+    "theme_foreground": "#1C1008",
+    "theme_muted": "#8A7868",
+    "theme_border": "#E0D8CC",
+    "theme_radius": 2,
+    "product_card_columns_desktop": "4",
+    "product_card_columns_mobile": "2",
+    "product_card_image_aspect_ratio": "3/4"
+  },
+  "en": {
+    "font_family": "Cormorant+Garamond",
+    "theme_primary": "#1C1008",
+    "theme_primary_foreground": "#FAF7F2",
+    "theme_secondary": "#F2EDE4",
+    "theme_accent": "#C9A96E",
+    "theme_background": "#FAF7F2",
+    "theme_foreground": "#1C1008",
+    "theme_muted": "#8A7868",
+    "theme_border": "#E0D8CC",
+    "theme_radius": 2,
+    "product_card_columns_desktop": "4",
+    "product_card_columns_mobile": "2",
+    "product_card_image_aspect_ratio": "3/4"
+  }
+}

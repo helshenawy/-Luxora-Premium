@@ -1,0 +1,43 @@
+<section class="section section-categories section-y">
+  <div class="container">
+    {% set title = section.settings.title_ar if session.lang == 'ar' else section.settings.title_en %}
+    {% include "components/shared/section-header.jinja" with { "title": title } only %}
+
+    <div class="categories-grid categories-grid--{{ section.settings.limit | default(4) }}">
+      {% for category in categories | slice(section.settings.limit | default(4)) %}
+        <a href="{{ category.url }}" class="category-card">
+          <div class="category-card__img-wrap">
+            {% if category.image %}
+              <img
+                src="{{ category.image }}"
+                alt="{{ category.name }}"
+                loading="lazy"
+                class="category-card__img"
+              />
+            {% else %}
+              <div class="category-card__img-placeholder"></div>
+            {% endif %}
+            <div class="category-card__overlay" aria-hidden="true"></div>
+          </div>
+          <div class="category-card__body">
+            <h3 class="category-card__name">{{ category.name }}</h3>
+            <span class="category-card__cta">
+              {% if session.lang == 'ar' %}تسوقي{% else %}Shop{% endif %}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="{% if session.locale.language.direction == 'rtl' %}M19 12H5M12 5l-7 7 7 7{% else %}M5 12h14M12 5l7 7-7 7{% endif %}"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_all_link | default(true) %}
+      <div class="section-categories__footer">
+        <a href="/categories" class="btn btn--outline">
+          {% if session.lang == 'ar' %}عرض جميع التصنيفات{% else %}All Categories{% endif %}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>

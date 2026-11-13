@@ -1,0 +1,64 @@
+<div class="mini-cart-overlay" id="mini-cart-overlay" aria-hidden="true"></div>
+<div
+  class="mini-cart"
+  id="mini-cart"
+  role="dialog"
+  aria-modal="true"
+  aria-label="{% if session.lang == 'ar' %}سلة التسوق{% else %}Shopping Cart{% endif %}"
+  hidden
+>
+  <div class="mini-cart__header">
+    <h2 class="mini-cart__title">
+      {% if session.lang == 'ar' %}سلة التسوق{% else %}Shopping Cart{% endif %}
+      <span class="mini-cart__count" id="mini-cart-count">{{ cart.count | default(0) }}</span>
+    </h2>
+    <button class="mini-cart__close" id="mini-cart-close" aria-label="{% if session.lang == 'ar' %}إغلاق{% else %}Close{% endif %}">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div class="mini-cart__body" id="mini-cart-body">
+    {% if cart.items | default([]) %}
+      {% for item in cart.items %}
+        <div class="mini-cart-item" data-item-id="{{ item.id }}">
+          <a href="{{ item.url | default('#') }}" class="mini-cart-item__img-link">
+            <img src="{{ item.image | default('') }}" alt="{{ item.name }}" loading="lazy" class="mini-cart-item__img" width="80" height="107" />
+          </a>
+          <div class="mini-cart-item__info">
+            <a href="{{ item.url | default('#') }}" class="mini-cart-item__name">{{ item.name }}</a>
+            {% if item.variant | default('') %}<span class="mini-cart-item__variant">{{ item.variant }}</span>{% endif %}
+            <div class="mini-cart-item__row">
+              <span class="mini-cart-item__price">{{ item.price }}</span>
+              <div class="quantity-control quantity-control--xs">
+                <button class="quantity-control__btn" data-action="decrease" data-item="{{ item.id }}" aria-label="decrease">−</button>
+                <span class="quantity-control__value">{{ item.quantity }}</span>
+                <button class="quantity-control__btn" data-action="increase" data-item="{{ item.id }}" aria-label="increase">+</button>
+              </div>
+            </div>
+          </div>
+          <button class="mini-cart-item__remove" data-item="{{ item.id }}" aria-label="remove">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="mini-cart__empty">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+        <p>{% if session.lang == 'ar' %}سلتك فارغة{% else %}Your cart is empty{% endif %}</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="mini-cart__footer">
+    <div class="mini-cart__total">
+      <span>{% if session.lang == 'ar' %}المجموع{% else %}Total{% endif %}</span>
+      <span id="mini-cart-total">{{ cart.total | default('') }}</span>
+    </div>
+    <a href="/checkout" class="btn btn--primary btn--full">
+      {% if session.lang == 'ar' %}إتمام الشراء{% else %}Checkout{% endif %}
+    </a>
+    <a href="/cart" class="btn btn--outline btn--full">
+      {% if session.lang == 'ar' %}عرض السلة{% else %}View Cart{% endif %}
+    </a>
+  </div>
+</div>

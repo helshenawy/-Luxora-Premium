@@ -1,0 +1,169 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+<div class="product-page">
+  <div class="container">
+    {% include "components/ui/breadcrumb.jinja" %}
+
+    <div class="product-layout">
+      <!-- Gallery -->
+      <div class="product-gallery" id="product-gallery">
+        <div class="product-gallery__main">
+          {% if product.images %}
+            <div class="product-gallery__pswp" id="luxora-product-gallery">
+              {% for image in product.images %}
+                <a
+                  href="{{ image }}"
+                  class="product-gallery__slide {% if loop.first %}is-active{% endif %}"
+                  data-pswp-width="1200"
+                  data-pswp-height="1600"
+                >
+                  <img
+                    src="{{ image }}"
+                    alt="{{ product.name }} - {{ loop.index }}"
+                    loading="{% if loop.first %}eager{% else %}lazy{% endif %}"
+                    class="product-gallery__img"
+                  />
+                </a>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="product-gallery__placeholder"></div>
+          {% endif %}
+        </div>
+        {% if product.images | length > 1 %}
+          <div class="product-gallery__thumbs">
+            {% for image in product.images %}
+              <button
+                class="product-gallery__thumb {% if loop.first %}is-active{% endif %}"
+                data-index="{{ loop.index0 }}"
+                aria-label="{% if session.lang == 'ar' %}صورة {{ loop.index }}{% else %}Image {{ loop.index }}{% endif %}"
+              >
+                <img src="{{ image }}" alt="{{ product.name }}" loading="lazy" />
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-info">
+        {% if product.label | default('') %}
+          {% include "components/ui/badge.jinja" %}
+        {% endif %}
+
+        <h1 class="product-info__name">{{ product.name }}</h1>
+
+        <div class="product-info__price">
+          {% if product.sale_price | default('') and product.sale_price != product.price %}
+            <span class="product-info__price-sale">{{ product.sale_price }}</span>
+            <span class="product-info__price-original">{{ product.price }}</span>
+          {% else %}
+            <span class="product-info__price-current">{{ product.price }}</span>
+          {% endif %}
+        </div>
+
+        <!-- Variants -->
+        {% if product.variants | default([]) %}
+          <div class="product-variants">
+            {% for variant_group in product.variants %}
+              <div class="variant-group">
+                <label class="variant-group__label">{{ variant_group.name }}</label>
+                <div class="variant-group__options">
+                  {% for option in variant_group.options %}
+                    <button
+                      class="variant-option {% if option.is_default %}is-selected{% endif %} {% if not option.in_stock %}is-unavailable{% endif %}"
+                      data-variant-id="{{ option.id }}"
+                      aria-pressed="{{ 'true' if option.is_default else 'false' }}"
+                    >
+                      {{ option.name }}
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- Quantity -->
+        <div class="product-quantity">
+          <label class="product-quantity__label">
+            {% if session.lang == 'ar' %}الكمية{% else %}Quantity{% endif %}
+          </label>
+          <div class="quantity-control">
+            <button class="quantity-control__btn" data-action="decrease" aria-label="{% if session.lang == 'ar' %}تقليل{% else %}Decrease{% endif %}">−</button>
+            <input type="number" class="quantity-control__input" value="1" min="1" max="{{ product.stock | default(99) }}" id="product-quantity" />
+            <button class="quantity-control__btn" data-action="increase" aria-label="{% if session.lang == 'ar' %}زيادة{% else %}Increase{% endif %}">+</button>
+          </div>
+        </div>
+
+        <!-- Add to Cart -->
+        <div class="product-actions">
+          <button
+            class="btn btn--primary btn--full product-add-to-cart"
+            id="add-to-cart"
+            data-product-id="{{ product.id }}"
+            {% if not product.in_stock | default(true) %}disabled{% endif %}
+          >
+            {% if product.in_stock | default(true) %}
+              {% if session.lang == 'ar' %}أضيفي للسلة{% else %}Add to Cart{% endif %}
+            {% else %}
+              {% if session.lang == 'ar' %}نفذ المخزون{% else %}Out of Stock{% endif %}
+            {% endif %}
+          </button>
+          <button class="btn btn--outline product-wishlist" aria-label="{% if session.lang == 'ar' %}أضيفي للمفضلة{% else %}Add to Wishlist{% endif %}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+
+        <!-- Description -->
+        {% if product.description | default('') %}
+          <div class="product-description">
+            <details class="product-accordion">
+              <summary class="product-accordion__trigger">
+                {% if session.lang == 'ar' %}وصف المنتج{% else %}Product Description{% endif %}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="product-accordion__icon" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+              </summary>
+              <div class="product-accordion__body">{{ product.description }}</div>
+            </details>
+          </div>
+        {% endif %}
+
+        <!-- Size Guide -->
+        <details class="product-accordion">
+          <summary class="product-accordion__trigger">
+            {% if session.lang == 'ar' %}دليل المقاسات{% else %}Size Guide{% endif %}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="product-accordion__icon" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+          </summary>
+          <div class="product-accordion__body">
+            <table class="size-guide-table">
+              <thead><tr><th>{% if session.lang == 'ar' %}المقاس{% else %}Size{% endif %}</th><th>{% if session.lang == 'ar' %}الصدر{% else %}Bust{% endif %}</th><th>{% if session.lang == 'ar' %}الخصر{% else %}Waist{% endif %}</th><th>{% if session.lang == 'ar' %}الورك{% else %}Hip{% endif %}</th></tr></thead>
+              <tbody>
+                <tr><td>XS</td><td>82–86</td><td>62–66</td><td>88–92</td></tr>
+                <tr><td>S</td><td>86–90</td><td>66–70</td><td>92–96</td></tr>
+                <tr><td>M</td><td>90–94</td><td>70–74</td><td>96–100</td></tr>
+                <tr><td>L</td><td>94–98</td><td>74–78</td><td>100–104</td></tr>
+                <tr><td>XL</td><td>98–102</td><td>78–82</td><td>104–108</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    {% if product.related_products | default([]) %}
+      <div class="related-products section-y">
+        <h2 class="related-products__heading">
+          {% if session.lang == 'ar' %}منتجات مشابهة{% else %}You May Also Like{% endif %}
+        </h2>
+        <div class="products-grid products-grid--4">
+          {% for product in product.related_products | slice(4) %}
+            {% include "components/products/card.jinja" %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
