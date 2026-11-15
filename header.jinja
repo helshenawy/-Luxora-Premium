@@ -1,3 +1,4 @@
+{% include 'vitrin:shared/store_messages.jinja' %}
 {% if settings.announcement_display | default(true) %}
 <div class="announcement-bar" id="announcement-bar">
   <div class="announcement-bar__inner">
@@ -25,7 +26,7 @@
 <header class="site-header {% if settings.sticky | default(true) %}is-sticky{% endif %}" id="site-header">
   <div class="header-inner">
     <!-- Logo -->
-    <a href="/" class="header-logo" aria-label="{{ store.name }}">
+    <a href="{{ url_for('home') }}" class="header-logo" aria-label="{{ store.name }}">
       {% if settings.logo_desktop %}
         <img
           src="{{ settings.logo_desktop }}"
@@ -44,27 +45,41 @@
           />
         {% endif %}
       {% else %}
-        <span class="header-logo__text">{{ store.name }}</span>
+        <span class="header-logo__text" style="font-family:'Georgia',serif;letter-spacing:0.18em;font-size:17px;font-weight:400">LUXORA</span>
       {% endif %}
     </a>
 
     <!-- Desktop Navigation -->
     <nav class="header-nav" aria-label="{% if session.lang == 'ar' %}القائمة الرئيسية{% else %}Main Navigation{% endif %}">
-      {% for category in categories | slice(6) %}
-        <a href="{{ category.url }}" class="header-nav__link">{{ category.name }}</a>
+      <a href="{{ url_for('home') }}" class="header-nav__link">{% if session.lang == 'ar' %}الرئيسية{% else %}Home{% endif %}</a>
+      {% set _hshown = namespace(count=0) %}
+      {% for category in categories %}
+        {% if _hshown.count < 5 and category.url and category.name %}
+          <a href="{{ category.url }}" class="header-nav__link">{{ category.name }}</a>
+          {% set _hshown.count = _hshown.count + 1 %}
+        {% endif %}
       {% endfor %}
     </nav>
 
     <!-- Header Actions -->
     <div class="header-actions">
       {% if not settings.hide_language | default(false) %}
-        <div class="header-lang-switcher">
+        <div class="header-lang-switcher" id="lang-switcher" style="display:none">
           {% if session.lang == 'ar' %}
             <a href="?lang=en" class="header-action-btn" aria-label="English">EN</a>
           {% else %}
             <a href="?lang=ar" class="header-action-btn" aria-label="العربية">ع</a>
           {% endif %}
         </div>
+        <script>
+        (function(){
+          var s = window.__vitrinStoreSettings;
+          if (s && s.languages && s.languages.length > 1) {
+            var el = document.getElementById('lang-switcher');
+            if (el) el.style.display = '';
+          }
+        })();
+        </script>
       {% endif %}
 
       <button class="header-action-btn" id="search-toggle" aria-label="{% if session.lang == 'ar' %}بحث{% else %}Search{% endif %}">
@@ -73,7 +88,7 @@
         </svg>
       </button>
 
-      <a href="/wishlist" class="header-action-btn" aria-label="{% if session.lang == 'ar' %}المفضلة{% else %}Wishlist{% endif %}">
+      <a href="{{ url_for('wishlist') }}" class="header-action-btn" aria-label="{% if session.lang == 'ar' %}المفضلة{% else %}Wishlist{% endif %}">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
         </svg>
@@ -84,7 +99,7 @@
           <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
           <path d="M16 10a4 4 0 0 1-8 0"/>
         </svg>
-        <span class="cart-count" id="cart-count" {% if cart.count == 0 %}style="display:none"{% endif %}>{{ cart.count }}</span>
+        <span class="cart-count" id="cart-count" style="display:none">0</span>
       </button>
 
       <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="{% if session.lang == 'ar' %}القائمة{% else %}Menu{% endif %}" aria-expanded="false">
@@ -96,7 +111,7 @@
   <!-- Search Bar -->
   <div class="header-search" id="header-search" hidden>
     <div class="header-search__inner">
-      <form action="/search" method="get" role="search">
+      <form action="{{ url_for('list_products') }}" method="get" role="search">
         <input
           type="search"
           name="q"
@@ -121,3 +136,73 @@
 </header>
 
 {% include "components/header/mobile-nav.jinja" %}
+
+<script>
+(function () {
+  var nav = document.querySelector('.header-nav');
+  var mobileLinks = document.querySelector('.mobile-nav__links');
+  var footerShop = document.querySelector('[data-shop-nav]');
+  function hasCatLinks(container, selector) {
+    if (!container) return false;
+    var links = container.querySelectorAll(selector);
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute('href');
+      if (!href) continue;
+      try {
+        if (new URL(href, window.location.origin).pathname !== '/') return true;
+      } catch (_) {}
+    }
+    return false;
+  }
+  var needNav = nav && !hasCatLinks(nav, '.header-nav__link');
+  var needMobile = mobileLinks && !hasCatLinks(mobileLinks, 'a');
+  var needFooter = footerShop && !footerShop.querySelector('a[href]:not([href=""])');
+  if (!needNav && !needMobile && !needFooter) return;
+  fetch('/api/v1/categories', { headers: { 'Accept': 'application/json' } })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var items = Array.isArray(data) ? data : Object.values(data);
+      if (!items.length) return;
+      if (needNav) {
+        var homeLink = nav.querySelector('.header-nav__link:first-child');
+        nav.innerHTML = '';
+        if (homeLink) nav.appendChild(homeLink);
+        items.slice(0, 5).forEach(function (c) {
+          var a = document.createElement('a');
+          a.href = c.url || ('/categories/' + (c.id || '') + '/' + (c.slug || ''));
+          a.className = 'header-nav__link';
+          a.textContent = c.name || '';
+          nav.appendChild(a);
+        });
+      }
+      if (needMobile) {
+        var homeLi = mobileLinks.querySelector('.mobile-nav__item:first-child');
+        mobileLinks.innerHTML = '';
+        if (homeLi) mobileLinks.appendChild(homeLi);
+        items.forEach(function (c) {
+          var li = document.createElement('li');
+          li.className = 'mobile-nav__item';
+          var a = document.createElement('a');
+          a.href = c.url || ('/categories/' + (c.id || '') + '/' + (c.slug || ''));
+          a.className = 'mobile-nav__link';
+          a.textContent = c.name || '';
+          li.appendChild(a);
+          mobileLinks.appendChild(li);
+        });
+      }
+      if (needFooter) {
+        footerShop.innerHTML = '';
+        items.slice(0, 5).forEach(function (c) {
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.href = c.url || ('/categories/' + (c.id || '') + '/' + (c.slug || ''));
+          a.className = 'footer-col__link';
+          a.textContent = c.name || '';
+          li.appendChild(a);
+          footerShop.appendChild(li);
+        });
+      }
+    })
+    .catch(function () {});
+})();
+</script>

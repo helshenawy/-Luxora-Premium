@@ -1,25 +1,31 @@
+{% set s = section.settings if section is defined else {} %}
+<style>.section-carousel,.embla{width:100%!important;max-width:100%!important}.embla{background:#1a1008;overflow:hidden}.embla__container{width:100%}.embla__slide{overflow:hidden;width:100%!important;flex:0 0 100%!important}.embla__slide-img{display:block;width:100%!important;height:80vh;min-height:480px;object-fit:cover;object-position:center center}</style>
 <section class="section-carousel">
   <div
     class="embla"
     id="luxora-carousel"
-    data-autoplay="{{ section.settings.autoplay | default(true) | lower }}"
-    data-delay="{{ (section.settings.autoplay_delay | default(5)) * 1000 }}"
+    data-autoplay="{{ s.autoplay | default(true) | lower }}"
+    data-delay="{{ (s.autoplay_delay | default(5)) * 1000 }}"
   >
+    {% set _default_slides = [
+      {'img': 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1920&q=85&fit=crop', 'ar': 'أناقة لا حدود لها', 'en': 'Elegance Without Limits'},
+      {'img': 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1920&q=85&fit=crop', 'ar': 'تشكيلتنا الحصرية', 'en': 'Our Exclusive Collection'},
+      {'img': 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&q=85&fit=crop', 'ar': 'اكتشفي عالم الموضة', 'en': 'Discover the World of Fashion'}
+    ] %}
     <div class="embla__container">
       {% for i in [1,2,3] %}
-        {% set img = section.settings['slide_' ~ i ~ '_image'] | default('') %}
-        {% if img %}
-          {% set heading = section.settings['slide_' ~ i ~ '_heading_ar'] if session.lang == 'ar' else section.settings['slide_' ~ i ~ '_heading_en'] %}
-          {% set url = section.settings['slide_' ~ i ~ '_url'] | default('') %}
-          <div class="embla__slide">
-            {% if url %}<a href="{{ url }}">{% endif %}
-            <img src="{{ img }}" alt="{{ heading | default('') }}" loading="{% if i == 1 %}eager{% else %}lazy{% endif %}" class="embla__slide-img" />
-            {% if heading | default('') %}
-              <div class="embla__slide-caption"><h3>{{ heading }}</h3></div>
-            {% endif %}
-            {% if url %}</a>{% endif %}
-          </div>
-        {% endif %}
+        {% set _d = _default_slides[loop.index0] %}
+        {% set img = s['slide_' ~ i ~ '_image'] | default(_d.img) %}
+        {% set heading = (s['slide_' ~ i ~ '_heading_ar'] | default(_d.ar)) if session.lang == 'ar' else (s['slide_' ~ i ~ '_heading_en'] | default(_d.en)) %}
+        {% set url = s['slide_' ~ i ~ '_url'] | default('/products') %}
+        <div class="embla__slide">
+          <a href="{{ url }}">
+          <img src="{{ img }}" alt="{{ heading }}" loading="{% if i == 1 %}eager{% else %}lazy{% endif %}" class="embla__slide-img" />
+          {% if heading %}
+            <div class="embla__slide-caption"><h3>{{ heading }}</h3></div>
+          {% endif %}
+          </a>
+        </div>
       {% endfor %}
     </div>
     <button class="embla__prev" aria-label="{% if session.lang == 'ar' %}السابق{% else %}Previous{% endif %}">

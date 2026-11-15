@@ -8,7 +8,7 @@
   hidden
 >
   <div class="mobile-nav__header">
-    <a href="/" class="mobile-nav__logo" aria-label="{{ store.name }}">
+    <a href="{{ url_for('home') }}" class="mobile-nav__logo" aria-label="{{ store.name }}">
       {% if settings.logo_mobile %}
         <img src="{{ settings.logo_mobile }}" alt="{{ store.name }}" width="100" />
       {% else %}
@@ -21,6 +21,9 @@
   </div>
 
   <ul class="mobile-nav__links">
+    <li class="mobile-nav__item">
+      <a href="{{ url_for('home') }}" class="mobile-nav__link">{% if session.lang == 'ar' %}الرئيسية{% else %}Home{% endif %}</a>
+    </li>
     {% for category in categories %}
       <li class="mobile-nav__item">
         <a href="{{ category.url }}" class="mobile-nav__link">{{ category.name }}</a>

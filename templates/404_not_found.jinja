@@ -13,8 +13,8 @@
       {% endif %}
     </p>
     <div class="error-page__actions">
-      <a href="/" class="btn btn--primary">{% if session.lang == 'ar' %}العودة للرئيسية{% else %}Back to Home{% endif %}</a>
-      <a href="/products" class="btn btn--outline">{% if session.lang == 'ar' %}تسوقي{% else %}Shop Now{% endif %}</a>
+      <a href="{{ url_for('home') }}" class="btn btn--primary">{% if session.lang == 'ar' %}العودة للرئيسية{% else %}Back to Home{% endif %}</a>
+      <a href="{{ url_for('list_products') }}" class="btn btn--outline">{% if session.lang == 'ar' %}تسوقي{% else %}Shop Now{% endif %}</a>
     </div>
   </div>
 </div>

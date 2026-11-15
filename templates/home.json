@@ -51,7 +51,7 @@
           "heading_ar": "صنع بشغف",
           "body_ar": "نحن نؤمن بأن الأزياء الراقية يجب أن تكون في متناول الجميع.",
           "cta_text_ar": "اعرفي أكثر",
-          "cta_url": "/about",
+          "cta_url": "/products",
           "image_position": "start"
         }
       },
@@ -115,7 +115,7 @@
           "heading_en": "Crafted With Passion",
           "body_en": "We believe that luxury fashion should be within everyone's reach.",
           "cta_text_en": "Learn More",
-          "cta_url": "/about",
+          "cta_url": "/products",
           "image_position": "start"
         }
       },

@@ -1,13 +1,12 @@
-<section class="section-cta" {% if section.settings.image %}style="background-image:url('{{ section.settings.image }}')"{% endif %}>
-  <div class="section-cta__overlay" style="opacity:{{ (section.settings.overlay_opacity | default(50)) / 100 }}" aria-hidden="true"></div>
+{% set s = section.settings if section is defined else {} %}
+<section class="section-cta" style="background-image:url('{{ s.image | default('https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=1920&q=85&fit=crop') }}')">
+  <div class="section-cta__overlay" style="opacity:{{ (s.overlay_opacity | default(50)) / 100 }}" aria-hidden="true"></div>
   <div class="container section-cta__content">
-    {% set heading = section.settings.heading_ar if session.lang == 'ar' else section.settings.heading_en %}
-    {% set subtext = section.settings.subtext_ar if session.lang == 'ar' else section.settings.subtext_en %}
-    {% set cta_text = section.settings.cta_text_ar if session.lang == 'ar' else section.settings.cta_text_en %}
-    {% if heading | default('') %}<h2 class="section-cta__heading">{{ heading }}</h2>{% endif %}
-    {% if subtext | default('') %}<p class="section-cta__sub">{{ subtext }}</p>{% endif %}
-    {% if section.settings.cta_url | default('') %}
-      <a href="{{ section.settings.cta_url }}" class="btn btn--outline-light">{{ cta_text | default('Shop Now') }}</a>
-    {% endif %}
+    {% set heading = (s.heading_ar | default('انضمي إلى عالم الأناقة')) if session.lang == 'ar' else (s.heading_en | default('Join the World of Elegance')) %}
+    {% set subtext = (s.subtext_ar | default('اكتشفي مجموعاتنا الحصرية الجديدة')) if session.lang == 'ar' else (s.subtext_en | default('Discover our exclusive new collections')) %}
+    {% set cta_text = (s.cta_text_ar | default('تسوقي الآن')) if session.lang == 'ar' else (s.cta_text_en | default('Shop Now')) %}
+    <h2 class="section-cta__heading">{{ heading }}</h2>
+    <p class="section-cta__sub">{{ subtext }}</p>
+    <a href="{{ s.cta_url | default('/products') }}" class="btn btn--outline-light">{{ cta_text }}</a>
   </div>
 </section>

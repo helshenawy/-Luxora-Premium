@@ -1,0 +1,105 @@
+{
+  "type": "default",
+  "name": { "en": "LUXORA — Luxury", "ar": "لوكسورا — فاخر" },
+  "images": [],
+  "presets": [
+    {
+      "path": "sections/hero.jinja",
+      "settings": {
+        "heading_ar": "أناقة بلا حدود",
+        "heading_en": "Elegance Without Limits",
+        "subheading_ar": "مجموعة خريف ٢٠٢٥",
+        "subheading_en": "Autumn Collection 2025",
+        "cta_text_ar": "تسوقي الآن",
+        "cta_text_en": "Shop Now",
+        "cta_url": "/products",
+        "layout": "center",
+        "overlay_opacity": 40,
+        "min_height": 90
+      }
+    },
+    {
+      "path": "sections/benefits.jinja",
+      "settings": {
+        "benefit_1_icon": "shipping",
+        "benefit_1_text_ar": "شحن مجاني للطلبات فوق ٣٠٠ ريال",
+        "benefit_1_text_en": "Free shipping over SAR 300",
+        "benefit_2_icon": "return",
+        "benefit_2_text_ar": "إرجاع مجاني خلال ٣٠ يومًا",
+        "benefit_2_text_en": "Free returns within 30 days",
+        "benefit_3_icon": "secure",
+        "benefit_3_text_ar": "دفع آمن ومشفر ١٠٠٪",
+        "benefit_3_text_en": "100% secure & encrypted payment",
+        "benefit_4_icon": "support",
+        "benefit_4_text_ar": "دعم عملاء على مدار الساعة",
+        "benefit_4_text_en": "24/7 customer support"
+      }
+    },
+    {
+      "path": "sections/products.jinja",
+      "settings": {
+        "title_ar": "وصول جديد",
+        "title_en": "New Arrivals",
+        "subtitle_ar": "اكتشفي أحدث التشكيلات",
+        "subtitle_en": "Discover our latest collections",
+        "limit": 8,
+        "columns_desktop": "4",
+        "show_view_all": true,
+        "view_all_url": "/products"
+      }
+    },
+    {
+      "path": "sections/categories.jinja",
+      "settings": {
+        "title_ar": "تسوقي حسب التصنيف",
+        "title_en": "Shop by Category",
+        "limit": 4,
+        "show_all_link": true
+      }
+    },
+    {
+      "path": "sections/editorial.jinja",
+      "settings": {
+        "image_position": "start",
+        "eyebrow_ar": "قصتنا",
+        "eyebrow_en": "Our Story",
+        "heading_ar": "صنع بشغف واتقان",
+        "heading_en": "Crafted with Passion",
+        "body_ar": "نحن نؤمن بأن الأزياء الراقية يجب أن تكون في متناول الجميع. كل قطعة نصنعها هي تعبير عن الجمال والأناقة.",
+        "body_en": "We believe luxury fashion should be within everyone's reach. Every piece we craft is an expression of beauty and elegance.",
+        "cta_text_ar": "اعرفي أكثر عنا",
+        "cta_text_en": "Learn More About Us",
+        "cta_url": "/products"
+      }
+    },
+    {
+      "path": "sections/testimonials.jinja",
+      "settings": {
+        "title_ar": "ماذا تقول عميلاتنا",
+        "title_en": "What Our Customers Say",
+        "testimonial_1_text_ar": "جودة رائعة وخدمة ممتازة. سعيدة جداً بتجربتي!",
+        "testimonial_1_text_en": "Amazing quality and excellent service. Very happy with my experience!",
+        "testimonial_1_name": "سارة م.",
+        "testimonial_2_text_ar": "العباءة وصلت بحالة ممتازة والخامة فاخرة جداً، أنصح بشدة",
+        "testimonial_2_text_en": "The abaya arrived in perfect condition and the fabric is very luxurious. Highly recommend!",
+        "testimonial_2_name": "نورة ع.",
+        "testimonial_3_text_ar": "أفضل متجر للأزياء الراقية، تجربة تسوق لا تُنسى ومنتجات استثنائية",
+        "testimonial_3_text_en": "Best luxury fashion store, an unforgettable shopping experience.",
+        "testimonial_3_name": "ريم ك."
+      }
+    },
+    {
+      "path": "sections/call-to-action.jinja",
+      "settings": {
+        "heading_ar": "انضمي إلى عالم الأناقة",
+        "heading_en": "Join the World of Elegance",
+        "subtext_ar": "اكتشفي مجموعاتنا الحصرية الجديدة",
+        "subtext_en": "Discover our exclusive new collections",
+        "cta_text_ar": "تسوقي الآن",
+        "cta_text_en": "Shop Now",
+        "cta_url": "/products",
+        "overlay_opacity": 50
+      }
+    }
+  ]
+}

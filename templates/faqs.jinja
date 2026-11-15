@@ -5,7 +5,15 @@
   {% include "components/ui/breadcrumb.jinja" %}
   <h1 class="page-title">{% if session.lang == 'ar' %}الأسئلة الشائعة{% else %}Frequently Asked Questions{% endif %}</h1>
   <div class="faqs-list">
-    {% for faq in faqs | default([]) %}
+    {% set fallback_faqs = [
+      {'question': settings.faq_1_q_ar | default('كم يستغرق تجهيز وشحن الطلب؟') if session.lang == 'ar' else settings.faq_1_q_en | default('How long does order processing and delivery take?'), 'answer': settings.faq_1_a_ar | default('تختلف مدة التجهيز والشحن حسب موقع العميل وشركة الشحن. ستظهر المدة المتوقعة أثناء إتمام الطلب.') if session.lang == 'ar' else settings.faq_1_a_en | default('Processing and delivery times depend on the destination and shipping carrier. The estimate is shown during checkout.')},
+      {'question': settings.faq_2_q_ar | default('كيف يمكنني تتبع طلبي؟') if session.lang == 'ar' else settings.faq_2_q_en | default('How can I track my order?'), 'answer': settings.faq_2_a_ar | default('بعد شحن الطلب ستصلك رسالة تحتوي على رقم التتبع والرابط الخاص بشركة الشحن.') if session.lang == 'ar' else settings.faq_2_a_en | default('Once your order ships, you will receive a message with its tracking number and carrier link.')},
+      {'question': settings.faq_3_q_ar | default('هل يمكن إرجاع أو استبدال المنتج؟') if session.lang == 'ar' else settings.faq_3_q_en | default('Can I return or exchange an item?'), 'answer': settings.faq_3_a_ar | default('نعم، وفق شروط وسياسة الإرجاع والاستبدال الخاصة بالمتجر، بشرط بقاء المنتج بحالته الأصلية.') if session.lang == 'ar' else settings.faq_3_a_en | default("Yes, subject to the store's returns and exchanges policy and provided the item remains in its original condition.")},
+      {'question': settings.faq_4_q_ar | default('كيف أختار المقاس المناسب؟') if session.lang == 'ar' else settings.faq_4_q_en | default('How do I choose the right size?'), 'answer': settings.faq_4_a_ar | default('راجعي دليل المقاسات في صفحة المنتج وقارني القياسات قبل إتمام الطلب.') if session.lang == 'ar' else settings.faq_4_a_en | default('Check the size guide on the product page and compare the measurements before ordering.')}
+    ] %}
+    {% set faq_items = faqs | default([]) %}
+    {% if not faq_items %}{% set faq_items = fallback_faqs %}{% endif %}
+    {% for faq in faq_items %}
       <details class="faq-item">
         <summary class="faq-item__question">
           {{ faq.question }}
@@ -13,8 +21,6 @@
         </summary>
         <div class="faq-item__answer">{{ faq.answer }}</div>
       </details>
-    {% else %}
-      <p class="faqs-empty">{% if session.lang == 'ar' %}لا توجد أسئلة حالياً{% else %}No questions available{% endif %}</p>
     {% endfor %}
   </div>
 </div>

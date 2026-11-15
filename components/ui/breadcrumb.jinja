@@ -2,7 +2,7 @@
 <nav class="breadcrumb" aria-label="{% if session.lang == 'ar' %}مسار التنقل{% else %}Breadcrumb{% endif %}">
   <ol class="breadcrumb__list">
     <li class="breadcrumb__item">
-      <a href="/" class="breadcrumb__link">{% if session.lang == 'ar' %}الرئيسية{% else %}Home{% endif %}</a>
+      <a href="{{ url_for('home') }}" class="breadcrumb__link">{% if session.lang == 'ar' %}الرئيسية{% else %}Home{% endif %}</a>
     </li>
     {% for crumb in breadcrumbs %}
       <li class="breadcrumb__item">

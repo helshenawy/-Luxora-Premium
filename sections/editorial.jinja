@@ -1,30 +1,25 @@
+{% set s = section.settings if section is defined else {} %}
 <section class="section section-editorial section-y">
   <div class="container">
-    <div class="editorial-block editorial-block--img-{{ section.settings.image_position | default('start') }}">
+    <div class="editorial-block editorial-block--img-{{ s.image_position | default('start') }}">
       <div class="editorial-block__media">
-        {% if section.settings.image %}
-          <img
-            src="{{ section.settings.image }}"
-            alt="{% if session.lang == 'ar' %}{{ section.settings.heading_ar | default('') }}{% else %}{{ section.settings.heading_en | default('') }}{% endif %}"
-            loading="lazy"
-            class="editorial-block__img"
-          />
-        {% else %}
-          <div class="editorial-block__img-placeholder"></div>
-        {% endif %}
+        <img
+          src="{{ s.image | default('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&q=85&fit=crop') }}"
+          alt="{% if session.lang == 'ar' %}{{ s.heading_ar | default('صنع بشغف واتقان') }}{% else %}{{ s.heading_en | default('Crafted with Passion') }}{% endif %}"
+          loading="lazy"
+          class="editorial-block__img"
+        />
       </div>
-      <div class="editorial-block__content">
-        {% set eyebrow = section.settings.eyebrow_ar if session.lang == 'ar' else section.settings.eyebrow_en %}
-        {% set heading = section.settings.heading_ar if session.lang == 'ar' else section.settings.heading_en %}
-        {% set body = section.settings.body_ar if session.lang == 'ar' else section.settings.body_en %}
-        {% set cta_text = section.settings.cta_text_ar if session.lang == 'ar' else section.settings.cta_text_en %}
+      <div class="editorial-block__content" data-reveal>
+        {% set eyebrow = (s.eyebrow_ar | default('قصتنا')) if session.lang == 'ar' else (s.eyebrow_en | default('Our Story')) %}
+        {% set heading = (s.heading_ar | default('صنع بشغف واتقان')) if session.lang == 'ar' else (s.heading_en | default('Crafted with Passion')) %}
+        {% set body = (s.body_ar | default('نحن نؤمن بأن الأزياء الراقية يجب أن تكون في متناول الجميع. كل قطعة نصنعها هي تعبير عن الجمال والأناقة.')) if session.lang == 'ar' else (s.body_en | default('We believe luxury fashion should be within everyone\'s reach. Every piece we craft is an expression of beauty and elegance.')) %}
+        {% set cta_text = (s.cta_text_ar | default('اعرفي أكثر عنا')) if session.lang == 'ar' else (s.cta_text_en | default('Learn More About Us')) %}
 
-        {% if eyebrow | default('') %}<span class="editorial-block__eyebrow">{{ eyebrow }}</span>{% endif %}
-        {% if heading | default('') %}<h2 class="editorial-block__heading">{{ heading }}</h2>{% endif %}
-        {% if body | default('') %}<p class="editorial-block__body">{{ body }}</p>{% endif %}
-        {% if section.settings.cta_url | default('') and cta_text | default('') %}
-          <a href="{{ section.settings.cta_url }}" class="btn btn--primary">{{ cta_text }}</a>
-        {% endif %}
+        {% if eyebrow %}<span class="editorial-block__eyebrow">{{ eyebrow }}</span>{% endif %}
+        {% if heading %}<h2 class="editorial-block__heading">{{ heading }}</h2>{% endif %}
+        {% if body %}<p class="editorial-block__body">{{ body }}</p>{% endif %}
+        <a href="{{ s.cta_url | default(url_for('list_products')) }}" class="btn btn--primary">{{ cta_text }}</a>
       </div>
     </div>
   </div>

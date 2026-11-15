@@ -1,16 +1,39 @@
+{% set s = section.settings if section is defined else {} %}
 <section class="section section-testimonials section-y">
   <div class="container">
-    {% set title = section.settings.title_ar if session.lang == 'ar' else section.settings.title_en %}
-    {% include "components/shared/section-header.jinja" with { "title": title } only %}
+    {% set title = (s.title_ar | default('ماذا تقول عميلاتنا')) if session.lang == 'ar' else (s.title_en | default('What Our Customers Say')) %}
+    {% set subtitle = '' %}
+    {% include "components/shared/section-header.jinja" %}
 
-    <div class="testimonials-grid">
-      {% for i in [1, 2, 3] %}
-        {% set text = section.settings['testimonial_' ~ i ~ '_text_ar'] if session.lang == 'ar' else section.settings['testimonial_' ~ i ~ '_text_en'] %}
-        {% set name = section.settings['testimonial_' ~ i ~ '_name'] | default('') %}
-        {% if text | default('') %}
-          <div class="testimonial-card">
+    {% set default_texts_ar = [
+      'جودة رائعة وخدمة ممتازة. سعيدة جداً بتجربتي!',
+      'العباءة وصلت بحالة ممتازة والخامة فاخرة جداً، أنصح بشدة',
+      'أفضل متجر للأزياء الراقية، تجربة تسوق لا تُنسى ومنتجات استثنائية',
+      'الشحن سريع جداً والتغليف راقٍ. سأكون زبونة دائمة.',
+      'المقاسات دقيقة والألوان تطابق الصور. ممتازة!',
+      'خدمة العملاء محترمة ومتعاونة. أنصح بشدة'
+    ] %}
+    {% set default_texts_en = [
+      'Amazing quality and excellent service. Very happy with my experience!',
+      'The abaya arrived in perfect condition and the fabric is very luxurious. Highly recommend!',
+      'Best luxury fashion store, an unforgettable shopping experience.',
+      'Very fast shipping and elegant packaging. I will be a regular customer.',
+      'Accurate sizing and colours match the photos exactly. Excellent!',
+      'Responsive and helpful customer service. Highly recommend!'
+    ] %}
+    {% set default_names = ['سارة م.', 'نورة ع.', 'ريم ك.', 'هند ت.', 'لمى ب.', 'دانا ع.'] %}
+
+    {% set count = s.count | default(3) | int %}
+    {% set cols_class = 'testimonials-grid--2' if count > 3 else '' %}
+
+    <div class="testimonials-grid {{ cols_class }}">
+      {% for i in range(1, count + 1) %}
+        {% set text = (s['testimonial_' ~ i ~ '_text_ar'] | default(default_texts_ar[i - 1])) if session.lang == 'ar' else (s['testimonial_' ~ i ~ '_text_en'] | default(default_texts_en[i - 1])) %}
+        {% set name = s['testimonial_' ~ i ~ '_name'] | default(default_names[i - 1]) %}
+        {% if text %}
+          <div class="testimonial-card" data-reveal style="--reveal-delay: {{ (loop.index0 % 3) * 120 }}ms">
             <div class="testimonial-card__stars" aria-label="5 stars">
-              {% for s in [1,2,3,4,5] %}<svg width="14" height="14" viewBox="0 0 24 24" fill="var(--gold)" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>{% endfor %}
+              {% for star in [1,2,3,4,5] %}<svg width="14" height="14" viewBox="0 0 24 24" fill="var(--gold)" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>{% endfor %}
             </div>
             <p class="testimonial-card__text">"{{ text }}"</p>
             {% if name %}<span class="testimonial-card__name">— {{ name }}</span>{% endif %}

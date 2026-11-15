@@ -1,29 +1,19 @@
 {% extends "layout.jinja" %}
 
+{% block title %}{{ store.name }}{% endblock %}
+
 {% block content %}
-  {% for section in home.sections %}
-    {% if section.type == 'carousel' %}
-      {% include "sections/carousel.jinja" %}
-    {% elif section.type == 'hero' %}
-      {% include "sections/hero.jinja" %}
-    {% elif section.type == 'benefits' %}
-      {% include "sections/benefits.jinja" %}
-    {% elif section.type == 'categories' %}
-      {% include "sections/categories.jinja" %}
-    {% elif section.type == 'products' %}
-      {% include "sections/products.jinja" %}
-    {% elif section.type == 'editorial' %}
-      {% include "sections/editorial.jinja" %}
-    {% elif section.type == 'call-to-action' %}
-      {% include "sections/call-to-action.jinja" %}
-    {% elif section.type == 'testimonials' %}
-      {% include "sections/testimonials.jinja" %}
-    {% elif section.type == 'video' %}
-      {% include "sections/video.jinja" %}
-    {% elif section.type == 'gallery' %}
-      {% include "sections/gallery.jinja" %}
-    {% elif section.type == 'countdown' %}
-      {% include "sections/countdown.jinja" %}
-    {% endif %}
-  {% endfor %}
+  <h1 class="visually-hidden">{{ store.name }}</h1>
+  {% include "sections/carousel.jinja" %}
+  {% include "sections/hero.jinja" %}
+  {% include "sections/benefits.jinja" %}
+  {% include "sections/products.jinja" %}
+  {% include "sections/banner.jinja" %}
+  {% include "sections/countdown.jinja" %}
+  {% include "sections/categories.jinja" %}
+  {% include "sections/editorial.jinja" %}
+  {% include "sections/video.jinja" %}
+  {% include "sections/gallery.jinja" %}
+  {% include "sections/testimonials.jinja" %}
+  {% include "sections/call-to-action.jinja" %}
 {% endblock %}

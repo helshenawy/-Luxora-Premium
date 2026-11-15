@@ -3,6 +3,18 @@
   "name": { "ar": "أسفل الصفحة", "en": "Footer" },
   "groups": [
     {
+      "id": "links",
+      "icon": "fa fa-link",
+      "name": { "ar": "روابط الصفحات", "en": "Page Links" },
+      "settings": [
+        { "id": "about_url", "type": "text", "label": { "ar": "رابط من نحن", "en": "About URL" }, "default": "" },
+        { "id": "returns_url", "type": "text", "label": { "ar": "رابط الإرجاع والاستبدال", "en": "Returns URL" }, "default": "" },
+        { "id": "contact_url", "type": "text", "label": { "ar": "رابط التواصل", "en": "Contact URL" }, "default": "" },
+        { "id": "terms_url", "type": "text", "label": { "ar": "رابط الشروط والأحكام", "en": "Terms URL" }, "default": "" },
+        { "id": "privacy_url", "type": "text", "label": { "ar": "رابط سياسة الخصوصية", "en": "Privacy URL" }, "default": "" }
+      ]
+    },
+    {
       "id": "brand",
       "icon": "fa fa-info-circle",
       "name": { "ar": "معلومات المتجر", "en": "Store Info" },
@@ -42,7 +54,13 @@
           "id": "newsletter_display",
           "type": "checkbox",
           "label": { "ar": "إظهار النشرة البريدية", "en": "Show Newsletter" },
-          "default": true
+          "default": false
+        },
+        {
+          "id": "newsletter_url",
+          "type": "text",
+          "label": { "ar": "رابط خدمة الاشتراك", "en": "Newsletter Form URL" },
+          "default": ""
         },
         {
           "id": "newsletter_heading_ar",

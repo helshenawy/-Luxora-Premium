@@ -1,0 +1,60 @@
+{% extends "layout.jinja" %}
+
+{% block title %}{% if session.lang == 'ar' %}المفضلة{% else %}Wishlist{% endif %} — {{ store.name }}{% endblock %}
+
+{% block content %}
+<div class="wishlist-page">
+  <div class="inner-page-hero">
+    <div class="container">
+      {% include "components/ui/breadcrumb.jinja" %}
+      <h1 class="inner-page-hero__title">
+        {% if session.lang == 'ar' %}المفضلة{% else %}Wishlist{% endif %}
+      </h1>
+    </div>
+  </div>
+
+  <div class="container section-y">
+    {% set wl_items = wishlist_products | default(wishlist.items | default([])) %}
+
+    {% if wl_items %}
+      <div class="wishlist-grid products-grid products-grid--{{ settings.product_card_columns_desktop | default('4') }}" data-reveal>
+        {% for product in wl_items %}
+          <div class="wishlist-item-wrap" data-product-id="{{ product.id }}">
+            {% include "components/products/card.jinja" %}
+            <button
+              class="wishlist-remove-btn"
+              data-product-id="{{ product.id }}"
+              aria-label="{% if session.lang == 'ar' %}حذف من المفضلة{% else %}Remove from wishlist{% endif %}"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              {% if session.lang == 'ar' %}حذف{% else %}Remove{% endif %}
+            </button>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% else %}
+      <div class="wishlist-empty empty-state" data-reveal>
+        <div class="empty-state__icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <h2>{% if session.lang == 'ar' %}قائمة المفضلة فارغة{% else %}Your Wishlist is Empty{% endif %}</h2>
+        <p class="empty-state__text">
+          {% if session.lang == 'ar' %}
+            أضيفي المنتجات التي تعجبكِ إلى المفضلة لتجديها هنا بسهولة
+          {% else %}
+            Save the pieces you love to find them here easily later
+          {% endif %}
+        </p>
+        <a href="{{ url_for('list_products') }}" class="btn btn--primary" style="margin-block-start: 2rem">
+          {% if session.lang == 'ar' %}تصفحي المنتجات{% else %}Browse Products{% endif %}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

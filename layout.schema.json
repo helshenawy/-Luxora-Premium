@@ -109,6 +109,44 @@
           "default": "3/4"
         }
       ]
+    },
+    {
+      "id": "commerce_experience",
+      "icon": "fa fa-shopping-bag",
+      "name": { "ar": "تجربة الشراء", "en": "Commerce Experience" },
+      "settings": [
+        { "id": "show_mobile_sticky_cart", "type": "checkbox", "label": { "ar": "إظهار زر الشراء الثابت على الجوال", "en": "Show mobile sticky add to cart" }, "default": true },
+        { "id": "show_size_guide", "type": "checkbox", "label": { "ar": "إظهار دليل المقاسات", "en": "Show size guide" }, "default": true },
+        { "id": "trust_shipping_ar", "type": "text", "label": { "ar": "رسالة الشحن (عربي)", "en": "Shipping message (Arabic)" }, "default": "شحن مجاني للطلبات فوق ٣٠٠ ريال" },
+        { "id": "trust_shipping_en", "type": "text", "label": { "ar": "رسالة الشحن (إنجليزي)", "en": "Shipping message (English)" }, "default": "Free shipping on orders over SAR 300" },
+        { "id": "trust_payment_ar", "type": "text", "label": { "ar": "رسالة الدفع (عربي)", "en": "Payment message (Arabic)" }, "default": "دفع آمن ومشفر ١٠٠٪" },
+        { "id": "trust_payment_en", "type": "text", "label": { "ar": "رسالة الدفع (إنجليزي)", "en": "Payment message (English)" }, "default": "100% secure and encrypted payment" },
+        { "id": "trust_returns_ar", "type": "text", "label": { "ar": "رسالة الإرجاع (عربي)", "en": "Returns message (Arabic)" }, "default": "إرجاع واستبدال وفق سياسة المتجر" },
+        { "id": "trust_returns_en", "type": "text", "label": { "ar": "رسالة الإرجاع (إنجليزي)", "en": "Returns message (English)" }, "default": "Returns and exchanges per store policy" }
+      ]
+    },
+    {
+      "id": "faq_fallback",
+      "icon": "fa fa-question-circle",
+      "name": { "ar": "الأسئلة الشائعة الافتراضية", "en": "Default FAQs" },
+      "settings": [
+        { "id": "faq_1_q_ar", "type": "text", "label": { "ar": "السؤال الأول (عربي)", "en": "Question 1 (Arabic)" }, "default": "كم يستغرق تجهيز وشحن الطلب؟" },
+        { "id": "faq_1_a_ar", "type": "textarea", "label": { "ar": "إجابة السؤال الأول (عربي)", "en": "Answer 1 (Arabic)" }, "default": "تختلف مدة التجهيز والشحن حسب موقع العميل وشركة الشحن. ستظهر المدة المتوقعة أثناء إتمام الطلب." },
+        { "id": "faq_1_q_en", "type": "text", "label": { "ar": "السؤال الأول (إنجليزي)", "en": "Question 1 (English)" }, "default": "How long does order processing and delivery take?" },
+        { "id": "faq_1_a_en", "type": "textarea", "label": { "ar": "إجابة السؤال الأول (إنجليزي)", "en": "Answer 1 (English)" }, "default": "Processing and delivery times depend on the destination and shipping carrier. The estimate is shown during checkout." },
+        { "id": "faq_2_q_ar", "type": "text", "label": { "ar": "السؤال الثاني (عربي)", "en": "Question 2 (Arabic)" }, "default": "كيف يمكنني تتبع طلبي؟" },
+        { "id": "faq_2_a_ar", "type": "textarea", "label": { "ar": "إجابة السؤال الثاني (عربي)", "en": "Answer 2 (Arabic)" }, "default": "بعد شحن الطلب ستصلك رسالة تحتوي على رقم التتبع والرابط الخاص بشركة الشحن." },
+        { "id": "faq_2_q_en", "type": "text", "label": { "ar": "السؤال الثاني (إنجليزي)", "en": "Question 2 (English)" }, "default": "How can I track my order?" },
+        { "id": "faq_2_a_en", "type": "textarea", "label": { "ar": "إجابة السؤال الثاني (إنجليزي)", "en": "Answer 2 (English)" }, "default": "Once your order ships, you will receive a message with its tracking number and carrier link." },
+        { "id": "faq_3_q_ar", "type": "text", "label": { "ar": "السؤال الثالث (عربي)", "en": "Question 3 (Arabic)" }, "default": "هل يمكن إرجاع أو استبدال المنتج؟" },
+        { "id": "faq_3_a_ar", "type": "textarea", "label": { "ar": "إجابة السؤال الثالث (عربي)", "en": "Answer 3 (Arabic)" }, "default": "نعم، وفق شروط وسياسة الإرجاع والاستبدال الخاصة بالمتجر، بشرط بقاء المنتج بحالته الأصلية." },
+        { "id": "faq_3_q_en", "type": "text", "label": { "ar": "السؤال الثالث (إنجليزي)", "en": "Question 3 (English)" }, "default": "Can I return or exchange an item?" },
+        { "id": "faq_3_a_en", "type": "textarea", "label": { "ar": "إجابة السؤال الثالث (إنجليزي)", "en": "Answer 3 (English)" }, "default": "Yes, subject to the store's returns and exchanges policy and provided the item remains in its original condition." },
+        { "id": "faq_4_q_ar", "type": "text", "label": { "ar": "السؤال الرابع (عربي)", "en": "Question 4 (Arabic)" }, "default": "كيف أختار المقاس المناسب؟" },
+        { "id": "faq_4_a_ar", "type": "textarea", "label": { "ar": "إجابة السؤال الرابع (عربي)", "en": "Answer 4 (Arabic)" }, "default": "راجعي دليل المقاسات في صفحة المنتج وقارني القياسات قبل إتمام الطلب." },
+        { "id": "faq_4_q_en", "type": "text", "label": { "ar": "السؤال الرابع (إنجليزي)", "en": "Question 4 (English)" }, "default": "How do I choose the right size?" },
+        { "id": "faq_4_a_en", "type": "textarea", "label": { "ar": "إجابة السؤال الرابع (إنجليزي)", "en": "Answer 4 (English)" }, "default": "Check the size guide on the product page and compare the measurements before ordering." }
+      ]
     }
   ]
 }

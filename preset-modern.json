@@ -1,0 +1,74 @@
+{
+  "type": "modern",
+  "name": { "en": "LUXORA — Modern", "ar": "لوكسورا — عصري" },
+  "images": [],
+  "presets": [
+    {
+      "path": "sections/hero.jinja",
+      "settings": {
+        "heading_ar": "مستقبل الأزياء",
+        "heading_en": "The Future of Fashion",
+        "subheading_ar": "تشكيلات حصرية لك",
+        "subheading_en": "Exclusive Collections for You",
+        "cta_text_ar": "اكتشفي الجديد",
+        "cta_text_en": "Explore Now",
+        "cta_url": "/products",
+        "layout": "start",
+        "overlay_opacity": 50,
+        "min_height": 80
+      }
+    },
+    {
+      "path": "sections/products.jinja",
+      "settings": {
+        "title_ar": "المنتجات المميزة",
+        "title_en": "Featured Products",
+        "subtitle_ar": "أكثر المنتجات طلبًا لدينا",
+        "subtitle_en": "Our most sought-after pieces",
+        "limit": 8,
+        "columns_desktop": "4",
+        "show_view_all": true,
+        "view_all_url": "/products"
+      }
+    },
+    {
+      "path": "sections/benefits.jinja",
+      "settings": {
+        "benefit_1_icon": "shipping",
+        "benefit_1_text_ar": "توصيل سريع لباب منزلك",
+        "benefit_1_text_en": "Fast delivery to your door",
+        "benefit_2_icon": "return",
+        "benefit_2_text_ar": "استرداد سهل خلال ٣٠ يومًا",
+        "benefit_2_text_en": "Easy 30-day returns",
+        "benefit_3_icon": "secure",
+        "benefit_3_text_ar": "دفع آمن ومضمون",
+        "benefit_3_text_en": "Secure guaranteed payment",
+        "benefit_4_icon": "support",
+        "benefit_4_text_ar": "دعم مستمر على مدار الساعة",
+        "benefit_4_text_en": "Round-the-clock support"
+      }
+    },
+    {
+      "path": "sections/categories.jinja",
+      "settings": {
+        "title_ar": "تصفحي التصنيفات",
+        "title_en": "Browse Categories",
+        "limit": 4,
+        "show_all_link": true
+      }
+    },
+    {
+      "path": "sections/call-to-action.jinja",
+      "settings": {
+        "heading_ar": "أحدث التشكيلات وصلت",
+        "heading_en": "New Arrivals Are Here",
+        "subtext_ar": "لا تفوتي أحدث صيحات الموضة",
+        "subtext_en": "Don't miss the latest fashion trends",
+        "cta_text_ar": "تسوقي الآن",
+        "cta_text_en": "Shop Now",
+        "cta_url": "/products",
+        "overlay_opacity": 55
+      }
+    }
+  ]
+}

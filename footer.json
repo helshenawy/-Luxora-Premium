@@ -1,0 +1,24 @@
+{
+  "ar": {
+    "show_newsletter": true,
+    "newsletter_heading": "انضمي إلى مجتمعنا",
+    "newsletter_subheading": "اشتركي للحصول على أحدث التشكيلات والعروض الحصرية",
+    "show_social": true,
+    "instagram_url": "",
+    "twitter_url": "",
+    "tiktok_url": "",
+    "snapchat_url": "",
+    "copyright_text": "جميع الحقوق محفوظة"
+  },
+  "en": {
+    "show_newsletter": true,
+    "newsletter_heading": "Join Our Community",
+    "newsletter_subheading": "Subscribe for the latest collections and exclusive offers",
+    "show_social": true,
+    "instagram_url": "",
+    "twitter_url": "",
+    "tiktok_url": "",
+    "snapchat_url": "",
+    "copyright_text": "All rights reserved"
+  }
+}

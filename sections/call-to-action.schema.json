@@ -1,14 +1,92 @@
 {
-  "name": { "ar": "دعوة للعمل", "en": "Call to Action" },
+  "template": "sections/call-to-action.schema.json",
+  "name": {
+    "ar": "دعوة للعمل",
+    "en": "Call to Action"
+  },
   "settings": [
-    { "id": "image", "type": "image", "label": { "ar": "صورة الخلفية", "en": "Background Image" } },
-    { "id": "heading_ar", "type": "text", "label": { "ar": "العنوان (عربي)", "en": "Heading (Arabic)" }, "default": "مجموعة خاصة" },
-    { "id": "heading_en", "type": "text", "label": { "ar": "العنوان (إنجليزي)", "en": "Heading (English)" }, "default": "Special Collection" },
-    { "id": "subtext_ar", "type": "text", "label": { "ar": "نص فرعي (عربي)", "en": "Subtext (Arabic)" }, "default": "اكتشفي تشكيلتنا الحصرية" },
-    { "id": "subtext_en", "type": "text", "label": { "ar": "نص فرعي (إنجليزي)", "en": "Subtext (English)" }, "default": "Discover our exclusive collection" },
-    { "id": "cta_text_ar", "type": "text", "label": { "ar": "نص الزر (عربي)", "en": "CTA Text (Arabic)" }, "default": "تسوقي الآن" },
-    { "id": "cta_text_en", "type": "text", "label": { "ar": "نص الزر (إنجليزي)", "en": "CTA Text (English)" }, "default": "Shop Now" },
-    { "id": "cta_url", "type": "text", "label": { "ar": "الرابط", "en": "URL" }, "default": "/products" },
-    { "id": "overlay_opacity", "type": "range", "label": { "ar": "شفافية التظليل", "en": "Overlay Opacity" }, "min": 0, "max": 70, "step": 5, "default": 50 }
+    {
+      "id": "image",
+      "type": "image",
+      "label": {
+        "ar": "صورة الخلفية",
+        "en": "Background Image"
+      }
+    },
+    {
+      "id": "heading_ar",
+      "type": "text",
+      "label": {
+        "ar": "العنوان (عربي)",
+        "en": "Heading (Arabic)"
+      },
+      "default": "مجموعة خاصة"
+    },
+    {
+      "id": "heading_en",
+      "type": "text",
+      "label": {
+        "ar": "العنوان (إنجليزي)",
+        "en": "Heading (English)"
+      },
+      "default": "Special Collection"
+    },
+    {
+      "id": "subtext_ar",
+      "type": "text",
+      "label": {
+        "ar": "نص فرعي (عربي)",
+        "en": "Subtext (Arabic)"
+      },
+      "default": "اكتشفي تشكيلتنا الحصرية"
+    },
+    {
+      "id": "subtext_en",
+      "type": "text",
+      "label": {
+        "ar": "نص فرعي (إنجليزي)",
+        "en": "Subtext (English)"
+      },
+      "default": "Discover our exclusive collection"
+    },
+    {
+      "id": "cta_text_ar",
+      "type": "text",
+      "label": {
+        "ar": "نص الزر (عربي)",
+        "en": "CTA Text (Arabic)"
+      },
+      "default": "تسوقي الآن"
+    },
+    {
+      "id": "cta_text_en",
+      "type": "text",
+      "label": {
+        "ar": "نص الزر (إنجليزي)",
+        "en": "CTA Text (English)"
+      },
+      "default": "Shop Now"
+    },
+    {
+      "id": "cta_url",
+      "type": "text",
+      "label": {
+        "ar": "الرابط",
+        "en": "URL"
+      },
+      "default": "/products"
+    },
+    {
+      "id": "overlay_opacity",
+      "type": "range",
+      "label": {
+        "ar": "شفافية التظليل",
+        "en": "Overlay Opacity"
+      },
+      "min": 0,
+      "max": 70,
+      "step": 5,
+      "default": 50
+    }
   ]
 }

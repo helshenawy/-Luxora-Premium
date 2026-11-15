@@ -1,0 +1,27 @@
+{
+  "template": "sections/banner.schema.json",
+  "name": { "ar": "بانر", "en": "Banner" },
+  "settings": [
+    { "id": "bg_image", "type": "image", "label": { "ar": "صورة الخلفية", "en": "Background Image" } },
+    { "id": "overlay_opacity", "type": "range", "label": { "ar": "شفافية التعتيم (%)", "en": "Overlay Opacity (%)" }, "min": 0, "max": 80, "step": 5, "default": 40 },
+    { "id": "height", "type": "select", "label": { "ar": "الارتفاع", "en": "Height" }, "options": [
+      { "value": "40vh", "label": { "ar": "صغير (40%)", "en": "Small (40%)" } },
+      { "value": "60vh", "label": { "ar": "متوسط (60%)", "en": "Medium (60%)" } },
+      { "value": "80vh", "label": { "ar": "كبير (80%)", "en": "Large (80%)" } },
+      { "value": "100vh", "label": { "ar": "كامل الشاشة", "en": "Full Screen" } }
+    ], "default": "60vh" },
+    { "id": "text_align", "type": "select", "label": { "ar": "محاذاة النص", "en": "Text Alignment" }, "options": [
+      { "value": "center", "label": { "ar": "وسط", "en": "Center" } },
+      { "value": "start", "label": { "ar": "يمين", "en": "Right" } },
+      { "value": "end", "label": { "ar": "يسار", "en": "Left" } }
+    ], "default": "center" },
+    { "id": "heading_ar", "type": "text", "label": { "ar": "العنوان (عربي)", "en": "Heading (Arabic)" }, "default": "تشكيلة حصرية" },
+    { "id": "heading_en", "type": "text", "label": { "ar": "العنوان (إنجليزي)", "en": "Heading (English)" }, "default": "Exclusive Collection" },
+    { "id": "subtext_ar", "type": "text", "label": { "ar": "النص الفرعي (عربي)", "en": "Subtext (Arabic)" }, "default": "اكتشفي أرقى الأزياء" },
+    { "id": "subtext_en", "type": "text", "label": { "ar": "النص الفرعي (إنجليزي)", "en": "Subtext (English)" }, "default": "Discover the finest fashion" },
+    { "id": "show_cta", "type": "checkbox", "label": { "ar": "إظهار زر الدعوة", "en": "Show CTA Button" }, "default": true },
+    { "id": "cta_label_ar", "type": "text", "label": { "ar": "نص الزر (عربي)", "en": "Button Text (Arabic)" }, "default": "تسوقي الآن" },
+    { "id": "cta_label_en", "type": "text", "label": { "ar": "نص الزر (إنجليزي)", "en": "Button Text (English)" }, "default": "Shop Now" },
+    { "id": "cta_url", "type": "url", "label": { "ar": "رابط الزر", "en": "Button URL" }, "default": "/products" }
+  ]
+}

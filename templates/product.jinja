@@ -1,5 +1,7 @@
 {% extends "layout.jinja" %}
 
+{% block title %}{{ product.name }} — {{ store.name }}{% endblock %}
+
 {% block content %}
 <div class="product-page">
   <div class="container">
@@ -7,19 +9,20 @@
 
     <div class="product-layout">
       <!-- Gallery -->
-      <div class="product-gallery" id="product-gallery">
+      <div class="product-gallery" id="product-gallery" data-reveal>
         <div class="product-gallery__main">
           {% if product.images %}
             <div class="product-gallery__pswp" id="luxora-product-gallery">
-              {% for image in product.images %}
+              {% for img in product.images %}
+                {% set img_src = image_url(img.image.large, w=1200, q=85, f='auto') if img.image else '' %}
                 <a
-                  href="{{ image }}"
+                  href="{{ img_src }}"
                   class="product-gallery__slide {% if loop.first %}is-active{% endif %}"
                   data-pswp-width="1200"
                   data-pswp-height="1600"
                 >
                   <img
-                    src="{{ image }}"
+                    src="{{ img_src }}"
                     alt="{{ product.name }} - {{ loop.index }}"
                     loading="{% if loop.first %}eager{% else %}lazy{% endif %}"
                     class="product-gallery__img"
@@ -27,19 +30,32 @@
                 </a>
               {% endfor %}
             </div>
+          {% elif product.main_image and product.main_image.image %}
+            <div class="product-gallery__pswp" id="luxora-product-gallery">
+              {% set img_src = image_url(product.main_image.image.large, w=1200, q=85, f='auto') %}
+              <a href="{{ img_src }}" class="product-gallery__slide is-active" data-pswp-width="1200" data-pswp-height="1600">
+                <img src="{{ img_src }}" alt="{{ product.name }}" loading="eager" class="product-gallery__img" />
+              </a>
+            </div>
           {% else %}
             <div class="product-gallery__placeholder"></div>
           {% endif %}
+          {% if product.images and product.images | length > 1 %}
+            <button class="product-gallery__nav product-gallery__nav--prev" type="button" data-gallery-prev aria-label="{% if session.lang == 'ar' %}الصورة السابقة{% else %}Previous image{% endif %}">‹</button>
+            <button class="product-gallery__nav product-gallery__nav--next" type="button" data-gallery-next aria-label="{% if session.lang == 'ar' %}الصورة التالية{% else %}Next image{% endif %}">›</button>
+            <span class="product-gallery__counter" aria-live="polite"><span data-gallery-current>1</span> / {{ product.images | length }}</span>
+          {% endif %}
         </div>
-        {% if product.images | length > 1 %}
+        {% if product.images and product.images | length > 1 %}
           <div class="product-gallery__thumbs">
-            {% for image in product.images %}
+            {% for img in product.images %}
+              {% set thumb_src = image_url(img.image.medium, w=120, q=80, f='auto') if img.image else '' %}
               <button
                 class="product-gallery__thumb {% if loop.first %}is-active{% endif %}"
                 data-index="{{ loop.index0 }}"
                 aria-label="{% if session.lang == 'ar' %}صورة {{ loop.index }}{% else %}Image {{ loop.index }}{% endif %}"
               >
-                <img src="{{ image }}" alt="{{ product.name }}" loading="lazy" />
+                <img src="{{ thumb_src }}" alt="{{ product.name }}" loading="lazy" />
               </button>
             {% endfor %}
           </div>
@@ -47,43 +63,52 @@
       </div>
 
       <!-- Product Info -->
-      <div class="product-info">
+      <div class="product-info" data-reveal style="--reveal-delay: 100ms">
         {% if product.label | default('') %}
           {% include "components/ui/badge.jinja" %}
         {% endif %}
 
+        {% if product.brand | default('') %}
+          <span class="product-info__brand">{{ product.brand.name | default(product.brand) }}</span>
+        {% endif %}
+
         <h1 class="product-info__name">{{ product.name }}</h1>
+        {% if product.sku | default('') %}<p class="product-info__sku">SKU: {{ product.sku }}</p>{% endif %}
 
         <div class="product-info__price">
-          {% if product.sale_price | default('') and product.sale_price != product.price %}
-            <span class="product-info__price-sale">{{ product.sale_price }}</span>
-            <span class="product-info__price-original">{{ product.price }}</span>
+          {% set sp = product.selected_product %}
+          {% if sp and sp.formatted_sale_price | default('') %}
+            <span class="product-info__price-sale">{{ sp.formatted_sale_price }}</span>
+            <span class="product-info__price-original">{{ sp.formatted_price }}</span>
+          {% elif sp %}
+            <span class="product-info__price-current">{{ sp.formatted_price }}</span>
           {% else %}
-            <span class="product-info__price-current">{{ product.price }}</span>
+            <span class="product-info__price-current">{{ product.formatted_price | default(product.price) }}</span>
           {% endif %}
         </div>
 
-        <!-- Variants -->
-        {% if product.variants | default([]) %}
-          <div class="product-variants">
-            {% for variant_group in product.variants %}
-              <div class="variant-group">
-                <label class="variant-group__label">{{ variant_group.name }}</label>
-                <div class="variant-group__options">
-                  {% for option in variant_group.options %}
-                    <button
-                      class="variant-option {% if option.is_default %}is-selected{% endif %} {% if not option.in_stock %}is-unavailable{% endif %}"
-                      data-variant-id="{{ option.id }}"
-                      aria-pressed="{{ 'true' if option.is_default else 'false' }}"
-                    >
-                      {{ option.name }}
-                    </button>
-                  {% endfor %}
-                </div>
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
+        <!-- Stock indicator -->
+        <div class="product-info__stock">
+          {% if product.in_stock | default(true) %}
+            <span class="stock-badge stock-badge--in">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><circle cx="4" cy="4" r="4"/></svg>
+              {% if session.lang == 'ar' %}متوفر في المخزون{% else %}In Stock{% endif %}
+            </span>
+          {% else %}
+            <span class="stock-badge stock-badge--out">
+              {% if session.lang == 'ar' %}نفذ المخزون{% else %}Out of Stock{% endif %}
+            </span>
+          {% endif %}
+        </div>
+
+        <form id="product-form" class="product-purchase-form">
+          <input type="hidden" name="product_id" value="{{ product.id }}" />
+          {% include 'vitrin:products/variants_list.jinja' %}
+          {% include 'vitrin:products/custom_input_fields.jinja' %}
+          {% include 'vitrin:products/grouped-product.jinja' %}
+          {% if product.product_class | default('') == 'dynamic_bundle' %}
+            {% include 'vitrin:products/bundle-products.jinja' %}
+          {% endif %}
 
         <!-- Quantity -->
         <div class="product-quantity">
@@ -91,18 +116,24 @@
             {% if session.lang == 'ar' %}الكمية{% else %}Quantity{% endif %}
           </label>
           <div class="quantity-control">
-            <button class="quantity-control__btn" data-action="decrease" aria-label="{% if session.lang == 'ar' %}تقليل{% else %}Decrease{% endif %}">−</button>
-            <input type="number" class="quantity-control__input" value="1" min="1" max="{{ product.stock | default(99) }}" id="product-quantity" />
-            <button class="quantity-control__btn" data-action="increase" aria-label="{% if session.lang == 'ar' %}زيادة{% else %}Increase{% endif %}">+</button>
+            <button type="button" class="quantity-control__btn" data-action="decrease" aria-label="{% if session.lang == 'ar' %}تقليل{% else %}Decrease{% endif %}">−</button>
+            <input type="number" class="quantity-control__input" name="quantity" value="1" min="1" max="{{ product.stock | default(99) }}" id="product-quantity" />
+            <button type="button" class="quantity-control__btn" data-action="increase" aria-label="{% if session.lang == 'ar' %}زيادة{% else %}Increase{% endif %}">+</button>
           </div>
         </div>
+        {% include 'vitrin:checkout/apple-pay-quick-checkout.jinja' %}
+        {% include 'vitrin:products/payment_widgets.jinja' %}
+        {% include 'vitrin:shared/bank_discounts.jinja' %}
+        {% include 'vitrin:products/loyalty_points_widget.jinja' %}
 
         <!-- Add to Cart -->
         <div class="product-actions">
           <button
+            type="submit"
             class="btn btn--primary btn--full product-add-to-cart"
             id="add-to-cart"
             data-product-id="{{ product.id }}"
+            data-use-form="{% if product.has_options | default(false) or product.has_fields | default(false) or product.product_class | default('') == 'dynamic_bundle' %}true{% else %}false{% endif %}"
             {% if not product.in_stock | default(true) %}disabled{% endif %}
           >
             {% if product.in_stock | default(true) %}
@@ -111,25 +142,27 @@
               {% if session.lang == 'ar' %}نفذ المخزون{% else %}Out of Stock{% endif %}
             {% endif %}
           </button>
-          <button class="btn btn--outline product-wishlist" aria-label="{% if session.lang == 'ar' %}أضيفي للمفضلة{% else %}Add to Wishlist{% endif %}">
+          <button type="button" class="btn btn--outline product-wishlist" aria-label="{% if session.lang == 'ar' %}أضيفي للمفضلة{% else %}Add to Wishlist{% endif %}">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
         </div>
+        </form>
 
         <!-- Description -->
         {% if product.description | default('') %}
-          <div class="product-description">
-            <details class="product-accordion">
-              <summary class="product-accordion__trigger">
-                {% if session.lang == 'ar' %}وصف المنتج{% else %}Product Description{% endif %}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="product-accordion__icon" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
-              </summary>
-              <div class="product-accordion__body">{{ product.description }}</div>
-            </details>
-          </div>
+          <details class="product-accordion" open>
+            <summary class="product-accordion__trigger">
+              {% if session.lang == 'ar' %}وصف المنتج{% else %}Product Description{% endif %}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="product-accordion__icon" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+            </summary>
+            <div class="product-accordion__body">{{ product.description }}</div>
+          </details>
         {% endif %}
+        {% set entity = product %}
+        {% include 'vitrin:shared/metafields.jinja' %}
 
         <!-- Size Guide -->
+        {% if settings.show_size_guide | default(true) %}
         <details class="product-accordion">
           <summary class="product-accordion__trigger">
             {% if session.lang == 'ar' %}دليل المقاسات{% else %}Size Guide{% endif %}
@@ -148,17 +181,34 @@
             </table>
           </div>
         </details>
+        {% endif %}
+
+        <!-- Shipping & Returns Info -->
+        <div class="product-trust">
+          <div class="product-trust__item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <span>{% if session.lang == 'ar' %}{{ settings.trust_shipping_ar | default('شحن مجاني للطلبات فوق ٣٠٠ ريال') }}{% else %}{{ settings.trust_shipping_en | default('Free shipping on orders over SAR 300') }}{% endif %}</span>
+          </div>
+          <div class="product-trust__item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>{% if session.lang == 'ar' %}{{ settings.trust_payment_ar | default('دفع آمن ومشفر ١٠٠٪') }}{% else %}{{ settings.trust_payment_en | default('100% secure and encrypted payment') }}{% endif %}</span>
+          </div>
+          <div class="product-trust__item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.1"/></svg>
+            <span>{% if session.lang == 'ar' %}{{ settings.trust_returns_ar | default('إرجاع واستبدال وفق سياسة المتجر') }}{% else %}{{ settings.trust_returns_en | default('Returns and exchanges per store policy') }}{% endif %}</span>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Related Products -->
     {% if product.related_products | default([]) %}
-      <div class="related-products section-y">
-        <h2 class="related-products__heading">
-          {% if session.lang == 'ar' %}منتجات مشابهة{% else %}You May Also Like{% endif %}
-        </h2>
+      <div class="related-products section-y" data-reveal>
+        {% set title = 'منتجات مشابهة' if session.lang == 'ar' else 'You May Also Like' %}
+        {% set subtitle = '' %}
+        {% include "components/shared/section-header.jinja" %}
         <div class="products-grid products-grid--4">
-          {% for product in product.related_products | slice(4) %}
+          {% for product in (product.related_products | default([]))[:4] %}
             {% include "components/products/card.jinja" %}
           {% endfor %}
         </div>
@@ -166,4 +216,14 @@
     {% endif %}
   </div>
 </div>
+{% if settings.show_mobile_sticky_cart | default(true) and product.in_stock | default(true) %}
+{% set sticky_variant = product.selected_product | default(none) %}
+<div class="mobile-sticky-cart" aria-label="{% if session.lang == 'ar' %}إضافة سريعة للسلة{% else %}Quick add to cart{% endif %}">
+  <div class="mobile-sticky-cart__details">
+    <strong>{{ product.name }}</strong>
+    <span>{% if sticky_variant %}{{ sticky_variant.formatted_sale_price | default(sticky_variant.formatted_price) }}{% else %}{{ product.formatted_price | default(product.price) }}{% endif %}</span>
+  </div>
+  <button class="btn btn--primary product-add-to-cart" data-product-id="{{ product.id }}" data-use-form="{% if product.has_options | default(false) or product.has_fields | default(false) or product.product_class | default('') == 'dynamic_bundle' %}true{% else %}false{% endif %}">{% if session.lang == 'ar' %}أضيفي للسلة{% else %}Add to Cart{% endif %}</button>
+</div>
+{% endif %}
 {% endblock %}

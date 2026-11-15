@@ -1,27 +1,30 @@
+{% set s = section.settings if section is defined else {} %}
+{% if s.youtube_id | default('') %}
 <section class="section section-video section-y">
   <div class="container">
-    {% set heading = section.settings.heading_ar if session.lang == 'ar' else section.settings.heading_en %}
-    {% if heading | default('') %}
-      {% include "components/shared/section-header.jinja" with { "title": heading } only %}
+    {% set heading = s.heading_ar | default('') if session.lang == 'ar' else s.heading_en | default('') %}
+    {% set title = heading %}
+    {% set subtitle = '' %}
+    {% if heading %}
+      {% include "components/shared/section-header.jinja" %}
     {% endif %}
-    {% if section.settings.youtube_id | default('') %}
-      <div class="video-wrapper" data-youtube-id="{{ section.settings.youtube_id }}">
-        {% if section.settings.thumbnail %}
-          <img src="{{ section.settings.thumbnail }}" alt="{{ heading | default('') }}" class="video-wrapper__thumbnail" loading="lazy" />
-        {% endif %}
-        <button class="video-wrapper__play" aria-label="{% if session.lang == 'ar' %}تشغيل الفيديو{% else %}Play Video{% endif %}">
-          <svg width="56" height="56" viewBox="0 0 24 24" fill="var(--gold)" aria-hidden="true"><circle cx="12" cy="12" r="11" stroke="var(--ivory)" stroke-width="1.5" fill="rgba(28,16,8,.7)"/><polygon points="10,8 18,12 10,16" fill="var(--gold)"/></svg>
-        </button>
-        <div class="video-wrapper__embed" hidden>
-          <iframe
-            src="https://www.youtube.com/embed/{{ section.settings.youtube_id }}?autoplay=1"
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen
-            title="{{ heading | default('Video') }}"
-          ></iframe>
-        </div>
+    <div class="video-wrapper" data-youtube-id="{{ s.youtube_id }}">
+      {% if s.thumbnail | default('') %}
+        <img src="{{ s.thumbnail }}" alt="{{ heading }}" class="video-wrapper__thumbnail" loading="lazy" />
+      {% endif %}
+      <button class="video-wrapper__play" aria-label="{% if session.lang == 'ar' %}تشغيل الفيديو{% else %}Play Video{% endif %}">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="var(--gold)" aria-hidden="true"><circle cx="12" cy="12" r="11" stroke="var(--ivory)" stroke-width="1.5" fill="rgba(28,16,8,.7)"/><polygon points="10,8 18,12 10,16" fill="var(--gold)"/></svg>
+      </button>
+      <div class="video-wrapper__embed" hidden>
+        <iframe
+          src="https://www.youtube.com/embed/{{ s.youtube_id }}?autoplay=1"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+          title="{{ heading | default('Video') }}"
+        ></iframe>
       </div>
-    {% endif %}
+    </div>
   </div>
 </section>
+{% endif %}

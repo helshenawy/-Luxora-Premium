@@ -1,39 +1,91 @@
 {% extends "layout.jinja" %}
 
+{% set _query = session.query_params | default({}) %}
+{% set _search_q = _query.q | default('') %}
+{% block title %}
+  {% if _search_q %}{% if session.lang == 'ar' %}نتائج: {{ _search_q }}{% else %}Results: {{ _search_q }}{% endif %}{% else %}{% if session.lang == 'ar' %}جميع المنتجات{% else %}All Products{% endif %}{% endif %} — {{ store.name }}
+{% endblock %}
+
 {% block content %}
 <div class="products-page">
-  <div class="container">
-    {% include "components/ui/breadcrumb.jinja" %}
+  <div class="inner-page-hero">
+    <div class="container">
+      {% include "components/ui/breadcrumb.jinja" %}
+      {% if _search_q %}
+        <h1 class="inner-page-hero__title">
+          {% if session.lang == 'ar' %}نتائج البحث{% else %}Search Results{% endif %}
+        </h1>
+        <p class="inner-page-hero__sub" style="margin-block-start:.5rem;color:var(--gold);font-size:1rem">
+          {% if session.lang == 'ar' %}عن: <strong>{{ _search_q }}</strong>{% else %}for: <strong>{{ _search_q }}</strong>{% endif %}
+        </p>
+      {% else %}
+        <h1 class="inner-page-hero__title">
+          {% if session.lang == 'ar' %}جميع المنتجات{% else %}All Products{% endif %}
+        </h1>
+      {% endif %}
+    </div>
+  </div>
 
+  <div class="container products-page__content">
     <div class="products-page__header">
-      <h1 class="products-page__title">
-        {% if session.lang == 'ar' %}جميع المنتجات{% else %}All Products{% endif %}
-      </h1>
       <div class="products-page__toolbar">
+        <button class="products-filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="products-filters">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+          {% if session.lang == 'ar' %}تصفية{% else %}Filter{% endif %}
+        </button>
         <span class="products-page__count">
           {% if session.lang == 'ar' %}{{ products | length }} منتج{% else %}{{ products | length }} products{% endif %}
         </span>
         <div class="products-sort">
           <label for="sort-select" class="visually-hidden">{% if session.lang == 'ar' %}ترتيب{% else %}Sort{% endif %}</label>
-          <select id="sort-select" class="products-sort__select" onchange="window.location.href=this.value">
-            <option value="?sort=newest">{% if session.lang == 'ar' %}الأحدث{% else %}Newest{% endif %}</option>
-            <option value="?sort=price_asc">{% if session.lang == 'ar' %}السعر: الأقل{% else %}Price: Low to High{% endif %}</option>
-            <option value="?sort=price_desc">{% if session.lang == 'ar' %}السعر: الأعلى{% else %}Price: High to Low{% endif %}</option>
-            <option value="?sort=popular">{% if session.lang == 'ar' %}الأكثر شعبية{% else %}Most Popular{% endif %}</option>
+          {% set current_sort = _query.sort | default('newest') %}
+          <select id="sort-select" class="products-sort__select" onchange="var u=new URL(window.location.href);u.searchParams.set('sort',this.value);window.location.href=u.toString()">
+            <option value="newest" {% if current_sort == 'newest' %}selected{% endif %}>{% if session.lang == 'ar' %}الأحدث{% else %}Newest{% endif %}</option>
+            <option value="price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>{% if session.lang == 'ar' %}السعر: الأقل{% else %}Price: Low to High{% endif %}</option>
+            <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>{% if session.lang == 'ar' %}السعر: الأعلى{% else %}Price: High to Low{% endif %}</option>
+            <option value="popular" {% if current_sort == 'popular' %}selected{% endif %}>{% if session.lang == 'ar' %}الأكثر شعبية{% else %}Most Popular{% endif %}</option>
           </select>
         </div>
       </div>
     </div>
 
+    <div id="active-filters-bar" class="active-filters-bar" style="display:none;padding-block:.5rem;padding-inline:0;margin-block-start:-.5rem;margin-block-end:.75rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center"></div>
+    <script>
+    (function(){
+      var bar=document.getElementById('active-filters-bar');
+      if(!bar)return;
+      var p=new URLSearchParams(window.location.search);
+      var chips=[];
+      var isAr=document.documentElement.lang==='ar';
+      function removeParam(k){var u=new URL(window.location.href);u.searchParams.delete(k);window.location.href=u.toString();}
+      if(p.get('price_min')||p.get('price_max')){
+        var mn=p.get('price_min')||'0',mx=p.get('price_max')||'∞';
+        chips.push({label:(isAr?'السعر: ':'Price: ')+mn+' — '+mx,remove:function(){var u=new URL(window.location.href);u.searchParams.delete('price_min');u.searchParams.delete('price_max');window.location.href=u.toString();}});
+      }
+      if(!chips.length){bar.style.display='none';return;}
+      bar.style.display='flex';
+      chips.forEach(function(c){
+        var btn=document.createElement('button');
+        btn.className='active-filter-chip';
+        btn.innerHTML=c.label+' <span aria-hidden="true">×</span>';
+        btn.addEventListener('click',c.remove);
+        bar.appendChild(btn);
+      });
+      var clearAll=document.createElement('button');
+      clearAll.className='active-filter-chip active-filter-chip--clear';
+      clearAll.textContent=isAr?'مسح الكل':'Clear all';
+      clearAll.addEventListener('click',function(){var u=new URL(window.location.href);['price_min','price_max','sort','q'].forEach(function(k){u.searchParams.delete(k);});window.location.href=u.toString();});
+      bar.appendChild(clearAll);
+    })();
+    </script>
+
     <div class="products-page__layout">
-      <!-- Filters Sidebar -->
       <aside class="products-filters" id="products-filters">
         <div class="products-filters__header">
           <h2 class="products-filters__title">{% if session.lang == 'ar' %}تصفية{% else %}Filters{% endif %}</h2>
           <button class="products-filters__clear" id="clear-filters">{% if session.lang == 'ar' %}مسح الكل{% else %}Clear All{% endif %}</button>
         </div>
 
-        <!-- Categories Filter -->
         {% if categories | default([]) %}
           <div class="filter-group">
             <h3 class="filter-group__label">{% if session.lang == 'ar' %}التصنيف{% else %}Category{% endif %}</h3>
@@ -47,7 +99,6 @@
           </div>
         {% endif %}
 
-        <!-- Price Filter -->
         <div class="filter-group">
           <h3 class="filter-group__label">{% if session.lang == 'ar' %}نطاق السعر{% else %}Price Range{% endif %}</h3>
           <div class="price-range" id="price-range" data-min="0" data-max="2000"></div>
@@ -59,10 +110,9 @@
         </div>
       </aside>
 
-      <!-- Products Grid -->
       <div class="products-page__grid-wrap">
         {% if products | default([]) %}
-          <div class="products-grid products-grid--{{ settings.product_card_columns_desktop | default('4') }}" id="products-grid">
+          <div class="products-grid products-grid--{{ settings.product_card_columns_desktop | default('4') }}" id="products-grid" data-reveal>
             {% for product in products %}
               {% include "components/products/card.jinja" %}
             {% endfor %}

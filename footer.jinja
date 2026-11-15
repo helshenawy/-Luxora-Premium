@@ -1,5 +1,5 @@
 <footer class="site-footer">
-  {% if settings.newsletter_display | default(true) %}
+  {% if settings.newsletter_display | default(false) and settings.newsletter_url | default('') %}
   <div class="footer-newsletter">
     <div class="container">
       <div class="footer-newsletter__inner">
@@ -15,7 +15,7 @@
             {% if session.lang == 'ar' %}كوني أول من يعلم بالمجموعات الجديدة والعروض الحصرية{% else %}Be first to know about new collections and exclusive offers{% endif %}
           </p>
         </div>
-        <form class="footer-newsletter__form" action="/newsletter" method="post">
+        <form class="footer-newsletter__form" action="{{ settings.newsletter_url }}" method="post">
           <input
             type="email"
             name="email"
@@ -37,7 +37,7 @@
       <div class="footer-grid">
         <!-- Brand Column -->
         <div class="footer-col footer-col--brand">
-          <a href="/" class="footer-logo">{{ store.name }}</a>
+          <a href="{{ url_for('home') }}" class="footer-logo" style="font-family:'Georgia',serif;letter-spacing:0.18em;font-size:17px;font-weight:400">LUXORA</a>
           <p class="footer-about">
             {% if session.lang == 'ar' %}
               {{ settings.footer_about_ar | default('وجهتك الأولى للأزياء الراقية.') }}
@@ -46,40 +46,34 @@
             {% endif %}
           </p>
           <div class="footer-social">
-            {% if settings.social_instagram | default('') %}
-              <a href="{{ settings.social_instagram }}" class="footer-social__link" target="_blank" rel="noopener" aria-label="Instagram">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-              </a>
-            {% endif %}
-            {% if settings.social_tiktok | default('') %}
-              <a href="{{ settings.social_tiktok }}" class="footer-social__link" target="_blank" rel="noopener" aria-label="TikTok">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9a8.17 8.17 0 0 0 4.78 1.53V7.08a4.85 4.85 0 0 1-1.01-.39z"/></svg>
-              </a>
-            {% endif %}
-            {% if settings.social_snapchat | default('') %}
-              <a href="{{ settings.social_snapchat }}" class="footer-social__link" target="_blank" rel="noopener" aria-label="Snapchat">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.5 2 6 4.5 6 8v.5C5 9 4 9.5 4 10.5c0 .8.5 1.5 1.3 1.7-.3.8-.9 1.6-1.8 2.2-.3.2-.3.6 0 .8 1.3.5 2.3.5 3 1.3.3.4.4.9.4 1.5H16c0-.6.1-1.1.4-1.5.7-.8 1.7-.8 3-1.3.3-.2.3-.6 0-.8-.9-.6-1.5-1.4-1.8-2.2.8-.2 1.3-.9 1.3-1.7 0-1-.9-1.5-2-.6V8c0-3.5-2.5-6-6-6z"/></svg>
-              </a>
-            {% endif %}
-            {% if settings.social_twitter | default('') %}
-              <a href="{{ settings.social_twitter }}" class="footer-social__link" target="_blank" rel="noopener" aria-label="X / Twitter">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              </a>
-            {% endif %}
-            {% if settings.social_whatsapp | default('') %}
-              <a href="https://wa.me/{{ settings.social_whatsapp }}" class="footer-social__link" target="_blank" rel="noopener" aria-label="WhatsApp">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-              </a>
-            {% endif %}
+            {% if settings.social_instagram | default('') %}<a href="{{ settings.social_instagram }}" class="footer-social__link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>{% endif %}
+            {% if settings.social_tiktok | default('') %}<a href="{{ settings.social_tiktok }}" class="footer-social__link" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9a8.17 8.17 0 0 0 4.78 1.53V7.08a4.85 4.85 0 0 1-1.01-.39z"/></svg>
+            </a>{% endif %}
+            {% if settings.social_snapchat | default('') %}<a href="{{ settings.social_snapchat }}" class="footer-social__link" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.5 2 6 4.5 6 8v.5C5 9 4 9.5 4 10.5c0 .8.5 1.5 1.3 1.7-.3.8-.9 1.6-1.8 2.2-.3.2-.3.6 0 .8 1.3.5 2.3.5 3 1.3.3.4.4.9.4 1.5H16c0-.6.1-1.1.4-1.5.7-.8 1.7-.8 3-1.3.3-.2.3-.6 0-.8-.9-.6-1.5-1.4-1.8-2.2.8-.2 1.3-.9 1.3-1.7 0-1-.9-1.5-2-.6V8c0-3.5-2.5-6-6-6z"/></svg>
+            </a>{% endif %}
+            {% if settings.social_twitter | default('') %}<a href="{{ settings.social_twitter }}" class="footer-social__link" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>{% endif %}
+            {% if settings.social_whatsapp | default('') %}<a href="https://wa.me/{{ settings.social_whatsapp | replace('+', '') | replace(' ', '') | replace('-', '') }}" class="footer-social__link" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            </a>{% endif %}
           </div>
         </div>
 
         <!-- Navigation Columns -->
         <div class="footer-col">
           <h4 class="footer-col__heading">{% if session.lang == 'ar' %}تسوقي{% else %}Shop{% endif %}</h4>
-          <ul class="footer-col__links">
-            {% for category in categories | slice(5) %}
-              <li><a href="{{ category.url }}" class="footer-col__link">{{ category.name }}</a></li>
+          <ul class="footer-col__links" data-shop-nav>
+            {% set _shown = namespace(count=0) %}
+            {% for category in categories %}
+              {% if _shown.count < 5 and category.url and category.name %}
+                <li><a href="{{ category.url }}" class="footer-col__link">{{ category.name }}</a></li>
+                {% set _shown.count = _shown.count + 1 %}
+              {% endif %}
             {% endfor %}
           </ul>
         </div>
@@ -87,29 +81,61 @@
         <div class="footer-col">
           <h4 class="footer-col__heading">{% if session.lang == 'ar' %}مساعدة{% else %}Help{% endif %}</h4>
           <ul class="footer-col__links">
-            <li><a href="/shipping-and-payments" class="footer-col__link">{% if session.lang == 'ar' %}الشحن والدفع{% else %}Shipping & Payment{% endif %}</a></li>
-            <li><a href="/faq" class="footer-col__link">{% if session.lang == 'ar' %}الأسئلة الشائعة{% else %}FAQ{% endif %}</a></li>
-            <li><a href="/returns" class="footer-col__link">{% if session.lang == 'ar' %}الإرجاع والاستبدال{% else %}Returns{% endif %}</a></li>
-            <li><a href="/contact" class="footer-col__link">{% if session.lang == 'ar' %}تواصلي معنا{% else %}Contact Us{% endif %}</a></li>
+            <li><a href="{{ url_for('shipping_payment') }}" class="footer-col__link">{% if session.lang == 'ar' %}الشحن والدفع{% else %}Shipping & Payment{% endif %}</a></li>
+            <li><a href="{{ url_for('faqs') }}" class="footer-col__link">{% if session.lang == 'ar' %}الأسئلة الشائعة{% else %}FAQ{% endif %}</a></li>
+            {% if settings.returns_url | default('') %}<li><a href="{{ settings.returns_url }}" class="footer-col__link">{% if session.lang == 'ar' %}الإرجاع والاستبدال{% else %}Returns{% endif %}</a></li>{% endif %}
+            {% if settings.contact_url | default('') %}<li><a href="{{ settings.contact_url }}" class="footer-col__link">{% if session.lang == 'ar' %}تواصلي معنا{% else %}Contact Us{% endif %}</a></li>{% endif %}
+            {% if settings.social_whatsapp | default('') %}
+            <li>
+              <a href="https://wa.me/{{ settings.social_whatsapp | replace('+', '') | replace(' ', '') | replace('-', '') }}" class="footer-col__link" target="_blank" rel="noopener">
+                {% if session.lang == 'ar' %}واتساب{% else %}WhatsApp{% endif %}
+              </a>
+            </li>
+            {% endif %}
           </ul>
         </div>
 
         <div class="footer-col">
           <h4 class="footer-col__heading">{% if session.lang == 'ar' %}عن المتجر{% else %}About{% endif %}</h4>
           <ul class="footer-col__links">
-            <li><a href="/about" class="footer-col__link">{% if session.lang == 'ar' %}من نحن{% else %}About Us{% endif %}</a></li>
-            <li><a href="/terms" class="footer-col__link">{% if session.lang == 'ar' %}الشروط والأحكام{% else %}Terms & Conditions{% endif %}</a></li>
-            <li><a href="/privacy" class="footer-col__link">{% if session.lang == 'ar' %}سياسة الخصوصية{% else %}Privacy Policy{% endif %}</a></li>
+            {% if settings.about_url | default('') %}<li><a href="{{ settings.about_url }}" class="footer-col__link">{% if session.lang == 'ar' %}من نحن{% else %}About Us{% endif %}</a></li>{% endif %}
+            {% if settings.terms_url | default('') %}<li><a href="{{ settings.terms_url }}" class="footer-col__link">{% if session.lang == 'ar' %}الشروط والأحكام{% else %}Terms & Conditions{% endif %}</a></li>{% endif %}
+            {% if settings.privacy_url | default('') %}<li><a href="{{ settings.privacy_url }}" class="footer-col__link">{% if session.lang == 'ar' %}سياسة الخصوصية{% else %}Privacy Policy{% endif %}</a></li>{% endif %}
           </ul>
         </div>
       </div>
     </div>
   </div>
 
+  <script>
+  (function () {
+    var ul = document.querySelector('[data-shop-nav]');
+    if (!ul) return;
+    if (ul.querySelector('a[href]:not([href=""])')) return;
+    fetch('/api/v1/categories', { headers: { 'Accept': 'application/json' } })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var items = Array.isArray(data) ? data : Object.values(data);
+        if (!items.length) return;
+        ul.innerHTML = '';
+        items.slice(0, 5).forEach(function (c) {
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.href = c.url || ('/categories/' + (c.id || '') + '/' + (c.slug || ''));
+          a.className = 'footer-col__link';
+          a.textContent = c.name || '';
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+      })
+      .catch(function () {});
+  })();
+  </script>
+
   <div class="footer-bottom">
     <div class="container">
       <p class="footer-copyright">
-        &copy; {{ "now" | date("Y") }} {{ store.name }}.
+        &copy; <span id="footer-year"></span> {{ store.name }}.
         {% if session.lang == 'ar' %}
           {{ settings.copyright_text_ar | default('جميع الحقوق محفوظة') }}
         {% else %}
@@ -127,3 +153,4 @@
     </div>
   </div>
 </footer>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>

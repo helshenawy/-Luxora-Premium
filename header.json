@@ -1,0 +1,18 @@
+{
+  "ar": {
+    "sticky": true,
+    "hide_language": false,
+    "hide_country": false,
+    "announcement_display": true,
+    "announcement_text": "شحن مجاني للطلبات فوق 300 ريال · استرجاع مجاني خلال 14 يوم",
+    "announcement_link": ""
+  },
+  "en": {
+    "sticky": true,
+    "hide_language": false,
+    "hide_country": false,
+    "announcement_display": true,
+    "announcement_text": "Free shipping on orders over SAR 300 · Free returns within 14 days",
+    "announcement_link": ""
+  }
+}

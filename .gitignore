@@ -1,7 +1,10 @@
 node_modules/
 assets/dist/
 assets/styles.css
+assets/tailwindcss.css
 .env
 .env.*
 .DS_Store
 *.zip
+.vitrin/
+assets/demo-images/

@@ -1,0 +1,74 @@
+{
+  "type": "minimal",
+  "name": { "en": "LUXORA — Minimal", "ar": "لوكسورا — بسيط" },
+  "images": [],
+  "presets": [
+    {
+      "path": "sections/hero.jinja",
+      "settings": {
+        "heading_ar": "الجودة تتحدث",
+        "heading_en": "Quality Speaks",
+        "subheading_ar": "",
+        "subheading_en": "",
+        "cta_text_ar": "تسوقي",
+        "cta_text_en": "Shop",
+        "cta_url": "/products",
+        "layout": "center",
+        "overlay_opacity": 45,
+        "min_height": 70
+      }
+    },
+    {
+      "path": "sections/benefits.jinja",
+      "settings": {
+        "benefit_1_icon": "shipping",
+        "benefit_1_text_ar": "شحن مجاني",
+        "benefit_1_text_en": "Free Shipping",
+        "benefit_2_icon": "return",
+        "benefit_2_text_ar": "إرجاع مجاني",
+        "benefit_2_text_en": "Free Returns",
+        "benefit_3_icon": "secure",
+        "benefit_3_text_ar": "دفع آمن",
+        "benefit_3_text_en": "Secure Payment",
+        "benefit_4_icon": "support",
+        "benefit_4_text_ar": "دعم ٢٤/٧",
+        "benefit_4_text_en": "24/7 Support"
+      }
+    },
+    {
+      "path": "sections/products.jinja",
+      "settings": {
+        "title_ar": "المنتجات",
+        "title_en": "Products",
+        "subtitle_ar": "",
+        "subtitle_en": "",
+        "limit": 8,
+        "columns_desktop": "4",
+        "show_view_all": true,
+        "view_all_url": "/products"
+      }
+    },
+    {
+      "path": "sections/categories.jinja",
+      "settings": {
+        "title_ar": "التصنيفات",
+        "title_en": "Categories",
+        "limit": 4,
+        "show_all_link": true
+      }
+    },
+    {
+      "path": "sections/call-to-action.jinja",
+      "settings": {
+        "heading_ar": "تسوقي الآن",
+        "heading_en": "Shop Now",
+        "subtext_ar": "مجموعة جديدة متوفرة",
+        "subtext_en": "New collection available",
+        "cta_text_ar": "اكتشفي",
+        "cta_text_en": "Explore",
+        "cta_url": "/products",
+        "overlay_opacity": 50
+      }
+    }
+  ]
+}

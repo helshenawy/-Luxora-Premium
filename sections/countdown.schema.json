@@ -1,11 +1,63 @@
 {
-  "name": { "ar": "عداد تنازلي", "en": "Countdown" },
+  "template": "sections/countdown.schema.json",
+  "name": {
+    "ar": "عداد تنازلي",
+    "en": "Countdown"
+  },
   "settings": [
-    { "id": "heading_ar", "type": "text", "label": { "ar": "العنوان (عربي)", "en": "Heading (Arabic)" }, "default": "عرض لفترة محدودة" },
-    { "id": "heading_en", "type": "text", "label": { "ar": "العنوان (إنجليزي)", "en": "Heading (English)" }, "default": "Limited Time Offer" },
-    { "id": "end_date", "type": "text", "label": { "ar": "تاريخ الانتهاء (YYYY-MM-DD)", "en": "End Date (YYYY-MM-DD)" }, "default": "" },
-    { "id": "cta_text_ar", "type": "text", "label": { "ar": "نص الزر (عربي)", "en": "CTA Text (Arabic)" }, "default": "تسوقي العرض" },
-    { "id": "cta_text_en", "type": "text", "label": { "ar": "نص الزر (إنجليزي)", "en": "CTA Text (English)" }, "default": "Shop the Offer" },
-    { "id": "cta_url", "type": "text", "label": { "ar": "الرابط", "en": "URL" }, "default": "/products" }
+    {
+      "id": "heading_ar",
+      "type": "text",
+      "label": {
+        "ar": "العنوان (عربي)",
+        "en": "Heading (Arabic)"
+      },
+      "default": "عرض لفترة محدودة"
+    },
+    {
+      "id": "heading_en",
+      "type": "text",
+      "label": {
+        "ar": "العنوان (إنجليزي)",
+        "en": "Heading (English)"
+      },
+      "default": "Limited Time Offer"
+    },
+    {
+      "id": "end_date",
+      "type": "text",
+      "label": {
+        "ar": "تاريخ الانتهاء (YYYY-MM-DD)",
+        "en": "End Date (YYYY-MM-DD)"
+      },
+      "default": ""
+    },
+    {
+      "id": "cta_text_ar",
+      "type": "text",
+      "label": {
+        "ar": "نص الزر (عربي)",
+        "en": "CTA Text (Arabic)"
+      },
+      "default": "تسوقي العرض"
+    },
+    {
+      "id": "cta_text_en",
+      "type": "text",
+      "label": {
+        "ar": "نص الزر (إنجليزي)",
+        "en": "CTA Text (English)"
+      },
+      "default": "Shop the Offer"
+    },
+    {
+      "id": "cta_url",
+      "type": "text",
+      "label": {
+        "ar": "الرابط",
+        "en": "URL"
+      },
+      "default": "/products"
+    }
   ]
 }

@@ -1,9 +1,12 @@
 {% extends "layout.jinja" %}
 
+{% block title %}{{ category.name }} — {{ store.name }}{% endblock %}
+
 {% block content %}
+{% set _query = session.query_params | default({}) %}
 <div class="category-page">
   {% if category.image | default('') %}
-    <div class="category-banner">
+    <div class="category-banner" data-reveal>
       <img src="{{ category.image }}" alt="{{ category.name }}" loading="eager" class="category-banner__img" />
       <div class="category-banner__overlay" aria-hidden="true"></div>
       <div class="category-banner__content container">
@@ -14,26 +17,34 @@
       </div>
     </div>
   {% else %}
-    <div class="container">
-      <h1 class="page-title">{{ category.name }}</h1>
-      {% include "components/ui/breadcrumb.jinja" %}
+    <div class="inner-page-hero">
+      <div class="container">
+        {% include "components/ui/breadcrumb.jinja" %}
+        <h1 class="inner-page-hero__title">{{ category.name }}</h1>
+        {% if category.description | default('') %}
+          <p class="inner-page-hero__sub">{{ category.description }}</p>
+        {% endif %}
+      </div>
     </div>
   {% endif %}
 
-  <div class="container category-page__body">
-    <div class="products-page__toolbar">
-      <span class="products-page__count">
-        {% if session.lang == 'ar' %}{{ products | length }} منتج{% else %}{{ products | length }} products{% endif %}
-      </span>
-      <select class="products-sort__select" onchange="window.location.href=this.value">
-        <option value="?sort=newest">{% if session.lang == 'ar' %}الأحدث{% else %}Newest{% endif %}</option>
-        <option value="?sort=price_asc">{% if session.lang == 'ar' %}السعر: الأقل{% else %}Price: Low to High{% endif %}</option>
-        <option value="?sort=price_desc">{% if session.lang == 'ar' %}السعر: الأعلى{% else %}Price: High to Low{% endif %}</option>
-      </select>
+  <div class="container products-page__content">
+    <div class="products-page__header">
+      <div class="products-page__toolbar">
+        <span class="products-page__count">
+          {% if session.lang == 'ar' %}{{ products | length }} منتج{% else %}{{ products | length }} products{% endif %}
+        </span>
+        {% set current_sort = _query.sort | default('newest') %}
+        <select class="products-sort__select" onchange="window.location.href=this.value">
+          <option value="?sort=newest" {% if current_sort == 'newest' %}selected{% endif %}>{% if session.lang == 'ar' %}الأحدث{% else %}Newest{% endif %}</option>
+          <option value="?sort=price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>{% if session.lang == 'ar' %}السعر: الأقل{% else %}Price: Low to High{% endif %}</option>
+          <option value="?sort=price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>{% if session.lang == 'ar' %}السعر: الأعلى{% else %}Price: High to Low{% endif %}</option>
+        </select>
+      </div>
     </div>
 
     {% if products | default([]) %}
-      <div class="products-grid products-grid--{{ settings.product_card_columns_desktop | default('4') }}">
+      <div class="products-grid products-grid--{{ settings.product_card_columns_desktop | default('4') }}" data-reveal>
         {% for product in products %}
           {% include "components/products/card.jinja" %}
         {% endfor %}

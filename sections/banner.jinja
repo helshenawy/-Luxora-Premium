@@ -1,0 +1,35 @@
+{% set s = section.settings if section is defined else {} %}
+{% set lang_ar = session.lang == 'ar' %}
+{% set heading = (s.heading_ar | default('تشكيلة حصرية')) if lang_ar else (s.heading_en | default('Exclusive Collection')) %}
+{% set subtext = (s.subtext_ar | default('اكتشفي أرقى الأزياء')) if lang_ar else (s.subtext_en | default('Discover the finest fashion')) %}
+{% set cta_label = (s.cta_label_ar | default('تسوقي الآن')) if lang_ar else (s.cta_label_en | default('Shop Now')) %}
+{% set cta_url = s.cta_url | default('/products') %}
+{% set bg_image = s.bg_image | default('https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=1920&q=85&fit=crop') %}
+{% set overlay = s.overlay_opacity | default(40) %}
+{% set height = s.height | default('60vh') %}
+{% set text_align = s.text_align | default('center') %}
+
+<section
+  class="section-banner"
+  style="
+    min-height: {{ height }};
+    {% if bg_image %}
+      background-image: url('{{ bg_image }}');
+      background-size: cover;
+      background-position: center;
+    {% else %}
+      background: linear-gradient(135deg, #1C1008 0%, #3D2015 40%, #2C1A0A 70%, #0F0804 100%);
+    {% endif %}
+  "
+>
+  <div class="section-banner__overlay" style="opacity: {{ overlay | int / 100 }}"></div>
+  <div class="container section-banner__content section-banner__content--{{ text_align }}">
+    {% if subtext %}
+      <p class="section-banner__eyebrow">{{ subtext }}</p>
+    {% endif %}
+    <h2 class="section-banner__heading">{{ heading }}</h2>
+    {% if s.show_cta | default(true) %}
+      <a href="{{ cta_url }}" class="btn btn--outline-light">{{ cta_label }}</a>
+    {% endif %}
+  </div>
+</section>

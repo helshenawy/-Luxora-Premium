@@ -1,27 +1,144 @@
 {
-  "name": { "ar": "بانر رئيسي", "en": "Hero Banner" },
+  "template": "sections/hero.schema.json",
+  "name": {
+    "ar": "بانر رئيسي",
+    "en": "Hero Banner"
+  },
   "settings": [
-    { "id": "image", "type": "image", "label": { "ar": "صورة الخلفية", "en": "Background Image" } },
-    { "id": "image_mobile", "type": "image", "label": { "ar": "صورة الموبايل", "en": "Mobile Image" } },
-    { "id": "heading_ar", "type": "text", "label": { "ar": "العنوان (عربي)", "en": "Heading (Arabic)" }, "default": "أناقة بلا حدود" },
-    { "id": "heading_en", "type": "text", "label": { "ar": "العنوان (إنجليزي)", "en": "Heading (English)" }, "default": "Elegance Without Limits" },
-    { "id": "subheading_ar", "type": "text", "label": { "ar": "النص الفرعي (عربي)", "en": "Subheading (Arabic)" }, "default": "مجموعة جديدة" },
-    { "id": "subheading_en", "type": "text", "label": { "ar": "النص الفرعي (إنجليزي)", "en": "Subheading (English)" }, "default": "New Collection" },
-    { "id": "cta_text_ar", "type": "text", "label": { "ar": "نص الزر (عربي)", "en": "Button Text (Arabic)" }, "default": "تسوقي الآن" },
-    { "id": "cta_text_en", "type": "text", "label": { "ar": "نص الزر (إنجليزي)", "en": "Button Text (English)" }, "default": "Shop Now" },
-    { "id": "cta_url", "type": "text", "label": { "ar": "رابط الزر", "en": "Button URL" }, "default": "/products" },
-    { "id": "overlay_opacity", "type": "range", "label": { "ar": "شفافية التظليل", "en": "Overlay Opacity" }, "min": 0, "max": 80, "step": 5, "default": 40 },
+    {
+      "id": "image",
+      "type": "image",
+      "label": {
+        "ar": "صورة الخلفية",
+        "en": "Background Image"
+      }
+    },
+    {
+      "id": "image_mobile",
+      "type": "image",
+      "label": {
+        "ar": "صورة الموبايل",
+        "en": "Mobile Image"
+      }
+    },
+    {
+      "id": "heading_ar",
+      "type": "text",
+      "label": {
+        "ar": "العنوان (عربي)",
+        "en": "Heading (Arabic)"
+      },
+      "default": "أناقة بلا حدود"
+    },
+    {
+      "id": "heading_en",
+      "type": "text",
+      "label": {
+        "ar": "العنوان (إنجليزي)",
+        "en": "Heading (English)"
+      },
+      "default": "Elegance Without Limits"
+    },
+    {
+      "id": "subheading_ar",
+      "type": "text",
+      "label": {
+        "ar": "النص الفرعي (عربي)",
+        "en": "Subheading (Arabic)"
+      },
+      "default": "مجموعة جديدة"
+    },
+    {
+      "id": "subheading_en",
+      "type": "text",
+      "label": {
+        "ar": "النص الفرعي (إنجليزي)",
+        "en": "Subheading (English)"
+      },
+      "default": "New Collection"
+    },
+    {
+      "id": "cta_text_ar",
+      "type": "text",
+      "label": {
+        "ar": "نص الزر (عربي)",
+        "en": "Button Text (Arabic)"
+      },
+      "default": "تسوقي الآن"
+    },
+    {
+      "id": "cta_text_en",
+      "type": "text",
+      "label": {
+        "ar": "نص الزر (إنجليزي)",
+        "en": "Button Text (English)"
+      },
+      "default": "Shop Now"
+    },
+    {
+      "id": "cta_url",
+      "type": "text",
+      "label": {
+        "ar": "رابط الزر",
+        "en": "Button URL"
+      },
+      "default": "/products"
+    },
+    {
+      "id": "overlay_opacity",
+      "type": "range",
+      "label": {
+        "ar": "شفافية التظليل",
+        "en": "Overlay Opacity"
+      },
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 40
+    },
     {
       "id": "layout",
       "type": "select",
-      "label": { "ar": "التخطيط", "en": "Layout" },
+      "label": {
+        "ar": "التخطيط",
+        "en": "Layout"
+      },
       "options": [
-        { "value": "center", "label": { "ar": "مركزي", "en": "Center" } },
-        { "value": "start", "label": { "ar": "يمين/يسار", "en": "Start" } },
-        { "value": "end", "label": { "ar": "يسار/يمين", "en": "End" } }
+        {
+          "value": "center",
+          "label": {
+            "ar": "مركزي",
+            "en": "Center"
+          }
+        },
+        {
+          "value": "start",
+          "label": {
+            "ar": "يمين/يسار",
+            "en": "Start"
+          }
+        },
+        {
+          "value": "end",
+          "label": {
+            "ar": "يسار/يمين",
+            "en": "End"
+          }
+        }
       ],
       "default": "center"
     },
-    { "id": "min_height", "type": "range", "label": { "ar": "الارتفاع الأدنى (vh)", "en": "Min Height (vh)" }, "min": 40, "max": 100, "step": 5, "default": 85 }
+    {
+      "id": "min_height",
+      "type": "range",
+      "label": {
+        "ar": "الارتفاع الأدنى (vh)",
+        "en": "Min Height (vh)"
+      },
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "default": 85
+    }
   ]
 }

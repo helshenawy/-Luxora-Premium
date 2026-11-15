@@ -1,3 +1,4 @@
+{% set s = section.settings if section is defined else {} %}
 {% macro benefit_icon(type) %}
   {% if type == 'shipping' %}
     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect x="9" y="11" width="14" height="10" rx="1"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>
@@ -10,18 +11,20 @@
   {% endif %}
 {% endmacro %}
 
+{% set default_icons = ['shipping', 'return', 'secure', 'support'] %}
+{% set default_ar = ['شحن مجاني للطلبات فوق ٣٠٠ ريال', 'إرجاع مجاني خلال ٣٠ يومًا', 'دفع آمن ومشفر ١٠٠٪', 'دعم عملاء على مدار الساعة'] %}
+{% set default_en = ['Free shipping over SAR 300', 'Free returns within 30 days', '100% secure & encrypted payment', '24/7 customer support'] %}
+
 <section class="section-benefits">
   <div class="container">
     <div class="benefits-grid">
       {% for i in [1, 2, 3, 4] %}
-        {% set icon = section.settings['benefit_' ~ i ~ '_icon'] | default('shipping') %}
-        {% set text = section.settings['benefit_' ~ i ~ '_text_ar'] if session.lang == 'ar' else section.settings['benefit_' ~ i ~ '_text_en'] %}
-        {% if text | default('') %}
-          <div class="benefit-item">
-            <span class="benefit-item__icon">{{ benefit_icon(icon) }}</span>
-            <span class="benefit-item__text">{{ text }}</span>
-          </div>
-        {% endif %}
+        {% set icon = s['benefit_' ~ i ~ '_icon'] | default(default_icons[i - 1]) %}
+        {% set text = (s['benefit_' ~ i ~ '_text_ar'] | default(default_ar[i - 1])) if session.lang == 'ar' else (s['benefit_' ~ i ~ '_text_en'] | default(default_en[i - 1])) %}
+        <div class="benefit-item" data-reveal style="--reveal-delay: {{ (i - 1) * 80 }}ms">
+          <span class="benefit-item__icon">{{ benefit_icon(icon) }}</span>
+          <span class="benefit-item__text">{{ text }}</span>
+        </div>
       {% endfor %}
     </div>
   </div>

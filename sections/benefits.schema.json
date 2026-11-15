@@ -1,17 +1,237 @@
 {
-  "name": { "ar": "المميزات", "en": "Benefits" },
+  "template": "sections/benefits.schema.json",
+  "name": {
+    "ar": "المميزات",
+    "en": "Benefits"
+  },
   "settings": [
-    { "id": "benefit_1_icon", "type": "select", "label": { "ar": "أيقونة 1", "en": "Icon 1" }, "options": [{"value":"shipping","label":{"ar":"شحن","en":"Shipping"}},{"value":"return","label":{"ar":"إرجاع","en":"Return"}},{"value":"secure","label":{"ar":"أمان","en":"Secure"}},{"value":"support","label":{"ar":"دعم","en":"Support"}}], "default": "shipping" },
-    { "id": "benefit_1_text_ar", "type": "text", "label": { "ar": "نص 1 (عربي)", "en": "Text 1 (Arabic)" }, "default": "شحن مجاني فوق 299 ريال" },
-    { "id": "benefit_1_text_en", "type": "text", "label": { "ar": "نص 1 (إنجليزي)", "en": "Text 1 (English)" }, "default": "Free shipping over SAR 299" },
-    { "id": "benefit_2_icon", "type": "select", "label": { "ar": "أيقونة 2", "en": "Icon 2" }, "options": [{"value":"shipping","label":{"ar":"شحن","en":"Shipping"}},{"value":"return","label":{"ar":"إرجاع","en":"Return"}},{"value":"secure","label":{"ar":"أمان","en":"Secure"}},{"value":"support","label":{"ar":"دعم","en":"Support"}}], "default": "return" },
-    { "id": "benefit_2_text_ar", "type": "text", "label": { "ar": "نص 2 (عربي)", "en": "Text 2 (Arabic)" }, "default": "إرجاع مجاني خلال 30 يومًا" },
-    { "id": "benefit_2_text_en", "type": "text", "label": { "ar": "نص 2 (إنجليزي)", "en": "Text 2 (English)" }, "default": "Free returns within 30 days" },
-    { "id": "benefit_3_icon", "type": "select", "label": { "ar": "أيقونة 3", "en": "Icon 3" }, "options": [{"value":"shipping","label":{"ar":"شحن","en":"Shipping"}},{"value":"return","label":{"ar":"إرجاع","en":"Return"}},{"value":"secure","label":{"ar":"أمان","en":"Secure"}},{"value":"support","label":{"ar":"دعم","en":"Support"}}], "default": "secure" },
-    { "id": "benefit_3_text_ar", "type": "text", "label": { "ar": "نص 3 (عربي)", "en": "Text 3 (Arabic)" }, "default": "دفع آمن ومشفر" },
-    { "id": "benefit_3_text_en", "type": "text", "label": { "ar": "نص 3 (إنجليزي)", "en": "Text 3 (English)" }, "default": "Secure & encrypted payment" },
-    { "id": "benefit_4_icon", "type": "select", "label": { "ar": "أيقونة 4", "en": "Icon 4" }, "options": [{"value":"shipping","label":{"ar":"شحن","en":"Shipping"}},{"value":"return","label":{"ar":"إرجاع","en":"Return"}},{"value":"secure","label":{"ar":"أمان","en":"Secure"}},{"value":"support","label":{"ar":"دعم","en":"Support"}}], "default": "support" },
-    { "id": "benefit_4_text_ar", "type": "text", "label": { "ar": "نص 4 (عربي)", "en": "Text 4 (Arabic)" }, "default": "دعم عملاء على مدار الساعة" },
-    { "id": "benefit_4_text_en", "type": "text", "label": { "ar": "نص 4 (إنجليزي)", "en": "Text 4 (English)" }, "default": "24/7 customer support" }
+    {
+      "id": "benefit_1_icon",
+      "type": "select",
+      "label": {
+        "ar": "أيقونة 1",
+        "en": "Icon 1"
+      },
+      "options": [
+        {
+          "value": "shipping",
+          "label": {
+            "ar": "شحن",
+            "en": "Shipping"
+          }
+        },
+        {
+          "value": "return",
+          "label": {
+            "ar": "إرجاع",
+            "en": "Return"
+          }
+        },
+        {
+          "value": "secure",
+          "label": {
+            "ar": "أمان",
+            "en": "Secure"
+          }
+        },
+        {
+          "value": "support",
+          "label": {
+            "ar": "دعم",
+            "en": "Support"
+          }
+        }
+      ],
+      "default": "shipping"
+    },
+    {
+      "id": "benefit_1_text_ar",
+      "type": "text",
+      "label": {
+        "ar": "نص 1 (عربي)",
+        "en": "Text 1 (Arabic)"
+      },
+      "default": "شحن مجاني فوق 299 ريال"
+    },
+    {
+      "id": "benefit_1_text_en",
+      "type": "text",
+      "label": {
+        "ar": "نص 1 (إنجليزي)",
+        "en": "Text 1 (English)"
+      },
+      "default": "Free shipping over SAR 299"
+    },
+    {
+      "id": "benefit_2_icon",
+      "type": "select",
+      "label": {
+        "ar": "أيقونة 2",
+        "en": "Icon 2"
+      },
+      "options": [
+        {
+          "value": "shipping",
+          "label": {
+            "ar": "شحن",
+            "en": "Shipping"
+          }
+        },
+        {
+          "value": "return",
+          "label": {
+            "ar": "إرجاع",
+            "en": "Return"
+          }
+        },
+        {
+          "value": "secure",
+          "label": {
+            "ar": "أمان",
+            "en": "Secure"
+          }
+        },
+        {
+          "value": "support",
+          "label": {
+            "ar": "دعم",
+            "en": "Support"
+          }
+        }
+      ],
+      "default": "return"
+    },
+    {
+      "id": "benefit_2_text_ar",
+      "type": "text",
+      "label": {
+        "ar": "نص 2 (عربي)",
+        "en": "Text 2 (Arabic)"
+      },
+      "default": "إرجاع مجاني خلال 30 يومًا"
+    },
+    {
+      "id": "benefit_2_text_en",
+      "type": "text",
+      "label": {
+        "ar": "نص 2 (إنجليزي)",
+        "en": "Text 2 (English)"
+      },
+      "default": "Free returns within 30 days"
+    },
+    {
+      "id": "benefit_3_icon",
+      "type": "select",
+      "label": {
+        "ar": "أيقونة 3",
+        "en": "Icon 3"
+      },
+      "options": [
+        {
+          "value": "shipping",
+          "label": {
+            "ar": "شحن",
+            "en": "Shipping"
+          }
+        },
+        {
+          "value": "return",
+          "label": {
+            "ar": "إرجاع",
+            "en": "Return"
+          }
+        },
+        {
+          "value": "secure",
+          "label": {
+            "ar": "أمان",
+            "en": "Secure"
+          }
+        },
+        {
+          "value": "support",
+          "label": {
+            "ar": "دعم",
+            "en": "Support"
+          }
+        }
+      ],
+      "default": "secure"
+    },
+    {
+      "id": "benefit_3_text_ar",
+      "type": "text",
+      "label": {
+        "ar": "نص 3 (عربي)",
+        "en": "Text 3 (Arabic)"
+      },
+      "default": "دفع آمن ومشفر"
+    },
+    {
+      "id": "benefit_3_text_en",
+      "type": "text",
+      "label": {
+        "ar": "نص 3 (إنجليزي)",
+        "en": "Text 3 (English)"
+      },
+      "default": "Secure & encrypted payment"
+    },
+    {
+      "id": "benefit_4_icon",
+      "type": "select",
+      "label": {
+        "ar": "أيقونة 4",
+        "en": "Icon 4"
+      },
+      "options": [
+        {
+          "value": "shipping",
+          "label": {
+            "ar": "شحن",
+            "en": "Shipping"
+          }
+        },
+        {
+          "value": "return",
+          "label": {
+            "ar": "إرجاع",
+            "en": "Return"
+          }
+        },
+        {
+          "value": "secure",
+          "label": {
+            "ar": "أمان",
+            "en": "Secure"
+          }
+        },
+        {
+          "value": "support",
+          "label": {
+            "ar": "دعم",
+            "en": "Support"
+          }
+        }
+      ],
+      "default": "support"
+    },
+    {
+      "id": "benefit_4_text_ar",
+      "type": "text",
+      "label": {
+        "ar": "نص 4 (عربي)",
+        "en": "Text 4 (Arabic)"
+      },
+      "default": "دعم عملاء على مدار الساعة"
+    },
+    {
+      "id": "benefit_4_text_en",
+      "type": "text",
+      "label": {
+        "ar": "نص 4 (إنجليزي)",
+        "en": "Text 4 (English)"
+      },
+      "default": "24/7 customer support"
+    }
   ]
 }

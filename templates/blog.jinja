@@ -12,6 +12,6 @@
   </div>
   <h1 class="blog-post__title">{{ post.title }}</h1>
   <div class="blog-post__body rich-text">{{ post.content | default('') }}</div>
-  <a href="/blog" class="btn btn--outline">{% if session.lang == 'ar' %}جميع المقالات{% else %}All Articles{% endif %}</a>
+  <a href="{{ url_for('blogs') }}" class="btn btn--outline">{% if session.lang == 'ar' %}جميع المقالات{% else %}All Articles{% endif %}</a>
 </div>
 {% endblock %}

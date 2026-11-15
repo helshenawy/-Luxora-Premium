@@ -1,13 +1,75 @@
 {
-  "name": { "ar": "معرض الصور", "en": "Gallery" },
+  "template": "sections/gallery.schema.json",
+  "name": {
+    "ar": "معرض الصور",
+    "en": "Gallery"
+  },
   "settings": [
-    { "id": "title_ar", "type": "text", "label": { "ar": "العنوان (عربي)", "en": "Title (Arabic)" }, "default": "معرض الصور" },
-    { "id": "title_en", "type": "text", "label": { "ar": "العنوان (إنجليزي)", "en": "Title (English)" }, "default": "Gallery" },
-    { "id": "image_1", "type": "image", "label": { "ar": "صورة 1", "en": "Image 1" } },
-    { "id": "image_2", "type": "image", "label": { "ar": "صورة 2", "en": "Image 2" } },
-    { "id": "image_3", "type": "image", "label": { "ar": "صورة 3", "en": "Image 3" } },
-    { "id": "image_4", "type": "image", "label": { "ar": "صورة 4", "en": "Image 4" } },
-    { "id": "image_5", "type": "image", "label": { "ar": "صورة 5", "en": "Image 5" } },
-    { "id": "image_6", "type": "image", "label": { "ar": "صورة 6", "en": "Image 6" } }
+    {
+      "id": "title_ar",
+      "type": "text",
+      "label": {
+        "ar": "العنوان (عربي)",
+        "en": "Title (Arabic)"
+      },
+      "default": "معرض الصور"
+    },
+    {
+      "id": "title_en",
+      "type": "text",
+      "label": {
+        "ar": "العنوان (إنجليزي)",
+        "en": "Title (English)"
+      },
+      "default": "Gallery"
+    },
+    {
+      "id": "image_1",
+      "type": "image",
+      "label": {
+        "ar": "صورة 1",
+        "en": "Image 1"
+      }
+    },
+    {
+      "id": "image_2",
+      "type": "image",
+      "label": {
+        "ar": "صورة 2",
+        "en": "Image 2"
+      }
+    },
+    {
+      "id": "image_3",
+      "type": "image",
+      "label": {
+        "ar": "صورة 3",
+        "en": "Image 3"
+      }
+    },
+    {
+      "id": "image_4",
+      "type": "image",
+      "label": {
+        "ar": "صورة 4",
+        "en": "Image 4"
+      }
+    },
+    {
+      "id": "image_5",
+      "type": "image",
+      "label": {
+        "ar": "صورة 5",
+        "en": "Image 5"
+      }
+    },
+    {
+      "id": "image_6",
+      "type": "image",
+      "label": {
+        "ar": "صورة 6",
+        "en": "Image 6"
+      }
+    }
   ]
 }

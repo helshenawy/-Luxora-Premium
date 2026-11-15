@@ -1,10 +1,11 @@
-{% if section.settings.end_date | default('') %}
+{% set s = section.settings if section is defined else {} %}
+{% if s.end_date | default('') %}
 <section class="section-countdown">
   <div class="container section-countdown__inner">
-    {% set heading = section.settings.heading_ar if session.lang == 'ar' else section.settings.heading_en %}
-    {% set cta_text = section.settings.cta_text_ar if session.lang == 'ar' else section.settings.cta_text_en %}
-    <h2 class="section-countdown__heading">{{ heading | default('') }}</h2>
-    <div class="countdown" data-end="{{ section.settings.end_date }}" id="luxora-countdown">
+    {% set heading = s.heading_ar | default('') if session.lang == 'ar' else s.heading_en | default('') %}
+    {% set cta_text = s.cta_text_ar | default('') if session.lang == 'ar' else s.cta_text_en | default('') %}
+    <h2 class="section-countdown__heading">{{ heading }}</h2>
+    <div class="countdown" data-end="{{ s.end_date }}" id="luxora-countdown">
       <div class="countdown__unit"><span class="countdown__value" data-unit="days">--</span><span class="countdown__label">{% if session.lang == 'ar' %}أيام{% else %}Days{% endif %}</span></div>
       <span class="countdown__sep" aria-hidden="true">:</span>
       <div class="countdown__unit"><span class="countdown__value" data-unit="hours">--</span><span class="countdown__label">{% if session.lang == 'ar' %}ساعات{% else %}Hours{% endif %}</span></div>
@@ -13,8 +14,8 @@
       <span class="countdown__sep" aria-hidden="true">:</span>
       <div class="countdown__unit"><span class="countdown__value" data-unit="seconds">--</span><span class="countdown__label">{% if session.lang == 'ar' %}ثوانٍ{% else %}Seconds{% endif %}</span></div>
     </div>
-    {% if section.settings.cta_url | default('') %}
-      <a href="{{ section.settings.cta_url }}" class="btn btn--gold">{{ cta_text }}</a>
+    {% if s.cta_url | default('') %}
+      <a href="{{ s.cta_url }}" class="btn btn--gold">{{ cta_text }}</a>
     {% endif %}
   </div>
 </section>

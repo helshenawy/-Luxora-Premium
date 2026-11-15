@@ -1,0 +1,61 @@
+<div class="quick-view-overlay" id="quick-view-overlay" aria-hidden="true"></div>
+<div
+  class="quick-view-modal"
+  id="quick-view-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="quick-view-title"
+  hidden
+>
+  <div class="quick-view__inner">
+    <button
+      class="quick-view__close"
+      id="quick-view-close"
+      aria-label="{% if session.lang == 'ar' %}إغلاق{% else %}Close{% endif %}"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <div class="quick-view__media">
+      <img id="quick-view-img" alt="" class="quick-view__img" loading="lazy" />
+    </div>
+
+    <div class="quick-view__info">
+      <h2 id="quick-view-title" class="quick-view__name"></h2>
+
+      <div class="quick-view__price-wrap">
+        <span id="quick-view-price" class="quick-view__price"></span>
+        <span id="quick-view-original-price" class="quick-view__price-original" hidden></span>
+      </div>
+
+      <div class="product-quantity">
+        <label class="product-quantity__label" for="quick-view-qty">
+          {% if session.lang == 'ar' %}الكمية{% else %}Quantity{% endif %}
+        </label>
+        <div class="quantity-control">
+          <button class="quantity-control__btn" data-action="decrease"
+            aria-label="{% if session.lang == 'ar' %}تقليل{% else %}Decrease{% endif %}">−</button>
+          <input type="number" id="quick-view-qty" class="quantity-control__input"
+            value="1" min="1" max="99" />
+          <button class="quantity-control__btn" data-action="increase"
+            aria-label="{% if session.lang == 'ar' %}زيادة{% else %}Increase{% endif %}">+</button>
+        </div>
+      </div>
+
+      <div class="quick-view__actions">
+        <button class="btn btn--primary btn--full" id="quick-view-add" data-product-id="">
+          {% if session.lang == 'ar' %}أضيفي للسلة{% else %}Add to Cart{% endif %}
+        </button>
+        <a id="quick-view-link" class="btn btn--outline btn--full">
+          {% if session.lang == 'ar' %}عرض التفاصيل كاملةً{% else %}View Full Details{% endif %}
+        </a>
+      </div>
+
+      <p class="quick-view__note">
+        {% if session.lang == 'ar' %}لاختيار المقاس أو اللون تفضلي بصفحة المنتج{% else %}Visit the product page to select size or colour{% endif %}
+      </p>
+    </div>
+  </div>
+</div>

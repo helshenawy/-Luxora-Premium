@@ -1,43 +1,112 @@
+{% set s = section.settings if section is defined else {} %}
+{% set category_limit = s.limit | default(4) | int %}
+{% set _categories = categories if categories is defined and categories | length > 0 else [] %}
+{% set _cat_demo_imgs = [
+  'https://media.zid.store/a2b27503-fb08-474d-a873-0f8c60862b5e/7ddf7d6c-deea-4e4d-94e8-f15d908518ba.jpeg',
+  'https://media.zid.store/a2b27503-fb08-474d-a873-0f8c60862b5e/d471b8dd-3dec-4a11-aeff-180196c13720.jpeg',
+  'https://media.zid.store/a2b27503-fb08-474d-a873-0f8c60862b5e/77c90760-1c76-4977-977e-de814b66ea05.jpeg',
+  'https://media.zid.store/a2b27503-fb08-474d-a873-0f8c60862b5e/19c2671d-5263-4196-80b6-fc5a250b0e74.jpeg'
+] %}
+<style>.category-card__name{color:var(--ivory,#faf7f2)!important}.category-card--loading .category-card__img-placeholder{animation:luxora-shimmer 1.5s ease-in-out infinite;background-size:600px 100%!important}</style>
 <section class="section section-categories section-y">
   <div class="container">
-    {% set title = section.settings.title_ar if session.lang == 'ar' else section.settings.title_en %}
-    {% include "components/shared/section-header.jinja" with { "title": title } only %}
+    {% set title = (s.title_ar | default('تسوقي حسب التصنيف')) if session.lang == 'ar' else (s.title_en | default('Shop by Category')) %}
+    {% set subtitle = '' %}
+    {% include "components/shared/section-header.jinja" %}
 
-    <div class="categories-grid categories-grid--{{ section.settings.limit | default(4) }}">
-      {% for category in categories | slice(section.settings.limit | default(4)) %}
-        <a href="{{ category.url }}" class="category-card">
-          <div class="category-card__img-wrap">
-            {% if category.image %}
-              <img
-                src="{{ category.image }}"
-                alt="{{ category.name }}"
-                loading="lazy"
-                class="category-card__img"
-              />
-            {% else %}
+    <div
+      class="categories-grid categories-grid--{{ category_limit }}"
+      data-categories-section
+      data-limit="{{ category_limit }}"
+      data-lang="{{ session.lang | default('ar') }}"
+    >
+      {% if _categories | length > 0 %}
+        {% for category in _categories[:category_limit] %}
+          <a href="{{ category.url }}" class="category-card">
+            <div class="category-card__img-wrap">
+              <img src="{{ category.image | default(_cat_demo_imgs[loop.index0 % 4]) }}" alt="{{ category.name }}" loading="lazy" class="category-card__img" />
+              <div class="category-card__overlay" aria-hidden="true"></div>
+            </div>
+            <div class="category-card__body">
+              <h3 class="category-card__name">{{ category.name }}</h3>
+              <span class="category-card__cta">
+                {% if session.lang == 'ar' %}تسوقي{% else %}Shop{% endif %}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="{% if session.locale.language.direction == 'rtl' %}M19 12H5M12 5l-7 7 7 7{% else %}M5 12h14M12 5l7 7-7 7{% endif %}"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+        {% endfor %}
+      {% else %}
+        {% for i in range(category_limit) %}
+          <div class="category-card category-card--loading">
+            <div class="category-card__img-wrap">
               <div class="category-card__img-placeholder"></div>
-            {% endif %}
-            <div class="category-card__overlay" aria-hidden="true"></div>
+              <div class="category-card__overlay" aria-hidden="true"></div>
+            </div>
+            <div class="category-card__body">
+              <h3 class="category-card__name">&nbsp;</h3>
+              <span class="category-card__cta" style="color:var(--gold)">
+                {% if session.lang == 'ar' %}تسوقي{% else %}Shop{% endif %}
+              </span>
+            </div>
           </div>
-          <div class="category-card__body">
-            <h3 class="category-card__name">{{ category.name }}</h3>
-            <span class="category-card__cta">
-              {% if session.lang == 'ar' %}تسوقي{% else %}Shop{% endif %}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="{% if session.locale.language.direction == 'rtl' %}M19 12H5M12 5l-7 7 7 7{% else %}M5 12h14M12 5l7 7-7 7{% endif %}"/>
-              </svg>
-            </span>
-          </div>
-        </a>
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
     </div>
 
-    {% if section.settings.show_all_link | default(true) %}
+    {% if s.show_all_link | default(true) %}
       <div class="section-categories__footer">
-        <a href="/categories" class="btn btn--outline">
+        <a href="{{ url_for('list_categories') }}" class="btn btn--outline">
           {% if session.lang == 'ar' %}عرض جميع التصنيفات{% else %}All Categories{% endif %}
         </a>
       </div>
     {% endif %}
   </div>
 </section>
+
+{% if _categories | length == 0 %}
+<script>
+(function () {
+  var grid = document.querySelector('[data-categories-section]');
+  if (!grid) return;
+  var limit = parseInt(grid.dataset.limit) || 4;
+  var lang = grid.dataset.lang || 'ar';
+  var isAr = lang === 'ar';
+  var arrowPath = isAr ? 'M19 12H5M12 5l-7 7 7 7' : 'M5 12h14M12 5l7 7-7 7';
+
+  var demoImgs = [
+    'https://media.zid.store/a2b27503-fb08-474d-a873-0f8c60862b5e/7ddf7d6c-deea-4e4d-94e8-f15d908518ba.jpeg',
+    'https://media.zid.store/a2b27503-fb08-474d-a873-0f8c60862b5e/d471b8dd-3dec-4a11-aeff-180196c13720.jpeg',
+    'https://media.zid.store/a2b27503-fb08-474d-a873-0f8c60862b5e/77c90760-1c76-4977-977e-de814b66ea05.jpeg',
+    'https://media.zid.store/a2b27503-fb08-474d-a873-0f8c60862b5e/19c2671d-5263-4196-80b6-fc5a250b0e74.jpeg'
+  ];
+  fetch('/api/v1/categories', { headers: { 'Accept': 'application/json' } })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var items = Array.isArray(data) ? data : Object.values(data);
+      items = items.slice(0, limit);
+      if (!items.length) { grid.innerHTML = ''; return; }
+      grid.innerHTML = items.map(function (c, i) {
+        var imgSrc = c.image || demoImgs[i % demoImgs.length];
+        var imgHtml = '<img src="' + imgSrc + '" alt="' + (c.name || '').replace(/"/g, '&quot;') + '" loading="lazy" class="category-card__img">';
+        var url = c.url || ('/categories/' + (c.id || '') + '/' + (c.slug || ''));
+        return '<a href="' + url + '" class="category-card">'
+          + '<div class="category-card__img-wrap">'
+          + imgHtml
+          + '<div class="category-card__overlay" aria-hidden="true"></div>'
+          + '</div>'
+          + '<div class="category-card__body">'
+          + '<h3 class="category-card__name">' + (c.name || '') + '</h3>'
+          + '<span class="category-card__cta">' + (isAr ? 'تسوقي' : 'Shop')
+          + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="' + arrowPath + '"/></svg>'
+          + '</span>'
+          + '</div>'
+          + '</a>';
+      }).join('');
+    })
+    .catch(function () {});
+})();
+</script>
+{% endif %}

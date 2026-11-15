@@ -1,23 +1,31 @@
 {% extends "layout.jinja" %}
 
+{% block title %}{% if session.lang == 'ar' %}سلة التسوق{% else %}Shopping Cart{% endif %} — {{ store.name }}{% endblock %}
+
 {% block content %}
 <div class="container cart-page section-y">
+  {% set cart_items = cart.products | default(cart.items | default([])) %}
+  {% set cart_total = cart.totals[-1].value_string if cart.totals | default([]) else cart.total | default('') %}
   <h1 class="page-title">{% if session.lang == 'ar' %}سلة التسوق{% else %}Shopping Cart{% endif %}</h1>
+  <div class="cart-assurance" role="note">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+    <span>{% if session.lang == 'ar' %}{{ settings.trust_payment_ar | default('دفع آمن ومشفر ١٠٠٪') }}{% else %}{{ settings.trust_payment_en | default('100% secure and encrypted payment') }}{% endif %}</span>
+  </div>
 
-  {% if cart.items | default([]) %}
-    <div class="cart-layout">
+  {% if cart.products_count | default(cart_items | length) > 0 %}
+    <div class="cart-layout" data-reveal>
       <div class="cart-items">
-        {% for item in cart.items %}
+        {% for item in cart_items %}
           <div class="cart-item" data-item-id="{{ item.id }}">
             <a href="{{ item.url | default('#') }}" class="cart-item__img-link">
-              <img src="{{ item.image | default('') }}" alt="{{ item.name }}" loading="lazy" class="cart-item__img" />
+              <span class="cart-item__img cart-item__img--placeholder" data-cart-item-image data-item-name="{{ item.name }}" aria-hidden="true"></span>
             </a>
             <div class="cart-item__info">
               <a href="{{ item.url | default('#') }}" class="cart-item__name">{{ item.name }}</a>
               {% if item.variant | default('') %}
                 <span class="cart-item__variant">{{ item.variant }}</span>
               {% endif %}
-              <span class="cart-item__price">{{ item.price }}</span>
+              <span class="cart-item__price">{{ item.price_string | default(item.formatted_price | default(item.price)) }}</span>
             </div>
             <div class="cart-item__actions">
               <div class="quantity-control quantity-control--sm">
@@ -37,7 +45,7 @@
         <h2 class="cart-summary__title">{% if session.lang == 'ar' %}ملخص الطلب{% else %}Order Summary{% endif %}</h2>
         <div class="cart-summary__row">
           <span>{% if session.lang == 'ar' %}المجموع الفرعي{% else %}Subtotal{% endif %}</span>
-          <span>{{ cart.total }}</span>
+          <span>{{ cart_total }}</span>
         </div>
         <div class="cart-summary__row cart-summary__row--shipping">
           <span>{% if session.lang == 'ar' %}الشحن{% else %}Shipping{% endif %}</span>
@@ -45,22 +53,63 @@
         </div>
         <div class="cart-summary__row cart-summary__row--total">
           <span>{% if session.lang == 'ar' %}الإجمالي{% else %}Total{% endif %}</span>
-          <span>{{ cart.total }}</span>
+          <span>{{ cart_total }}</span>
         </div>
-        <a href="/checkout" class="btn btn--primary btn--full cart-summary__checkout">
+
+        <!-- Promo Code -->
+        <div class="cart-promo">
+          <label class="cart-promo__label" for="promo-input">
+            {% if session.lang == 'ar' %}كود الخصم{% else %}Promo Code{% endif %}
+          </label>
+          <div class="cart-promo__row">
+            <input
+              type="text"
+              id="promo-input"
+              class="cart-promo__input"
+              placeholder="{% if session.lang == 'ar' %}أدخلي الكود هنا{% else %}Enter code here{% endif %}"
+            />
+            <button class="btn btn--outline cart-promo__btn">
+              {% if session.lang == 'ar' %}تطبيق{% else %}Apply{% endif %}
+            </button>
+          </div>
+        </div>
+
+        <a href="{{ url_for('single_page_checkout') }}" class="btn btn--primary btn--full cart-summary__checkout">
           {% if session.lang == 'ar' %}إتمام الشراء{% else %}Proceed to Checkout{% endif %}
         </a>
-        <a href="/products" class="btn btn--outline btn--full cart-summary__continue">
+        {% include 'vitrin:checkout/apple-pay-quick-checkout.jinja' %}
+        {% include 'vitrin:cart/payment_widgets.jinja' %}
+        {% include 'vitrin:cart/gift-card.jinja' %}
+        {% include 'vitrin:shared/bank_discounts.jinja' %}
+        <a href="{{ url_for('list_products') }}" class="btn btn--outline btn--full cart-summary__continue">
           {% if session.lang == 'ar' %}متابعة التسوق{% else %}Continue Shopping{% endif %}
         </a>
+
+        <!-- Trust badges -->
+        <div class="cart-trust">
+          <div class="cart-trust__item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>{% if session.lang == 'ar' %}دفع آمن{% else %}Secure Payment{% endif %}</span>
+          </div>
+          <div class="cart-trust__item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.1"/></svg>
+            <span>{% if session.lang == 'ar' %}إرجاع مجاني{% else %}Free Returns{% endif %}</span>
+          </div>
+          <div class="cart-trust__item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>{% if session.lang == 'ar' %}ضمان الجودة{% else %}Quality Guarantee{% endif %}</span>
+          </div>
+        </div>
       </div>
     </div>
   {% else %}
-    <div class="cart-empty">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <div class="cart-empty" data-reveal>
+      <div class="cart-empty__icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </div>
       <h2>{% if session.lang == 'ar' %}سلتك فارغة{% else %}Your Cart is Empty{% endif %}</h2>
       <p>{% if session.lang == 'ar' %}ابدأي تسوقك الآن واملأي سلتك بأجمل القطع{% else %}Start shopping now and fill your cart with beautiful pieces{% endif %}</p>
-      <a href="/products" class="btn btn--primary">{% if session.lang == 'ar' %}تسوقي الآن{% else %}Shop Now{% endif %}</a>
+      <a href="{{ url_for('list_products') }}" class="btn btn--primary">{% if session.lang == 'ar' %}تسوقي الآن{% else %}Shop Now{% endif %}</a>
     </div>
   {% endif %}
 </div>

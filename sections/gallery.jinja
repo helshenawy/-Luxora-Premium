@@ -1,15 +1,23 @@
+{% set s = section.settings if section is defined else {} %}
+{% set _default_gallery = [
+  'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&q=85&fit=crop',
+  'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=85&fit=crop',
+  'https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?w=800&q=85&fit=crop',
+  'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&q=85&fit=crop',
+  'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=85&fit=crop',
+  'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=85&fit=crop'
+] %}
 <section class="section section-gallery section-y">
   <div class="container">
-    {% set title = section.settings.title_ar if session.lang == 'ar' else section.settings.title_en %}
-    {% include "components/shared/section-header.jinja" with { "title": title } only %}
+    {% set title = (s.title_ar | default('إلهام الموضة')) if session.lang == 'ar' else (s.title_en | default('Fashion Inspiration')) %}
+    {% set subtitle = '' %}
+    {% include "components/shared/section-header.jinja" %}
     <div class="gallery-grid" id="luxora-gallery">
       {% for i in [1,2,3,4,5,6] %}
-        {% set img = section.settings['image_' ~ i] | default('') %}
-        {% if img %}
-          <a href="{{ img }}" class="gallery-grid__item" data-pswp-width="1200" data-pswp-height="1600">
-            <img src="{{ img }}" alt="{{ title | default('Gallery') }} {{ i }}" loading="lazy" class="gallery-grid__img" />
-          </a>
-        {% endif %}
+        {% set img = s['image_' ~ i] | default(_default_gallery[loop.index0]) %}
+        <a href="{{ img }}" class="gallery-grid__item" data-pswp-width="1200" data-pswp-height="1600">
+          <img src="{{ img }}" alt="{{ title }} {{ i }}" loading="lazy" class="gallery-grid__img" />
+        </a>
       {% endfor %}
     </div>
   </div>
